@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1020805852452",
+    "firebase_url": "https://hotplaceserver.firebaseio.com",
+    "project_id": "hotplaceserver",
+    "storage_bucket": "hotplaceserver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1020805852452:android:7f31f6f0c5a3007a5197b1",
+        "android_client_info": {
+          "package_name": "com.posturn.hotplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1020805852452-v0u5gpnqgidci4celksatmn9i5lmrko2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyColAhxtoQ_tSqeS7J6W_m8e0ZVw4dnLs8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1020805852452-v0u5gpnqgidci4celksatmn9i5lmrko2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
