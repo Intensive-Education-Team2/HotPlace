@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 import time
 import re 
 import unicodedata
+import pandas as pd
+from pandas import DataFrame
 
 #함수 작성
 def insta_searching(word):  #word라는 매개변수를 받는 insta_searching 이라는 함수 생성
@@ -156,18 +158,19 @@ select_first(driver)
 #5. 비어있는 변수(results) 만들기
 results = [] 
 
+df = pd.DataFrame(results ,columns = ['Content' , 'Date', 'Like', 'Place', 'Content_tags', 'Comment_tags', 'img_src'])
+df.to_csv('crawler.csv', index=False, encoding='utf-8-sig')
+
 #여러 게시물 크롤링하기
-target = 20 #크롤링할 게시물 수
+target = 1000 #크롤링할 게시물 수
 for i in range(target):
     data = get_content(driver) #게시물 정보 가져오기
+
+    #result안에 들어있는 key 값 비교 후, 동일한 key 있으면 result 배열에 추가 하지 않기. 
     results.append(data)
-    move_next(driver)    
-
-import pandas as pd
-from pandas import DataFrame
- 
-#list to dateframe  
-df = pd.DataFrame(results ,columns = ['Content' , 'Date', 'Like', 'Place', 'Content_tags', 'Comment_tags', 'img_src'])
-
-## DataFrame을 csv에 쓰기
-df.to_csv('/Users/osubin/python/crawler.csv', index=False, encoding='utf-8-sig')
+    move_next(driver)
+    if(i%10 == 0):
+        df = pd.DataFrame(results)
+        df.to_csv('crawler.csv', index=False, encoding='utf-8-sig', mode = 'a', header = False)
+        results.clear()
+#여러 게시물 크롤링하기
