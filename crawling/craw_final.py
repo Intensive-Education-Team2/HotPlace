@@ -123,8 +123,8 @@ driver.get(url)
 time.sleep(4) 
 
 #2. 로그인 하기
-id = '01072848952'
-password = 'osh8952a!!' 
+id = '01027504064'
+password = 'skidrom0506' 
 login_section = '//*[@id="react-root"]/section/nav/div[2]/div/div/div[3]/div/span/a[1]/button'
 
 driver.find_element_by_xpath(login_section).click()
