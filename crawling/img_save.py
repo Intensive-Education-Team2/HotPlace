@@ -194,30 +194,32 @@ results = []
 
 
 df = pd.DataFrame(results ,columns = ['Content' , 'Date', 'Like', 'Place', 'Content_tags', 'Comment_tags', 'imgs'])
-df.to_csv('crawler2.csv', index=False, encoding='utf-8-sig')
+df.to_csv('crawler3.csv', index=False, encoding='utf-8-sig')
 
 #여러 게시물 크롤링하기
-target = 20 #크롤링할 게시물 수
+target = 50 #크롤링할 게시물 수
 num = 1 #이미지 넘버링 
 for i in range(target):
     data = get_content(driver) #게시물 정보 가져오기
 
     imgUrl = data[6] # 이미지 저장을 위한, 이미지 소스 데이터 가져오기 
-
-    if(imgUrl !=''):
-        #urllib.request.urlretrieve(imgUrl,'이미지 저장할 폴더 경로/사진 명'+str(num)+'.png') 
-        urllib.request.urlretrieve(imgUrl,'/Users/osubin/python/img2/insta_'+str(num)+'.png') 
-        num += 1
+        
+    num += 1    
     
+    if(imgUrl !=''):
+        
+        print(imgUrl)
+        print()
+        urllib.request.urlretrieve(imgUrl,'/Users/osubin/python/img2/insta_'+str(num)+'.png') 
+
     results.append(data)
     move_next(driver)
     
-    if(i%10 == 0): # 10개씩 정보 저장
+    if((i + 1) % 10 == 0): # 10개씩 정보 저장
         df = pd.DataFrame(results)
-        df.to_csv('crawler2.csv', index=False, encoding='utf-8-sig', mode = 'a', header = False)
+        df.to_csv('crawler3.csv', index=False, encoding='utf-8-sig', mode = 'a', header = False)
         results.clear()
     
     if(i%100 == 0): # 100 단위 마다 출력 -확인용
         print(i)
 #여러 게시물 크롤링하기
-
