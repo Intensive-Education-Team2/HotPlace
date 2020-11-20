@@ -2,17 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/write_my_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/upper_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorStrongPink"
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/button2"
+            android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -24,13 +27,13 @@
             android:text="Button" />
 
         <View
-            android:id="@+id/view2"
+            android:id="@+id/toolbar_block"
             android:layout_width="745dp"
             android:layout_height="match_parent"
             android:layout_weight="3" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/btn_register"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4"
@@ -44,16 +47,17 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/place_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_weight="3"
-        android:text="플레이스" />
+        android:text="플레이스"
+        android:textColor="@color/colorStrongPink" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -63,31 +67,33 @@
         android:text="Button" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/image_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_weight="3"
+        android:textColor="@color/colorStrongPink"
         android:text="사진추가" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btn_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="30"
-        android:src="@drawable/Hotpler"/>
+        android:src="@drawable/Hotpler" />
     />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/content_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_weight="3"
+        android:textColor="@color/colorStrongPink"
         android:text="내용" />
 
     <EditText
-        android:id="@+id/edittext"
+        android:id="@+id/edittext_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
