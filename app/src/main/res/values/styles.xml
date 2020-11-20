@@ -7,22 +7,52 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
 
-        <style name="NaNumTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
-            <item name="android:fontFamily">@font/nanumbarungothic</item>
-        </style>
-        <style name="NaNumButtonStyle" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
-            <item name="android:fontFamily">@font/nanumbarungothic</item>
-        </style>
-        <style name="NaNumEditTextStyle" parent="@android:style/Widget.DeviceDefault.EditText">
-            <item name="android:fontFamily">@font/nanumbarungothic</item>
-        </style>
-        <style name="NaNumRadioButtonStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.RadioButton">
-            <item name="android:fontFamily">@font/nanumbarungothic</item>
-        </style>
-        <style name="NaNumCheckboxStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.CheckBox">
-            <item name="android:fontFamily">@font/nanumbarungothic</item>
-        </style>
+    <style name="NaNumTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/nanumbarungothic</item>
+    </style>
+    <style name="NaNumButtonStyle" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
+        <item name="android:fontFamily">@font/nanumbarungothic</item>
+    </style>
+    <style name="NaNumEditTextStyle" parent="@android:style/Widget.DeviceDefault.EditText">
+        <item name="android:fontFamily">@font/nanumbarungothic</item>
+    </style>
+    <style name="NaNumRadioButtonStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.RadioButton">
+        <item name="android:fontFamily">@font/nanumbarungothic</item>
+    </style>
+    <style name="NaNumCheckboxStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.CheckBox">
+        <item name="android:fontFamily">@font/nanumbarungothic</item>
+    </style>
+
+    <style name="HotplerToolbarTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:background">@color/colorStrongPink</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:actionMenuTextColor">@color/colorWhite</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_back</item>
+    </style>
+
+    <!--메인화면  TOP5 텍스트-->
+    <style name="Top12Text" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">25dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@color/colorBlack</item>
+        <item name="android:shadowRadius">30</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="Top345Text" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@color/colorBlack</item>
+        <item name="android:shadowRadius">30</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:clickable">true</item>
     </style>
 
 </resources>

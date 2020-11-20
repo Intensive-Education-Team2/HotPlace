@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/user_group1"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/hotplace_rank"
+            android:icon="@drawable/ic_list"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="핫플레이스 순위"
+            />
+
+        <item
+            android:id="@+id/hotplace_recommand"
+            android:icon="@drawable/ic_checklist"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="추천 핫플레이스"
+            />
+        <item
+            android:id="@+id/hotplace_board"
+            android:icon="@drawable/ic_listboard"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="핫플레이스 게시판"
+            />
+    </group>
+
+    <group android:id="@+id/user_group2"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/my_hotplace"
+            android:icon="@drawable/ic_bookmark"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="MY 플레이스"
+            />
+    </group>
+
+    <group android:id="@+id/user_group3"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/notice"
+            android:icon="@drawable/ic_calendar"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="공지사항"
+            />
+
+        <item
+            android:id="@+id/cs"
+            android:icon="@drawable/ic_humancheck"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="고객센터"
+            />
+
+        <item
+            android:id="@+id/setting"
+            android:icon="@drawable/baseline_settings_white_18dp"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="설정"
+            />
+    </group>
+
+    <group android:id="@+id/user_group4"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/login"
+            android:icon="@drawable/baseline_login_white_18dp"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:title="로그인"
+            />
+    </group>
+
+
+</menu>

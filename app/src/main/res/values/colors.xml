@@ -10,6 +10,7 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorGrey">#A6A6A6</color>
+    <color name="colorLightGrey">#D2D0D0</color>
     <color name="colorStrongViolet">#613655</color>
     <color name="colorDustyViolet">#8A5E7E</color>
     <color name="colorStrongPink">#E06C81</color>
