@@ -7,26 +7,28 @@
     android:paddingTop="40dp">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/logo_Hotpler"
         android:layout_width="111dp"
         android:layout_height="254dp"
         android:layout_marginTop="100dp"
         android:paddingTop="120dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/Hotpler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image" />
+        app:srcCompat="@drawable/Hotpler" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/Hotpler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="324dp"
+        android:layout_marginBottom="350dp"
         android:text="Hotpler"
-        android:textColor="@color/colorPink3"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorPink3"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

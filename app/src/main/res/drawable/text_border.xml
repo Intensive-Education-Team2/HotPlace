@@ -4,19 +4,21 @@
     <item>
 
         <shape android:shape="rectangle">
-            <solid android:color="#000000"/>
-        </shape>
-    </item>
-    <item
-        android:top="3dp"
-        android:right="3dp"
-        android:left="3dp"
-        android:bottom="3dp">
-        <shape android:shape="rectangle">
-            <solid android:color="000000"/>
+            <stroke
+                android:width="3dp"
+                android:color="613655"/>
+            <solid android:color="#FFFFFF"/>
+
+            <corners
+                android:bottomLeftRadius="30dp"
+                android:bottomRightRadius="30dp"
+                android:topLeftRadius="30dp"
+                android:topRightRadius="30dp"></corners>
         </shape>
 
+
     </item>
+
 
 
 
