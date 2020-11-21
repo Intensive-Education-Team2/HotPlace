@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/write_my_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/upper_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorStrongPink"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/colorStrongPink"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:src="@drawable/ic_back_white"
+            android:text="Button" />
+
+        <TextView
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:gravity="right"
+            android:paddingLeft="5dp"
+            android:paddingTop="15dp"
+            android:paddingRight="15dp"
+            android:text="등록"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/place_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp"
+        android:text="플레이스"
+        android:textColor="@color/colorStrongPink"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:id="@+id/btn_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_weight="0.5"
+        android:background="@drawable/btn_radius"
+        android:text="Place"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textColor="@color/colorStrongViolet"/>
+
+    <TextView
+        android:id="@+id/image_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorStrongPink"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="사진추가" />
+
+    <ImageButton
+        android:id="@+id/btn_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="30"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/add_image_radius"
+        android:src="@drawable/Hotpler" />
+
+    />
+
+    <TextView
+        android:id="@+id/content_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorStrongPink"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="내용" />
+
+    <EditText
+        android:id="@+id/edittext_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="50"
+        android:background="@drawable/text_border" />
+
+</LinearLayout>
