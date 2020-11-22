@@ -18,13 +18,16 @@
             android:value="3sjkwye96q" />
 
         <activity android:name=".MainActivity"/>
-        <activity android:name=".MainPageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".LoadingPageActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+        <activity android:name=".MainPageActivity"/>
+
         <activity android:name=".MapPageActivity"/>
+        <activity android:name=".BoardActivity"/>
     </application>
 
 </manifest>

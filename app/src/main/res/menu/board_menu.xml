@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/boardadd"
+        android:title="글쓰기"
+        android:icon="@drawable/ic_edit"
+        app:showAsAction="always"
+        android:width="30dp"
+        android:height="30dp"/>
+
+    <item android:id="@+id/boardfilter"
+        android:title="필터"
+        android:icon="@drawable/ic_filter"
+        app:showAsAction="always"
+        android:width="30dp"
+        android:height="30dp"/>
+</menu>
