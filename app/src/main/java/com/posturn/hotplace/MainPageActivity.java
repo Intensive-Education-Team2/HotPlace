@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -57,6 +58,12 @@ public class MainPageActivity extends AppCompatActivity {
                 else if(id == R.id.hotplace_board){
                     Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
                     startActivity(intent);
+                }
+
+                mDrawerLayout.closeDrawer(Gravity.LEFT) ;
+                int size = navigationView.getMenu().size();
+                for (int i = 0; i < size; i++) {
+                    navigationView.getMenu().getItem(i).setChecked(false);
                 }
 
                 return true;
