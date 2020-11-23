@@ -51,7 +51,9 @@ public class MainPageActivity extends AppCompatActivity {
                 else if(id == R.id.hotplace_recommand){
                     Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
                 }
-                else if(id == R.id.hotplace_recommand){
+                else if(id == R.id.hotplace_board){
+                    Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
+                    startActivity(intent);
                     Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
                 }
 
