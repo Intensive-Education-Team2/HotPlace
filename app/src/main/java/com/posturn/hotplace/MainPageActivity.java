@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -22,6 +24,8 @@ public class MainPageActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private Context context = this;
+    private TextView morerank;
+    private TextView morerecommand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,10 @@ public class MainPageActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
                     startActivity(intent);
                 }
+                else if(id == R.id.my_hotplace){
+                    Intent intent = new Intent(getApplicationContext(), MyPlaceActivity.class);
+                    startActivity(intent);
+                }
 
                 mDrawerLayout.closeDrawer(Gravity.LEFT) ;
                 int size = navigationView.getMenu().size();
@@ -67,6 +75,25 @@ public class MainPageActivity extends AppCompatActivity {
                 }
 
                 return true;
+            }
+        });
+
+        morerank=findViewById(R.id.textView2);
+        morerecommand=findViewById(R.id.textView3);
+
+        morerank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RankActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        morerecommand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RecommandActivity.class);
+                startActivity(intent);
             }
         });
 
