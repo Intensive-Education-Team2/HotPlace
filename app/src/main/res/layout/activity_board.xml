@@ -21,5 +21,10 @@
                 android:layout_gravity="center"
                 android:textSize="18sp" />
         </androidx.appcompat.widget.Toolbar>
+
+        <ListView
+            android:id="@+id/board_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

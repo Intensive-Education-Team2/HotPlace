@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/question"
+        android:title="물음표"
+        android:icon="@drawable/baseline_help_white_18dp"
+        app:showAsAction="always"
+        android:width="20dp"
+        android:height="20dp"/>
+</menu>

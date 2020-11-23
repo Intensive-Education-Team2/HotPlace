@@ -14,33 +14,19 @@
         android:background="@color/colorStrongPink"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="3dp"
-            android:background="@color/colorStrongPink"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:src="@drawable/ic_back_white"
-            android:text="Button" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/HotplerToolbarTheme">
 
-        <TextView
-            android:id="@+id/btn_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:gravity="right"
-            android:paddingLeft="5dp"
-            android:paddingTop="15dp"
-            android:paddingRight="15dp"
-            android:text="등록"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="18sp" />
+        </androidx.appcompat.widget.Toolbar>
     </LinearLayout>
 
     <TextView
@@ -52,10 +38,10 @@
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="5dp"
-        android:text="플레이스"
+        android:paddingBottom="10dp"
+        android:text="플레이스 선택"
+        android:textSize="16dp"
         android:textColor="@color/colorStrongPink"
-        android:textSize="24sp"
         android:textStyle="bold"
         />
 
@@ -65,16 +51,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="15dp"
-        android:layout_weight="0.5"
         android:background="@drawable/btn_radius"
         android:text="Place"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:textStyle="bold"
-        android:textSize="24sp"
-        android:textColor="@color/colorStrongViolet"/>
+        android:textColor="@color/darkgary"/>
 
     <TextView
         android:id="@+id/image_label"
@@ -86,9 +66,9 @@
         android:paddingBottom="5dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
-        android:textSize="24sp"
         android:textStyle="bold"
-        android:text="사진추가" />
+        android:text="사진추가"
+        android:textSize="16dp"/>
 
     <ImageButton
         android:id="@+id/btn_image"
@@ -114,9 +94,9 @@
         android:paddingBottom="5dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
-        android:textSize="24sp"
         android:textStyle="bold"
-        android:text="내용" />
+        android:text="내용"
+        android:textSize="16dp"/>
 
     <EditText
         android:id="@+id/edittext_content"
@@ -127,6 +107,13 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="50"
+        android:gravity="start|top"
+        android:ems="10"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:fontFamily="@font/nanumbarungothic"
+        android:hint="내용을 입력해주세요."
+        android:inputType="textMultiLine"
         android:background="@drawable/text_border" />
 
 </LinearLayout>

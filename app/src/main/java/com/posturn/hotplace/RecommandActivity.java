@@ -10,7 +10,7 @@ public class RecommandActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recommand_page);
+        setContentView(R.layout.activity_recommand_page);
 
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         toolbarTitle.setText("추천 핫플레이스");
