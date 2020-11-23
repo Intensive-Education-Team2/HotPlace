@@ -18,4 +18,8 @@
     <color name="colorBabyPink">#EDD4D9</color>
     <color name="colorWhitePink">#D4C3CF</color>
 
+    <color name="lightgray">#E2E2E2</color>
+    <color name="gray">#B6B6B6</color>
+    <color name="darkgary">#707070</color>
+
 </resources>

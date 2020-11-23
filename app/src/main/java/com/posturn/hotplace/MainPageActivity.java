@@ -1,5 +1,6 @@
 package com.posturn.hotplace;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,15 +47,16 @@ public class MainPageActivity extends AppCompatActivity {
                 String title = menuItem.getTitle().toString();
 
                 if(id == R.id.hotplace_rank){
-                    Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), RankActivity.class);
+                    startActivity(intent);
                 }
                 else if(id == R.id.hotplace_recommand){
-                    Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), RecommandActivity.class);
+                    startActivity(intent);
                 }
                 else if(id == R.id.hotplace_board){
                     Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
                     startActivity(intent);
-                    Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
                 }
 
                 return true;
