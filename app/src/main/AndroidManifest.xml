@@ -19,15 +19,18 @@
 
         <activity android:name=".MainActivity"/>
         <activity android:name=".LoadingPageActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainPageActivity"/>
-
         <activity android:name=".MapPageActivity"/>
         <activity android:name=".BoardActivity"/>
+        <activity android:name=".RankActivity"/>
+        <activity android:name=".RecommandActivity"/>
+        <activity android:name=".WriteMyPageActivity"/>
+        <activity android:name=".FilterPageActivity"/>
     </application>
 
 </manifest>

@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,7 +29,7 @@ import androidx.fragment.app.FragmentManager;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
-import com. naver.maps.map.MapFragment;
+import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
@@ -188,9 +190,13 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             });
             //마커 클릭 이벤트
             marker.setOnClickListener(overlay -> {
+                Animation animation = new AlphaAnimation(0, 1);
+                animation.setDuration(500);
+
                 TextView placename=findViewById(R.id.placename);
                 placename.setText(place.name);
                 placeinfo.setVisibility(View.VISIBLE);
+                placeinfo.setAnimation(animation);
 
                 Toast.makeText(getApplication(), place.name + " 클릭", Toast.LENGTH_SHORT).show();
                 return false;

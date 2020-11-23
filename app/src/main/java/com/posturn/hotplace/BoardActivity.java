@@ -43,15 +43,17 @@ public class BoardActivity extends AppCompatActivity {
                 return true;
             }
 
-            case R.id.boardadd: //글쓰기
-                //Intent intent = new Intent(getApplicationContext(), MapPageActivity.class);
-                //startActivity(intent);
+            case R.id.boardadd: {//글쓰기
+                Intent intent = new Intent(getApplicationContext(), WriteMyPageActivity.class);
+                startActivity(intent);
                 return false;
+            }
 
-            case R.id.boardfilter: //필터버튼
-                //Intent intent = new Intent(getApplicationContext(), MapPageActivity.class);
-                //startActivity(intent);
+            case R.id.boardfilter: {//필터버튼
+                Intent intent = new Intent(getApplicationContext(), FilterPageActivity.class);
+                startActivity(intent);
                 return false;
+            }
 
             default:
                 return super.onOptionsItemSelected(item);
