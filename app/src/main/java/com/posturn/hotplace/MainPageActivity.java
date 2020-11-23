@@ -1,6 +1,7 @@
 package com.posturn.hotplace;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,13 +60,15 @@ public class MainPageActivity extends AppCompatActivity {
         });
 
     }
-
+    //툴바 테마
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mainpage_menu, menu) ;
         return true ;
     }
 
+
+    //툴바 기능
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -75,8 +78,9 @@ public class MainPageActivity extends AppCompatActivity {
             }
 
             case R.id.mainpagemap : //지도버튼
-
-                return true ;
+                Intent intent = new Intent(getApplicationContext(), MapPageActivity.class);
+                startActivity(intent);
+                return false;
             default :
                 return super.onOptionsItemSelected(item) ;
         }
