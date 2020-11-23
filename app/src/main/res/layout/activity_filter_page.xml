@@ -4,13 +4,19 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/upper_toolbar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:orientation="horizontal">
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/HotplerToolbarTheme">
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18sp" />
+    </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,31 +34,24 @@
                 android:background="@color/colorWhitePink"
                 android:text="ㄱ"
                 android:paddingLeft="8dp"
-                android:layout_marginTop="2dp"
                 android:textColor="@color/colorStrongViolet"
                 android:textSize="24sp"
                 />
 
-            <LinearLayout
-                android:id="@+id/gieug_filter"
+            <com.nex3z.flowlayout.FlowLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="left"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:flChildSpacing="20dp"
+                app:flChildSpacingForLastRow="align"
+                app:flRowSpacing="8dp">
 
                 <TextView
-                    android:id="@+id/garosoogil"
+                    android:id="@+id/garoㅁsoogil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -62,15 +61,7 @@
                     android:id="@+id/gundae"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -80,21 +71,23 @@
                     android:id="@+id/gyeonglidangil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="경리단길" />
+            </com.nex3z.flowlayout.FlowLayout>
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/ni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="@color/colorWhitePink"
+                android:paddingLeft="8dp"
+                android:textColor="@color/colorStrongViolet"
+                android:textSize="24sp"
+                android:text="ㄴ" />
 
             <TextView
                 android:id="@+id/digeud"
@@ -106,29 +99,36 @@
                 android:textSize="24sp"
                 android:text="ㄷ" />
 
-            <LinearLayout
+            <com.nex3z.flowlayout.FlowLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:flChildSpacing="20dp"
+                app:flChildSpacingForLastRow="align"
+                app:flRowSpacing="8dp">
 
                 <TextView
                     android:id="@+id/dongdaemoon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="동대문" />
-            </LinearLayout>
+            </com.nex3z.flowlayout.FlowLayout>
+
+            <TextView
+                android:id="@+id/li"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="@color/colorWhitePink"
+                android:paddingLeft="8dp"
+                android:textColor="@color/colorStrongViolet"
+                android:textSize="24sp"
+                android:text="ㄹ" />
 
             <TextView
                 android:id="@+id/mieum"
@@ -140,29 +140,25 @@
                 android:textSize="24sp"
                 android:text="ㅁ" />
 
-            <LinearLayout
+            <com.nex3z.flowlayout.FlowLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:flChildSpacing="20dp"
+                app:flChildSpacingForLastRow="align"
+                app:flRowSpacing="8dp">
 
                 <TextView
                     android:id="@+id/mangwondong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="망원동" />
-            </LinearLayout>
+            </com.nex3z.flowlayout.FlowLayout>
 
             <TextView
                 android:id="@+id/bieub"
@@ -174,29 +170,25 @@
                 android:textSize="24sp"
                 android:text="ㅂ" />
 
-            <LinearLayout
+            <com.nex3z.flowlayout.FlowLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:flChildSpacing="20dp"
+                app:flChildSpacingForLastRow="align"
+                app:flRowSpacing="8dp">
 
                 <TextView
                     android:id="@+id/bangbaedong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="방배동" />
-            </LinearLayout>
+            </com.nex3z.flowlayout.FlowLayout>
 
             <TextView
                 android:id="@+id/siocs"
@@ -208,24 +200,20 @@
                 android:textSize="24sp"
                 android:text="ㅅ" />
 
-            <LinearLayout
+            <com.nex3z.flowlayout.FlowLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:flChildSpacing="20dp"
+                app:flChildSpacingForLastRow="align"
+                app:flRowSpacing="8dp">
 
                 <TextView
                     android:id="@+id/samcheongdong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -235,15 +223,7 @@
                     android:id="@+id/sharosoogil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -253,15 +233,7 @@
                     android:id="@+id/seochon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -271,15 +243,7 @@
                     android:id="@+id/seongsoo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -289,20 +253,12 @@
                     android:id="@+id/shinchon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="신촌" />
-            </LinearLayout>
+            </com.nex3z.flowlayout.FlowLayout>
 
             <TextView
                 android:id="@+id/ieung"
@@ -314,24 +270,20 @@
                 android:textSize="24sp"
                 android:text="ㅇ" />
 
-            <LinearLayout
+            <com.nex3z.flowlayout.FlowLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:flChildSpacing="20dp"
+                app:flChildSpacingForLastRow="align"
+                app:flRowSpacing="8dp">
 
                 <TextView
                     android:id="@+id/yeonnamdong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -341,20 +293,12 @@
                     android:id="@+id/wangsipli"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="왕십리" />
-            </LinearLayout>
+            </com.nex3z.flowlayout.FlowLayout>
 
             <TextView
                 android:id="@+id/jieug"
@@ -366,29 +310,69 @@
                 android:textSize="24sp"
                 android:text="ㅈ" />
 
-            <LinearLayout
+            <com.nex3z.flowlayout.FlowLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:flChildSpacing="20dp"
+                app:flChildSpacingForLastRow="align"
+                app:flRowSpacing="8dp">
 
                 <TextView
                     android:id="@+id/jamsil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="잠실" />
-            </LinearLayout>
+            </com.nex3z.flowlayout.FlowLayout>
+
+            <TextView
+                android:id="@+id/chi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="@color/colorWhitePink"
+                android:paddingLeft="8dp"
+                android:textColor="@color/colorStrongViolet"
+                android:textSize="24sp"
+                android:text="ㅊ" />
+
+            <TextView
+                android:id="@+id/ki"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="@color/colorWhitePink"
+                android:paddingLeft="8dp"
+                android:textColor="@color/colorStrongViolet"
+                android:textSize="24sp"
+                android:text="ㅋ" />
+
+            <TextView
+                android:id="@+id/ti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="@color/colorWhitePink"
+                android:paddingLeft="8dp"
+                android:textColor="@color/colorStrongViolet"
+                android:textSize="24sp"
+                android:text="ㅌ" />
+
+            <TextView
+                android:id="@+id/pi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="@color/colorWhitePink"
+                android:paddingLeft="8dp"
+                android:textColor="@color/colorStrongViolet"
+                android:textSize="24sp"
+                android:text="ㅍ" />
 
             <TextView
                 android:id="@+id/hieug"
@@ -400,24 +384,20 @@
                 android:textSize="24sp"
                 android:text="ㅎ" />
 
-            <LinearLayout
+            <com.nex3z.flowlayout.FlowLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_margin="6dp"
+                app:flChildSpacing="20dp"
+                app:flChildSpacingForLastRow="align"
+                app:flRowSpacing="8dp">
 
                 <TextView
                     android:id="@+id/hannamdong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -427,15 +407,7 @@
                     android:id="@+id/haebangchon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -445,20 +417,13 @@
                     android:id="@+id/hwaehwa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/txtview_radius"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
                     android:paddingBottom="10dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="혜화" />
-            </LinearLayout>
+            </com.nex3z.flowlayout.FlowLayout>
         </LinearLayout>
     </ScrollView>
 
