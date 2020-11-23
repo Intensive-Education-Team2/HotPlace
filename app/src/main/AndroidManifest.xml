@@ -18,19 +18,19 @@
             android:value="3sjkwye96q" />
 
         <activity android:name=".MainActivity"/>
-        <activity android:name=".MainPageActivity"/>
-        <activity android:name=".RecommandActivity"/>
-        <activity android:name=".WriteMyPageActivity">
+        <activity android:name=".LoadingPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoadingPageActivity"/>
-        <activity android:name=".FilterPageActivity"/>
-        <activity android:name=".RankActivity"/>
+        <activity android:name=".MainPageActivity"/>
         <activity android:name=".MapPageActivity"/>
-
+        <activity android:name=".BoardActivity"/>
+        <activity android:name=".RankActivity"/>
+        <activity android:name=".RecommandActivity"/>
+        <activity android:name=".WriteMyPageActivity"/>
+        <activity android:name=".FilterPageActivity"/>
     </application>
 
 </manifest>
