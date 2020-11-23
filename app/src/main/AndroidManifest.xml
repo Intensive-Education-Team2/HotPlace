@@ -26,6 +26,7 @@
 
         <activity android:name=".LoadingPageActivity"/>
         <activity android:name=".FilterPageActivity"/>
+        <activity android:name=".RankActivity"/>
 
 
     </application>
