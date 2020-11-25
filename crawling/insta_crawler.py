@@ -10,6 +10,7 @@ from pandas import DataFrame
 import urllib.request
 import os
 import argparse
+from datetime import datetime
 
 #함수 작성
 def insta_searching(word):  #word라는 매개변수를 받는 insta_searching 이라는 함수 생성
@@ -142,14 +143,14 @@ def move_next(driver):
 
 
 #1. 크롬으로 인스타그램 - ' 지역 ' 검색
-def crwaling(tag, number):
+def crwaling(tag, day):
     driver = webdriver.Chrome()
     url = insta_searching(tag)
     driver.get(url) 
     time.sleep(4) 
 
     #2. 로그인 하기
-    id = 'hhhhhhjjjjjj96'
+    id = 'hhhhhjjjjj96'
     password = 'z1x2c3'
 
     # 페이지 변경 아래 2코드 필요 없음
@@ -196,55 +197,57 @@ def crwaling(tag, number):
     #5. 비어있는 변수(results) 만들기
     results = [] 
 
+    now = datetime.today().date()
 
     df = pd.DataFrame(results ,columns = ['Content' , 'Date', 'Like', 'Place', 'Content_tags', 'Comment_tags', 'imgs'])
-    df.to_csv('{}.csv'.format(tag), index=False, encoding='utf-8-sig')
+    df.to_csv('{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig')
 
     #여러 게시물 크롤링하기
-    target = number #크롤링할 게시물 수
-    num = 0 #이미지 넘버링 
-    for i in range(target):
+    num = 0 #이미지 넘버링
+    cnt = 0
+    while True:
         data = get_content(driver) #게시물 정보 가져오기
 
-        imgUrl = data[6] # 이미지 저장을 위한, 이미지 소스 데이터 가져오기 
-            
-        num += 1    
-        
-        if(imgUrl !=''):
-            
-            print(imgUrl)
-            print()
+        dt = datetime.strptime(data[1], "%Y-%m-%d").date()
+        if (now - dt).days > day: #날짜차이까지만 가져오기
+            cnt+=1
+            print(cnt)
+            if cnt > 5:
+                break
+            continue
+        else:
+            cnt=0
 
-            path = "./{}사진".format(tag)
+        imgUrl = data[6] # 이미지 저장을 위한, 이미지 소스 데이터 가져오기            
+        num += 1            
+        if(imgUrl !=''):
+            #print(imgUrl)
+            path = "./{}_{}사진".format(now, tag)
             if not os.path.isdir(path):                                                           
-                os.mkdir(path)
-                
+                os.mkdir(path)   
             urllib.request.urlretrieve(imgUrl, path+'/insta_'+str(num)+'.png') 
+
+        if((num) % 10 == 0): # 10개씩 정보 저장
+            df = pd.DataFrame(results)
+            df.to_csv('{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig', mode = 'a', header = False)
+            results.clear()
 
         results.append(data)
         move_next(driver)
+
+    print('총 게시물 수 : {}'.format(num))
         
-        if((i + 1) % 10 == 0): # 10개씩 정보 저장
-            df = pd.DataFrame(results)
-            df.to_csv('{}.csv'.format(tag), index=False, encoding='utf-8-sig', mode = 'a', header = False)
-            results.clear()
-        
-        if(i%100 == 0): # 100 단위 마다 출력 -확인용
-            print(i)
-
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Instagram Crawler")
     parser.add_argument("-t", "--tag", help="instagram's tag name", dest = 'tag')
-    parser.add_argument("-n", "--number", type=int, help="number of returned posts", dest = 'number')
+    parser.add_argument("-d", "--day", type=int, help="날짜 차이만큼 가져오기", dest = 'day')
 
     args = parser.parse_args()
 
-    usage = "example python img_save.py -t 삼청동 -n 100"
+    usage = "example python img_save.py -t '삼청동' -d 1"
 
-    if args.tag is None or args.number is None:
+    if args.tag is None or args.day is None:
         print(usage)
     else:
-        crwaling(args.tag, args.number)
+        crwaling(args.tag, args.day)
     
