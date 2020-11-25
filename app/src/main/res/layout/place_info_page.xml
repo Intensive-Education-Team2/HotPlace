@@ -43,7 +43,7 @@
                 android:layout_weight="1"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
+            <Button
                 android:id="@+id/placeinfo_category_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 android:layout_weight="1"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
+            <Button
                 android:id="@+id/placeinfo_category_res"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 android:layout_weight="1"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
+            <Button
                 android:id="@+id/placeinfo_category_cafe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                 android:layout_weight="1"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
+            <Button
                 android:id="@+id/placeinfo_category_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
