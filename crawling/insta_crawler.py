@@ -156,7 +156,7 @@ def crwaling(tag, day):
     # 페이지 변경 아래 2코드 필요 없음
     #login_section = '//*[@id="react-root"]/section/nav/div[2]/div/div/div[3]/div/span/a[1]/button'
     #driver.find_element_by_xpath(login_section).click()
-
+    
     time.sleep(3) 
 
     elem_login = driver.find_element_by_name("username")
@@ -200,7 +200,7 @@ def crwaling(tag, day):
     now = datetime.today().date()
 
     df = pd.DataFrame(results ,columns = ['Content' , 'Date', 'Like', 'Place', 'Content_tags', 'Comment_tags', 'imgs'])
-    df.to_csv('{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig')
+    df.to_csv('./new/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig')
 
     #여러 게시물 크롤링하기
     num = 0 #이미지 넘버링
@@ -211,10 +211,12 @@ def crwaling(tag, day):
         dt = datetime.strptime(data[1], "%Y-%m-%d").date()
         if (now - dt).days > day: #날짜차이까지만 가져오기
             cnt+=1
-            print(cnt)
-            if cnt > 5:
+            if cnt > 10:
                 break
+
+            move_next(driver)
             continue
+        
         else:
             cnt=0
 
@@ -222,14 +224,14 @@ def crwaling(tag, day):
         num += 1            
         if(imgUrl !=''):
             #print(imgUrl)
-            path = "./{}_{}사진".format(now, tag)
+            path = "./new/{}_{}사진".format(now, tag)
             if not os.path.isdir(path):                                                           
                 os.mkdir(path)   
             urllib.request.urlretrieve(imgUrl, path+'/insta_'+str(num)+'.png') 
 
         if((num) % 10 == 0): # 10개씩 정보 저장
             df = pd.DataFrame(results)
-            df.to_csv('{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig', mode = 'a', header = False)
+            df.to_csv('./new/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig', mode = 'a', header = False)
             results.clear()
 
         results.append(data)
