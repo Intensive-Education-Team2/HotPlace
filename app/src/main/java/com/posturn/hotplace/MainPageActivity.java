@@ -1,10 +1,15 @@
 package com.posturn.hotplace;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -19,6 +24,8 @@ public class MainPageActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private Context context = this;
+    private TextView morerank;
+    private TextView morerecommand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,27 +52,61 @@ public class MainPageActivity extends AppCompatActivity {
                 String title = menuItem.getTitle().toString();
 
                 if(id == R.id.hotplace_rank){
-                    Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), RankActivity.class);
+                    startActivity(intent);
                 }
                 else if(id == R.id.hotplace_recommand){
-                    Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), RecommandActivity.class);
+                    startActivity(intent);
                 }
-                else if(id == R.id.hotplace_recommand){
-                    Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
+                else if(id == R.id.hotplace_board){
+                    Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
+                    startActivity(intent);
+                }
+                else if(id == R.id.my_hotplace){
+                    Intent intent = new Intent(getApplicationContext(), MyPlaceActivity.class);
+                    startActivity(intent);
+                }
+
+                mDrawerLayout.closeDrawer(Gravity.LEFT) ;
+                int size = navigationView.getMenu().size();
+                for (int i = 0; i < size; i++) {
+                    navigationView.getMenu().getItem(i).setChecked(false);
                 }
 
                 return true;
             }
         });
 
-    }
+        morerank=findViewById(R.id.textView2);
+        morerecommand=findViewById(R.id.textView3);
 
+        morerank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RankActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        morerecommand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RecommandActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+    //툴바 테마
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mainpage_menu, menu) ;
         return true ;
     }
 
+
+    //툴바 기능
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -75,8 +116,9 @@ public class MainPageActivity extends AppCompatActivity {
             }
 
             case R.id.mainpagemap : //지도버튼
-
-                return true ;
+                Intent intent = new Intent(getApplicationContext(), MapPageActivity.class);
+                startActivity(intent);
+                return false;
             default :
                 return super.onOptionsItemSelected(item) ;
         }

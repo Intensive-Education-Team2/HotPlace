@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/write_my_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/upper_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorStrongPink"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/HotplerToolbarTheme">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="18sp" />
+        </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/place_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:text="플레이스 선택"
+        android:textSize="16dp"
+        android:textColor="@color/colorStrongPink"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:id="@+id/btn_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/btn_radius"
+        android:text="Place"
+        android:textStyle="bold"
+        android:textColor="@color/darkgary"/>
+
+    <TextView
+        android:id="@+id/image_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorStrongPink"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:textStyle="bold"
+        android:text="사진추가"
+        android:textSize="16dp"/>
+
+    <ImageButton
+        android:id="@+id/btn_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="30"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/add_image_radius"
+        android:src="@drawable/hotpler" />
+
+    />
+
+    <TextView
+        android:id="@+id/content_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorStrongPink"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:textStyle="bold"
+        android:text="내용"
+        android:textSize="16dp"/>
+
+    <EditText
+        android:id="@+id/edittext_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="50"
+        android:gravity="start|top"
+        android:ems="10"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:fontFamily="@font/nanumbarungothic"
+        android:hint="내용을 입력해주세요."
+        android:inputType="textMultiLine"
+        android:background="@drawable/text_border" />
+
+</LinearLayout>
