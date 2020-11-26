@@ -1,8 +1,13 @@
 package com.posturn.hotplace;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,6 +42,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +58,37 @@ public class MainPageActivity extends AppCompatActivity {
     private TextView morerecommand;
     private StorageReference mStorageRef;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private ArrayList<ObjectPlace> objectPlaces = new ArrayList<ObjectPlace>();
+
+    public ArrayList<ObjectPlace> objectPlaces = new ArrayList<ObjectPlace>();
+    public ArrayList<ObjectCount> objectCountsToday = new ArrayList<ObjectCount>();
+
+    public ImageView imageViewTop1;
+    public ImageView imageViewTop2;
+    public ImageView imageViewTop3;
+    public ImageView imageViewTop4;
+    public ImageView imageViewTop5;
+
+    public TextView textViewTop1;
+    public TextView textViewTop2;
+    public TextView textViewTop3;
+    public TextView textViewTop4;
+    public TextView textViewTop5;
+
+    public TextView textViewnear1;
+    public TextView textViewnear2;
+    public TextView textViewnear3;
+
+    public TextView textViewnearDistance1;
+    public TextView textViewnearDistance2;
+    public TextView textViewnearDistance3;
+
+    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
+    private static final int PERMISSIONS_REQUEST_CODE = 100;
+    String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    public GpsTracker gpsTracker = new GpsTracker(MainPageActivity.this);
+    public double latitude = gpsTracker.getLatitude();
+    public double longitude = gpsTracker.getLongitude();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +104,29 @@ public class MainPageActivity extends AppCompatActivity {
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         toolbarTitle.setText("Hotpler");
 
-        ImageView imageViewTop1 = findViewById(R.id.imageViewRank1);
-        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/place%2Fgangnam.jpg?alt=media&token=db172198-1073-452f-8970-641e1ba4f43e").into(imageViewTop1);
+        gpsTracker = new GpsTracker(MainPageActivity.this);
+        latitude = gpsTracker.getLatitude();
+        longitude = gpsTracker.getLongitude();
+
+        imageViewTop1 = findViewById(R.id.imageViewRank1);
+        imageViewTop2 = findViewById(R.id.imageViewRank2);
+        imageViewTop3 = findViewById(R.id.imageViewRank3);
+        imageViewTop4 = findViewById(R.id.imageViewRank4);
+        imageViewTop5 = findViewById(R.id.imageViewRank5);
+
+        textViewTop1=findViewById(R.id.textViewRank1);
+        textViewTop2=findViewById(R.id.textViewRank2);
+        textViewTop3=findViewById(R.id.textViewRank3);
+        textViewTop4=findViewById(R.id.textViewRank4);
+        textViewTop5=findViewById(R.id.textViewRank5);
+
+        textViewnear1=findViewById(R.id.textViewHereName1);
+        textViewnear2=findViewById(R.id.textViewHereName2);
+        textViewnear3=findViewById(R.id.textViewHereName3);
+
+        textViewnearDistance1=findViewById(R.id.textViewHereDistance1);
+        textViewnearDistance2=findViewById(R.id.textViewHereDistance2);
+        textViewnearDistance3=findViewById(R.id.textViewHereDistance3);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -130,22 +187,8 @@ public class MainPageActivity extends AppCompatActivity {
             }
         });
 
-        db.collection("HotPlace")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Map map=document.getData();
-                                Log.d("TAG", map.get("name").toString());
-                                objectPlaces.add(new ObjectPlace(map.get("name").toString(), (Double)map.get("lat"), (Double)map.get("lon"), map.get("img").toString(), map.get("tag").toString(), Integer.parseInt(map.get("index").toString())));
-                            }
-                        } else {
-                        }
-                    }
-                });
-        Log.d("TAG", objectPlaces.toString());
+        getTodayCountData();
+        getPlaceList();
     }
 
     //툴바 테마
@@ -174,7 +217,117 @@ public class MainPageActivity extends AppCompatActivity {
         }
     }
 
+    public void getTodayCountData() {
+        DocumentReference docRef = db.collection("Test").document("2020-11-25");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        for (int i = 0; i < 15; i++) {
+                            HashMap map = (HashMap) document.get(Integer.toString(i));
+                            objectCountsToday.add(new ObjectCount(map.get("name").toString(), Integer.parseInt(map.get("count").toString())));
+                            //Log.d("TAG", objectCountsToday.toString());
+                        }
+                    } else {
+                    }
+                    Collections.sort(objectCountsToday);//소팅
+                    Log.d("Sort", objectCountsToday.get(1).getName().toString());
 
+                    setTop5text();
+                } else {
+                }
+            }
+        });
+
+        }
+
+    public void getPlaceList() {
+        db.collection("HotPlace")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map map = document.getData();
+                                Log.d("TAG", map.get("name").toString());
+                                objectPlaces.add(new ObjectPlace(map.get("name").toString(), (Double) map.get("lat"), (Double) map.get("lon"), map.get("img").toString(), map.get("tag").toString(), Integer.parseInt(map.get("index").toString())));
+                            }
+                        } else {
+                        }
+                        calculateDistance(latitude, longitude, objectPlaces);
+                        setTop5img();
+                    }
+                });
+    }
+
+    public void setTop5text(){
+        textViewTop1.setText(objectCountsToday.get(0).getName());
+        textViewTop2.setText(objectCountsToday.get(1).getName());
+        textViewTop3.setText(objectCountsToday.get(2).getName());
+        textViewTop4.setText(objectCountsToday.get(3).getName());
+        textViewTop5.setText(objectCountsToday.get(4).getName());
+    }
+
+    public void setTop5img(){
+        Picasso.get().load(queryPlaceById(objectPlaces, objectCountsToday.get(0).getName())).into(imageViewTop1);
+        Picasso.get().load(queryPlaceById(objectPlaces, objectCountsToday.get(1).getName())).into(imageViewTop2);
+        Picasso.get().load(queryPlaceById(objectPlaces, objectCountsToday.get(2).getName())).into(imageViewTop3);
+        Picasso.get().load(queryPlaceById(objectPlaces, objectCountsToday.get(3).getName())).into(imageViewTop4);
+        Picasso.get().load(queryPlaceById(objectPlaces, objectCountsToday.get(4).getName())).into(imageViewTop5);
+
+
+    }
+
+    //이미지찾기
+    private static String queryPlaceById(ArrayList<ObjectPlace> objectPlaces, String name) {
+        ObjectPlace objectPlace = null;
+        for (ObjectPlace place : objectPlaces) {
+            if (place.name.equals(name)) {
+                objectPlace = place;
+                break;
+            }
+        }
+        return objectPlace.img;
+    }
+
+    private void calculateDistance(double lat, double lon, ArrayList<ObjectPlace> objectPlaces){
+        ArrayList<ObjectDistance> distances = new ArrayList<ObjectDistance>();
+
+        for(int i=0; i<objectPlaces.size();i++) {
+            distances.add(new ObjectDistance(objectPlaces.get(i).name,getDistance(lat, lon, objectPlaces.get(i).lat, objectPlaces.get(i).lon)));
+        }
+        Collections.sort(distances);
+        setDistance(distances);
+    }
+
+    private void setDistance(ArrayList<ObjectDistance> distances){
+        textViewnear1.setText(distances.get(0).name);
+        textViewnear2.setText(distances.get(1).name);
+        textViewnear3.setText(distances.get(2).name);
+
+        textViewnearDistance1.setText(Double.toString(distances.get(0).distance)+"km");
+        textViewnearDistance2.setText(Double.toString(distances.get(1).distance)+"km");
+        textViewnearDistance3.setText(Double.toString(distances.get(2).distance)+"km");
+
+    }
+    private double getDistance(double lat1 , double lng1 , double lat2 , double lng2 ){
+        double distance;
+
+        Location locationA = new Location("point A");
+        locationA.setLatitude(lat1);
+        locationA.setLongitude(lng1);
+
+        Location locationB = new Location("point B");
+        locationB.setLatitude(lat2);
+        locationB.setLongitude(lng2);
+
+        distance = locationA.distanceTo(locationB);
+
+        return Math.round(distance/1000*100)/100.0;
+    }
 }
 
 
