@@ -17,6 +17,8 @@
     <color name="colorPink">#F78B87</color>
     <color name="colorBabyPink">#EDD4D9</color>
     <color name="colorWhitePink">#D4C3CF</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorBlue">#1930F7</color>
 
     <color name="lightgray">#E2E2E2</color>
     <color name="gray">#B6B6B6</color>

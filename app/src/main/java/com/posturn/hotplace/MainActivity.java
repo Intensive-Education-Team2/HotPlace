@@ -20,10 +20,12 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<ObjectPlace> objectPlaces = new ArrayList<ObjectPlace>();
+    private ArrayList<ObjectCount> objectCounts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         writeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*플레이스 데이텉 추가
+/*플레이스 데이터 추가
                 objectPlaces.add(new ObjectPlace("가로수길", 37.5212, 127.0229, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/place%2Fgarosugil.jpg?alt=media&token=75372fe7-d872-466a-a852-02786ec2034f", "신사역 주변" , 1));
                 objectPlaces.add(new ObjectPlace("강남", 37.4979, 127.0276, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/place%2Fgangnam.jpg?alt=media&token=602b8306-9867-47e3-b4fa-2517841d99d4", "강남역주변", 2));
                 objectPlaces.add(new ObjectPlace("건대", 37.5418, 127.0659, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/place%2Fkunkuk.jpg?alt=media&token=d06ca4fe-024f-4b51-b76c-7324f4f931ed", "설명" , 3));
@@ -60,7 +62,29 @@ public class MainActivity extends AppCompatActivity {
                 }
  */
 
+//카운트 데이터 추가
+                Map<String, Object> nestedData = new HashMap<>();
 
+                objectCounts.add(new ObjectCount("가로수길", 1400));
+                objectCounts.add(new ObjectCount("강남", 1500));
+                objectCounts.add(new ObjectCount("건대", 1300));
+                objectCounts.add(new ObjectCount("경리단길", 1200));
+                objectCounts.add(new ObjectCount("망원동", 1100));
+                objectCounts.add(new ObjectCount("삼청동", 1000));
+                objectCounts.add(new ObjectCount("성수동", 900));
+                objectCounts.add(new ObjectCount("신림", 100));
+                objectCounts.add(new ObjectCount("신촌", 700));
+                objectCounts.add(new ObjectCount("연남동", 600));
+                objectCounts.add(new ObjectCount("왕십리", 500));
+                objectCounts.add(new ObjectCount("잠실", 400));
+                objectCounts.add(new ObjectCount("한남동", 300));
+                objectCounts.add(new ObjectCount("합정", 200));
+                objectCounts.add(new ObjectCount("해방촌", 800));
+
+                for(int i=0; i<15; i++) {
+                    nestedData.put(Integer.toString(i), objectCounts.get(i));
+                }
+                db.collection("Test").document("2020-11-24").set(nestedData);
 
             }
         });
