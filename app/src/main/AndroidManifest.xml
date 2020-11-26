@@ -28,9 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
-        <activity android:name=".LoadingPageActivity">
-     
-
 
         <activity android:name=".LoadingPageActivity">
             <intent-filter>
@@ -52,8 +49,7 @@
         <activity android:name=".RecommandActivity"/>
         <activity android:name=".WriteMyPageActivity"/>
         <activity android:name=".FilterPageActivity"/>
-        <activity android:name=".PlaceInfoActivity">
-        </activity>
+
         <activity android:name=".MyPlaceActivity"/>
         <activity android:name=".TestPlaceInfoActivity"></activity>
 
