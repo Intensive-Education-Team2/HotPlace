@@ -96,6 +96,9 @@ public class MainPageActivity extends AppCompatActivity {
                 } else if (id == R.id.my_hotplace) {
                     Intent intent = new Intent(getApplicationContext(), MyPlaceActivity.class);
                     startActivity(intent);
+                } else if (id == R.id.notice) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
 
                 mDrawerLayout.closeDrawer(Gravity.LEFT);

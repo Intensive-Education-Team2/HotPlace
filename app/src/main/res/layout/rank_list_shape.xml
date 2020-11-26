@@ -31,18 +31,18 @@
     <ImageView
         android:id="@+id/updown_img"
         android:layout_width="19dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/notchange" />
+        app:srcCompat="@drawable/up" />
 
     <TextView
         android:id="@+id/updown_num"
-        android:layout_width="wrap_content"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="15dp"
         android:layout_gravity="center"
         android:textSize="16dp"
-        android:text="TextView" />
+        android:text="21" />
 
 </LinearLayout>

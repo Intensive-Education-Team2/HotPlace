@@ -212,9 +212,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     public void makeMarking(){//마커 만들기
-        placelist.add(new ObjectPlace("강남", 37.4979, 127.0276, "imgurl", "강남역주변", 1));
-        placelist.add(new ObjectPlace("가로수길", 37.5206 , 127.0229, "imgurl", "신사역 주변", 2));
-        placelist.add(new ObjectPlace(name, lat , lon, img, tag, index));
+
         Log.v("here", name+" "+lat+" "+lon);
 
         for(ObjectPlace place : placelist) {
