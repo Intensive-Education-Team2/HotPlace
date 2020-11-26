@@ -26,6 +26,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
@@ -46,6 +54,7 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MapPageActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -54,16 +63,23 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
     private MapFragment mapFragment;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private double lat, lon; //위도 경도
-
-    private ArrayList<ObjectPlace> placelist = new ArrayList<ObjectPlace>();
+    public ArrayList<ObjectPlace> placelist = new ArrayList<ObjectPlace>();
+    public ObjectPlace objectPlace;
 
     public InfoWindow infoWindow;
 
     public LinearLayout placeinfo;
 
     public ImageView mappart;
+
+    public String name;
+    public double lat;
+    public double lon;
+    public String img;
+    public String tag;
+    public int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,8 +141,37 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         mappart.setOnClickListener(clickListener);
 
         this.naverMap = naverMap;
+
+        db.collection("HotPlace")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map map=document.getData();
+                                name = map.get("name").toString();
+                                lat =(Double)map.get("lat");
+                                lon =(Double)map.get("lon");
+                                img = map.get("img").toString();
+                                tag = map.get("tag").toString();
+                                index = Integer.parseInt(map.get("index").toString());
+                                objectPlace = new ObjectPlace(map.get("name").toString(), lat, lon, img, tag, index);
+                                placelist.add(objectPlace);
+                                Log.v("value",objectPlace.getName());
+                                Log.v("please", objectPlace.getName()+" "+objectPlace.getLat()+" "+objectPlace.getLon());
+                                //placelist.add(new ObjectPlace(map.get("name").toString(), (Double)map.get("lat"), (Double)map.get("lon"), map.get("img").toString(), map.get("tag").toString(), Integer.parseInt(map.get("index").toString())));
+
+                            }
+                        } else {
+                        }
+                        makeMarking();
+                    }
+                });
+
         setMapOption();
-        makeMarking();
+
+
 
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
@@ -169,6 +214,8 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     public void makeMarking(){//마커 만들기
         placelist.add(new ObjectPlace("강남", 37.4979, 127.0276, "imgurl", "강남역주변", 1));
         placelist.add(new ObjectPlace("가로수길", 37.5206 , 127.0229, "imgurl", "신사역 주변", 2));
+        placelist.add(new ObjectPlace(name, lat , lon, img, tag, index));
+        Log.v("here", name+" "+lat+" "+lon);
 
         for(ObjectPlace place : placelist) {
             infoWindow = new InfoWindow();
