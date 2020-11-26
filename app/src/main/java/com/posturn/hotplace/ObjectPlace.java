@@ -6,15 +6,16 @@ class ObjectPlace {
     double lon;
     String img;
     String tag;
-    int rank;
+    int index;
 
-    public ObjectPlace(String name, double lat, double lon, String img, String tag, int rank) {
+
+    public ObjectPlace(String name, double lat, double lon, String img, String tag, int index) {
         this.name=name;
         this.lat=lat;
         this.lon=lon;
         this.img=img;
         this.tag=tag;
-        this.rank=rank;
+        this.index=index;
     }
 
     public String getName(){
@@ -32,7 +33,26 @@ class ObjectPlace {
     public String getTag(){
         return tag;
     }
-    public int getRank(){
-        return rank;
+    public int getindex(){
+        return index;
+    }
+
+    public void setName(String name){
+        this.name=name;
+    }
+    public void setLat(double lat){
+        this.lat=lat;
+    }
+    public void setLon(double lon){
+        this.lon=lon;
+    }
+    public void setImg(String img){
+        this.img=img;
+    }
+    public void setTag(String tag){
+        this.tag=tag;
+    }
+    public void setindex(int index){
+        this.index=index;
     }
 }
