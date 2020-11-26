@@ -32,14 +32,20 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_weight="1"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ranklist"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.posturn.hotplace.WrapListView
+                    android:id="@+id/ranklist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
         </androidx.cardview.widget.CardView>
     </ScrollView>
 

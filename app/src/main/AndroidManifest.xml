@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
 
     <meta-data
         android:name="com.xxx.MyGlideModule"
@@ -21,10 +24,21 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="3sjkwye96q" />
 
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".LoadingPageActivity">
 
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".LoadingPageActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".MarketMainActivity">
+             <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+
         <activity android:name=".MainPageActivity"/>
         <activity android:name=".MapPageActivity"/>
         <activity android:name=".BoardActivity"/>
@@ -32,15 +46,10 @@
         <activity android:name=".RecommandActivity"/>
         <activity android:name=".WriteMyPageActivity"/>
         <activity android:name=".FilterPageActivity"/>
-
         <activity android:name=".PlaceInfoActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
-
         <activity android:name=".MyPlaceActivity"/>
+        <activity android:name=".TestPlaceInfoActivity"></activity>
 
     </application>
 
