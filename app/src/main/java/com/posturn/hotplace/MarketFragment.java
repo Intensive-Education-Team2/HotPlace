@@ -46,18 +46,18 @@ public class MarketFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.ab_fragment_post, container, false);
+        View view = inflater.inflate(R.layout.market_fragment_post, container, false);
         view.setClickable(true);
 
         list.clear();
         /*list.add(new MarketObject("블랭크", "잠실","res","361m",
                 "잠실,잠실본동",
                 "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fblank_jamsil_img.jpg?alt=media&token=7414e8c8-e738-4fb5-a447-8b7b8dbeb9d1",
-                "detail_blank"));
-        list.add(new MarketObject("연탄부락", "잠실","res","452m",
+                "https://m.store.naver.com/places/detail?id=1409709820"));*/
+        /*list.add(new MarketObject("연탄부락", "잠실","res","452m",
                 "연탄불에 구워먹는 두툼한 돼지고기",
                 "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fyeontan_jamsil_img.jpg?alt=media&token=a2ad2f92-c5cc-4e30-8407-2fe60f667d9d",
-                "detail_yeontan"));*/
+                "https://m.store.naver.com/places/detail?id=1390330587"));*/
         getFireBaseObject();
 
         TextView title = view.findViewById(R.id.title);
