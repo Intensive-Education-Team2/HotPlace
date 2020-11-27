@@ -1,5 +1,6 @@
 package com.posturn.hotplace;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -40,6 +44,9 @@ public class RankActivity extends AppCompatActivity {
     private ArrayList objectCountsToday = new ArrayList();
     private ArrayList objectCountsYesterday= new ArrayList();
 
+    private String today;
+    private String yesterday;
+
     private void populateListView(ArrayList<ObjectCount> objectCountsToday, ArrayList<ObjectCount> objectCountsYesterday) {
         listView = findViewById(R.id.ranklist);
         adapter = new TopListAdapter(this, objectCountsToday, objectCountsYesterday);
@@ -47,6 +54,7 @@ public class RankActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +67,11 @@ public class RankActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         toolbarTitle.setText("핫플레이스 순위");
+
+        LocalDate date=LocalDate.of(2020,11,25);
+        LocalDate dateago=date.minusDays(1L);
+        today = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        yesterday=dateago.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         getTodayCountData();
     }
@@ -84,7 +97,7 @@ public class RankActivity extends AppCompatActivity {
     }
 
     public void getTodayCountData(){
-        DocumentReference docRef = db.collection("Test").document("2020-11-25");
+        DocumentReference docRef = db.collection("Test").document(today);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -108,7 +121,7 @@ public class RankActivity extends AppCompatActivity {
     }
 
     public void getYesterdayCountData(){
-        DocumentReference docRef = db.collection("Test").document("2020-11-24");
+        DocumentReference docRef = db.collection("Test").document(yesterday);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

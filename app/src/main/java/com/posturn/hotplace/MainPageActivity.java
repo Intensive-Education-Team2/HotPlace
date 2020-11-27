@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,13 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -40,6 +41,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,6 +64,8 @@ public class MainPageActivity extends AppCompatActivity {
 
     public ArrayList<ObjectPlace> objectPlaces = new ArrayList<ObjectPlace>();
     public ArrayList<ObjectCount> objectCountsToday = new ArrayList<ObjectCount>();
+    public ArrayList<ObjectCount> objectCountsYesterday = new ArrayList<ObjectCount>();
+    public ArrayList<ObjectRecommand> objectRecommands = new ArrayList<ObjectRecommand>();
 
     public ImageView imageViewTop1;
     public ImageView imageViewTop2;
@@ -82,14 +87,22 @@ public class MainPageActivity extends AppCompatActivity {
     public TextView textViewnearDistance2;
     public TextView textViewnearDistance3;
 
+    private TextView textViewrecommand1name;
+    private TextView textViewrecommand2name;
+    private TextView textViewrecommand3name;
+
+    private String today;
+    private String yesterday;
+
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
-    String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     public GpsTracker gpsTracker = new GpsTracker(MainPageActivity.this);
     public double latitude = gpsTracker.getLatitude();
     public double longitude = gpsTracker.getLongitude();
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,25 +121,12 @@ public class MainPageActivity extends AppCompatActivity {
         latitude = gpsTracker.getLatitude();
         longitude = gpsTracker.getLongitude();
 
-        imageViewTop1 = findViewById(R.id.imageViewRank1);
-        imageViewTop2 = findViewById(R.id.imageViewRank2);
-        imageViewTop3 = findViewById(R.id.imageViewRank3);
-        imageViewTop4 = findViewById(R.id.imageViewRank4);
-        imageViewTop5 = findViewById(R.id.imageViewRank5);
+        setView();
 
-        textViewTop1=findViewById(R.id.textViewRank1);
-        textViewTop2=findViewById(R.id.textViewRank2);
-        textViewTop3=findViewById(R.id.textViewRank3);
-        textViewTop4=findViewById(R.id.textViewRank4);
-        textViewTop5=findViewById(R.id.textViewRank5);
-
-        textViewnear1=findViewById(R.id.textViewHereName1);
-        textViewnear2=findViewById(R.id.textViewHereName2);
-        textViewnear3=findViewById(R.id.textViewHereName3);
-
-        textViewnearDistance1=findViewById(R.id.textViewHereDistance1);
-        textViewnearDistance2=findViewById(R.id.textViewHereDistance2);
-        textViewnearDistance3=findViewById(R.id.textViewHereDistance3);
+        LocalDate date = LocalDate.of(2020, 11, 25);
+        LocalDate dateago = date.minusDays(1L);
+        today = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        yesterday = dateago.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -188,7 +188,7 @@ public class MainPageActivity extends AppCompatActivity {
         });
 
         getTodayCountData();
-        getPlaceList();
+
     }
 
     //툴바 테마
@@ -218,7 +218,7 @@ public class MainPageActivity extends AppCompatActivity {
     }
 
     public void getTodayCountData() {
-        DocumentReference docRef = db.collection("Test").document("2020-11-25");
+        DocumentReference docRef = db.collection("Test").document(today);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -235,13 +235,35 @@ public class MainPageActivity extends AppCompatActivity {
                     Collections.sort(objectCountsToday);//소팅
                     Log.d("Sort", objectCountsToday.get(1).getName().toString());
 
+                    getPlaceList();
                     setTop5text();
                 } else {
                 }
             }
         });
+    }
 
-        }
+    public void getYesterdayCountData() {
+        DocumentReference docRef = db.collection("Test").document(yesterday);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        for (int i = 0; i < 15; i++) {
+                            HashMap map = (HashMap) document.get(Integer.toString(i));
+                            objectCountsYesterday.add(new ObjectCount(map.get("name").toString(), Integer.parseInt(map.get("count").toString())));
+                            Log.v("22222", String.valueOf(objectCountsYesterday.get(i).name));
+                        }
+                    } else {
+                    }
+                } else {
+                }
+                calculateRate(objectCountsToday, objectCountsYesterday, objectRecommands);
+            }
+        });
+    }
 
     public void getPlaceList() {
         db.collection("HotPlace")
@@ -259,11 +281,12 @@ public class MainPageActivity extends AppCompatActivity {
                         }
                         calculateDistance(latitude, longitude, objectPlaces);
                         setTop5img();
+                        getYesterdayCountData();
                     }
                 });
     }
 
-    public void setTop5text(){
+    public void setTop5text() {
         textViewTop1.setText(objectCountsToday.get(0).getName());
         textViewTop2.setText(objectCountsToday.get(1).getName());
         textViewTop3.setText(objectCountsToday.get(2).getName());
@@ -271,7 +294,7 @@ public class MainPageActivity extends AppCompatActivity {
         textViewTop5.setText(objectCountsToday.get(4).getName());
     }
 
-    public void setTop5img(){
+    public void setTop5img() {
         Picasso.get().load(queryPlaceById(objectPlaces, objectCountsToday.get(0).getName())).into(imageViewTop1);
         Picasso.get().load(queryPlaceById(objectPlaces, objectCountsToday.get(1).getName())).into(imageViewTop2);
         Picasso.get().load(queryPlaceById(objectPlaces, objectCountsToday.get(2).getName())).into(imageViewTop3);
@@ -293,27 +316,28 @@ public class MainPageActivity extends AppCompatActivity {
         return objectPlace.img;
     }
 
-    private void calculateDistance(double lat, double lon, ArrayList<ObjectPlace> objectPlaces){
+    private void calculateDistance(double lat, double lon, ArrayList<ObjectPlace> objectPlaces) {
         ArrayList<ObjectDistance> distances = new ArrayList<ObjectDistance>();
 
-        for(int i=0; i<objectPlaces.size();i++) {
-            distances.add(new ObjectDistance(objectPlaces.get(i).name,getDistance(lat, lon, objectPlaces.get(i).lat, objectPlaces.get(i).lon)));
+        for (int i = 0; i < objectPlaces.size(); i++) {
+            distances.add(new ObjectDistance(objectPlaces.get(i).name, getDistance(lat, lon, objectPlaces.get(i).lat, objectPlaces.get(i).lon)));
         }
         Collections.sort(distances);
         setDistance(distances);
     }
 
-    private void setDistance(ArrayList<ObjectDistance> distances){
+    private void setDistance(ArrayList<ObjectDistance> distances) {
         textViewnear1.setText(distances.get(0).name);
         textViewnear2.setText(distances.get(1).name);
         textViewnear3.setText(distances.get(2).name);
 
-        textViewnearDistance1.setText(Double.toString(distances.get(0).distance)+"km");
-        textViewnearDistance2.setText(Double.toString(distances.get(1).distance)+"km");
-        textViewnearDistance3.setText(Double.toString(distances.get(2).distance)+"km");
+        textViewnearDistance1.setText(Double.toString(distances.get(0).distance) + "km");
+        textViewnearDistance2.setText(Double.toString(distances.get(1).distance) + "km");
+        textViewnearDistance3.setText(Double.toString(distances.get(2).distance) + "km");
 
     }
-    private double getDistance(double lat1 , double lng1 , double lat2 , double lng2 ){
+
+    private double getDistance(double lat1, double lng1, double lat2, double lng2) {
         double distance;
 
         Location locationA = new Location("point A");
@@ -326,8 +350,55 @@ public class MainPageActivity extends AppCompatActivity {
 
         distance = locationA.distanceTo(locationB);
 
-        return Math.round(distance/1000*100)/100.0;
+        return Math.round(distance / 1000 * 100) / 100.0;
     }
+
+    public void calculateRate(ArrayList<ObjectCount> objectCountsToday, ArrayList<ObjectCount> objectCountsYesterday, ArrayList<ObjectRecommand> objectRecommands) {
+        for (int i = 0; i < objectCountsToday.size(); i++) {
+            double todayCount = objectCountsToday.get(i).count;
+            double yesterdayCount = objectCountsYesterday.get(i).count;
+
+            objectRecommands.add(new ObjectRecommand(objectCountsToday.get(i).name, (todayCount - yesterdayCount) / yesterdayCount));
+        }
+        Collections.sort(objectRecommands);
+        setRecommaneText(objectRecommands);
+    }
+
+    private void setRecommaneText(ArrayList<ObjectRecommand> objectRecommands){
+        textViewrecommand1name.setText(objectRecommands.get(0).name);
+        textViewrecommand2name.setText(objectRecommands.get(1).name);
+        textViewrecommand3name.setText(objectRecommands.get(2).name);
+    }
+
+    private void setView() {
+        imageViewTop1 = findViewById(R.id.imageViewRank1);
+        imageViewTop2 = findViewById(R.id.imageViewRank2);
+        imageViewTop3 = findViewById(R.id.imageViewRank3);
+        imageViewTop4 = findViewById(R.id.imageViewRank4);
+        imageViewTop5 = findViewById(R.id.imageViewRank5);
+
+        textViewTop1 = findViewById(R.id.textViewRank1);
+        textViewTop2 = findViewById(R.id.textViewRank2);
+        textViewTop3 = findViewById(R.id.textViewRank3);
+        textViewTop4 = findViewById(R.id.textViewRank4);
+        textViewTop5 = findViewById(R.id.textViewRank5);
+
+        textViewnear1 = findViewById(R.id.textViewHereName1);
+        textViewnear2 = findViewById(R.id.textViewHereName2);
+        textViewnear3 = findViewById(R.id.textViewHereName3);
+
+        textViewrecommand1name=findViewById(R.id.recommand1name);
+        textViewrecommand2name=findViewById(R.id.recommand2name);
+        textViewrecommand3name=findViewById(R.id.recommand3name);
+
+        textViewnearDistance1 = findViewById(R.id.textViewHereDistance1);
+        textViewnearDistance2 = findViewById(R.id.textViewHereDistance2);
+        textViewnearDistance3 = findViewById(R.id.textViewHereDistance3);
+
+
+    }
+
+
 }
 
 

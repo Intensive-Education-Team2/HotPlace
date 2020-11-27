@@ -35,10 +35,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
-                android:textSize="16dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
-                android:textColor="@color/colorStrongPink"
-                android:text="급상승 핫플레이스" />
+                android:text="급상승 핫플레이스"
+                android:textColor="@color/colorStrongPink"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -59,14 +59,14 @@
                         android:layout_marginBottom="10dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="30dp"
-                        app:cardElevation="5dp">
+                        app:cardElevation="10dp">
 
                         <ImageView
                             android:id="@+id/th1_place_1"
                             android:layout_width="160dp"
                             android:layout_height="230dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/garosugil" />
+                            android:src="@drawable/transparent" />
 
                         <TextView
                             android:id="@+id/th1_placename_1"
@@ -75,7 +75,6 @@
                             android:layout_gravity="bottom|right"
                             android:layout_marginRight="15dp"
                             android:layout_marginBottom="10dp"
-                            android:text="가로수길"
                             android:theme="@style/RecommandText"/>
                     </androidx.cardview.widget.CardView>
 
@@ -95,7 +94,7 @@
                             android:layout_width="160dp"
                             android:layout_height="230dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/habjung" />
+                            android:src="@drawable/transparent" />
 
                         <TextView
                             android:id="@+id/th1_placename_2"
@@ -104,7 +103,6 @@
                             android:layout_gravity="bottom|right"
                             android:layout_marginRight="15dp"
                             android:layout_marginBottom="10dp"
-                            android:text="합정"
                             android:theme="@style/RecommandText"/>
                     </androidx.cardview.widget.CardView>
 
@@ -124,7 +122,7 @@
                             android:layout_width="160dp"
                             android:layout_height="230dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/gyunglidangil" />
+                            android:src="@drawable/transparent" />
 
                         <TextView
                             android:id="@+id/th1_placename_3"
@@ -133,7 +131,6 @@
                             android:layout_gravity="bottom|right"
                             android:layout_marginRight="15dp"
                             android:layout_marginBottom="10dp"
-                            android:text="경리단길"
                             android:theme="@style/RecommandText"/>
                     </androidx.cardview.widget.CardView>
 
@@ -153,7 +150,7 @@
                             android:layout_width="160dp"
                             android:layout_height="230dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/gangnam" />
+                            android:src="@drawable/transparent" />
 
                         <TextView
                             android:id="@+id/th1_placename_4"
@@ -162,7 +159,6 @@
                             android:layout_gravity="bottom|right"
                             android:layout_marginRight="15dp"
                             android:layout_marginBottom="10dp"
-                            android:text="강남"
                             android:theme="@style/RecommandText"/>
                     </androidx.cardview.widget.CardView>
 
@@ -182,7 +178,7 @@
                             android:layout_width="160dp"
                             android:layout_height="230dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/silim" />
+                            android:src="@drawable/transparent" />
 
                         <TextView
                             android:id="@+id/th1_placename_5"
@@ -191,7 +187,6 @@
                             android:layout_gravity="bottom|right"
                             android:layout_marginRight="15dp"
                             android:layout_marginBottom="10dp"
-                            android:text="신림"
                             android:theme="@style/RecommandText"/>
                     </androidx.cardview.widget.CardView>
 
@@ -208,10 +203,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"
-                android:textSize="16dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
-                android:textColor="@color/colorStrongPink"
-                android:text="겨울철 핫플레이스" />
+                android:text="겨울철 핫플레이스"
+                android:textColor="@color/colorStrongPink"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
