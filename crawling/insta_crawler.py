@@ -1,33 +1,41 @@
-from urllib.request import urlopen # 인터넷 url를 열어주는 패키지
-from urllib.parse import quote_plus # 한글을 유니코드 형식으로 변환해줌
 from selenium import webdriver
 from bs4 import BeautifulSoup
-import time
-import re 
+
 import unicodedata
-import pandas as pd
-from pandas import DataFrame
-import urllib.request
+import re
 import os
 import argparse
+
+import time
 from datetime import datetime
 
-driver = webdriver.Chrome()
+import pandas as pd
+from pandas import DataFrame
 
-instagram_id = 'hhhhhjjjjj96'
-instagram_pw = 'z1x2c3'
+driver = webdriver.Chrome() # 크롬 웹드라이버
 
-#함수 작성
+instagram_id = 'hhhhhhjjjjjj96' # wirte your instagram id
+instagram_pw = 'z1x2c3' # write your instagram password
+
+# Tag 검색 함수
 def insta_searching(word):  #word라는 매개변수를 받는 insta_searching 이라는 함수 생성
     url = 'https://www.instagram.com/explore/tags/' + word
     return url
 
+# 최근 게시물 선택 함수 (인기 게시물 무시)
 def select_first(driver):
-    first = driver.find_element_by_xpath('//*[@id="react-root"]/section/main/article/div[2]/div/div[1]/div[1]/a/div/div[2]')
     #find_element_by_css_selector 함수를 사용해 요소 찾기
+    first = driver.find_element_by_xpath('//*[@id="react-root"]/section/main/article/div[2]/div/div[1]/div[1]/a/div/div[2]')    
     first.click()
     time.sleep(3) #로딩을 위해 3초 대기
 
+# 다음 게시물 이동 함수
+def move_next(driver):
+    right = driver.find_element_by_css_selector('a._65Bje.coreSpriteRightPaginationArrow') 
+    right.click()
+    time.sleep(3)
+
+# 게시물 정보 획득 함수
 def get_content(driver):
     # 1. 현재 페이지의 HTML 정보 가져오기
     html = driver.page_source
@@ -41,7 +49,7 @@ def get_content(driver):
             content = soup.select('div.C4VMK > span')[0].text             
             content = unicodedata.normalize('NFC', content)
         except:
-            content = ' ' 
+            content = '' 
         
         # 3. 해시태그 가져오기(정규표현식 활용) 
         content_tags = re.findall(r'#[^\s#,\\]+', content)
@@ -49,7 +57,7 @@ def get_content(driver):
         if(len(soup.select('div.C4VMK > span')) == 0): #게시글,댓글 없이 사진만 있는 경우
             comment = ''
               
-        try: # 숨겨진 댓글에서 태그 찾기 
+        try: # 3.1. 숨겨진 댓글에서 태그 찾기 
             xpath3 = '/html/body/div[5]/div[2]/div/article/div[3]/div[1]/ul/ul[1]/li/ul/li/div/button'
             driver.find_element_by_xpath(xpath3).click()
             
@@ -58,7 +66,7 @@ def get_content(driver):
             comment = unicodedata.normalize('NFC', comment)
             time.sleep(1) 
             
-        except: #숨겨진 댓글이 없는 경우, 댓글 하나하나 확인하고 태그 찾기 
+        except: # 3.2. 숨겨진 댓글이 없는 경우, 댓글 하나하나 확인하고 태그 찾기 
             try:    
                 for i  in range(len(soup.select('div.C4VMK > span'))):
                     comment = soup.select('div.C4VMK > span')[i].text
@@ -109,18 +117,13 @@ def get_content(driver):
                 except:
                     imgs = ''
        
-        # 9. 수집한 정보 저장하기
+        # 8. 수집한 정보 저장하기
         data = [content, date, like, place, content_tags, comment_tags, imgs]
         return data 
     
     except:
         data = ''
         return data
-
-def move_next(driver):
-    right = driver.find_element_by_css_selector('a._65Bje.coreSpriteRightPaginationArrow') 
-    right.click()
-    time.sleep(3)
 
 def login(id, pw):
     driver.get('https://www.instagram.com')
@@ -147,42 +150,42 @@ def login(id, pw):
 def is_nan(x):
     return (x != x)
 
-#1. 크롬으로 인스타그램 - ' 지역 ' 검색
+# 1. 크롬으로 인스타그램 - ' 지역, 날짜 ' 검색
 def crwaling(tag, day):
+    now = datetime.today().date()
+
+    # 2. 로그인
     login(instagram_id,instagram_pw)
     time.sleep(4)
 
+    # 3. Tag 검색
     url = insta_searching(tag)
     driver.get(url)
     time.sleep(4)
 
-    #4. 첫번째 게시글 열기
+    # 4. 첫번째 게시글 열기
     select_first(driver) 
 
-    #5. 비어있는 변수(results) 만들기
-    results = [] 
+    # 5. 비어있는 변수(results) 만들기
+    results = []
 
-    now = datetime.today().date()
-
-    #csv 파일 생성
+    # 6. csv 파일 생성
     df = pd.DataFrame(results ,columns = ['Content' , 'Date', 'Like', 'Place', 'Content_tags', 'Comment_tags', 'imgs'])
-    df.to_csv('./new/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig')
+    df.to_csv('./last/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig')
 
     num = 0 #이미지 넘버링
-    cnt = 0 #
+    cnt = 0 #날짜 카운트
 
-    #여러 게시물 크롤링하기
-    #for i in range(number):
+    # 7. 게시물 크롤링하기
     while True:
         data = get_content(driver) #게시물 정보 가져오기
 
-        print(data[1])
         if is_nan(data[1]):
             dt = now
         else: 
             dt = datetime.strptime(data[1], "%Y-%m-%d").date()
         
-        if (now - dt).days > day: #날짜차이까지만 가져오기
+        if (now - dt).days > day: #날짜 차이까지만 가져오기
             cnt+=1
             print("이상한 날짜 횟수 {}".format(cnt))
             if cnt == 12:
@@ -190,25 +193,12 @@ def crwaling(tag, day):
             else:
                 move_next(driver)
                 continue
-        
         else:
             cnt=0
 
-        imgUrl = data[6] # 이미지 저장을 위한, 이미지 소스 데이터 가져오기            
-        num += 1            
-        if(imgUrl !=''):
-            path = "./new1/{}_{}사진".format(now, tag)
-            if not os.path.isdir(path):                                                           
-                os.mkdir(path)
-            filepath = path+'/insta_'+str(num)+'.png'
-            try:
-                urllib.request.urlretrieve(imgUrl, filepath)
-            except:
-                print("사진 저장 실패")
-
         if((num+1) % 10 == 0): # 10개씩 csv파일에 저장
             df = pd.DataFrame(results)
-            df.to_csv('./new/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig', mode = 'a', header = False)
+            df.to_csv('./last/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig', mode = 'a', header = False)
             results.clear()
 
         results.append(data)
@@ -219,16 +209,16 @@ def crwaling(tag, day):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Instagram Crawler")
     parser.add_argument("-t", "--tag", help="instagram's tag name", dest = 'tag')
-    parser.add_argument("-n", "--number", type=int, help="날짜 차이만큼 가져오기", dest = 'number')
+    parser.add_argument("-d", "--day", type=int, help="날짜 차이만큼 가져오기", dest = 'day')
 
     args = parser.parse_args()
 
     usage = "example python img_save.py -t '삼청동' -n 1"
 
-    if args.tag is None or args.number is None:
+    if args.tag is None or args.day is None:
         print(usage)
     else:
         start = time.time()
-        crwaling(args.tag, args.number)
+        crwaling(args.tag, args.day)
         print("time :", time.time() - start)
     
