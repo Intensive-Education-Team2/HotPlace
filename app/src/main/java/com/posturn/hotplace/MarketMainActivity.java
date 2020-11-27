@@ -5,7 +5,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
@@ -16,11 +18,23 @@ public class MarketMainActivity extends AppCompatActivity{
     private ViewPager pager;
     private MarketPagerAdapter marketPagerAdapter;
 
+    private String placeName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.market_activity_main);
+
+        placeName = getIntent().getStringExtra("placeName");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_market);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();    //뒤로가기 버튼 생성
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_place_name_marketinfo);
+        toolbarTitle.setText(placeName);
 
         pager = (ViewPager) findViewById(R.id.pager);
         //marketPagerAdapter = new MarketPagerAdapter(getSupportFragmentManager());
@@ -70,8 +84,7 @@ public class MarketMainActivity extends AppCompatActivity{
     }
 
     private void setupViewPager(ViewPager viewPager){
-        marketPagerAdapter = new MarketPagerAdapter(getSupportFragmentManager());
-        //marketPagerAdapter.addFragment(new FirstFragment(), "First");
+        marketPagerAdapter = new MarketPagerAdapter(getSupportFragmentManager(),placeName);
         pager.setAdapter(marketPagerAdapter);
     }
 }

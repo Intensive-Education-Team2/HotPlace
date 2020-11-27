@@ -38,9 +38,15 @@ public class MarketFragment extends Fragment {
     public String imgcoverfrag;
     public String detail_uri;
 
+    public String f_place;
+    public String f_category;
 
-    MarketFragment(String title_string) {
+
+    MarketFragment(String title_string, String placeName, String categoryName) {
         this.title_string = title_string;
+        this.f_place = placeName;
+        this.f_category = categoryName;
+
     }
 
     @Nullable
@@ -49,11 +55,14 @@ public class MarketFragment extends Fragment {
         View view = inflater.inflate(R.layout.market_fragment_post, container, false);
         view.setClickable(true);
 
+        Log.v("value",this.f_category);
+        Log.v("value",this.f_place);
+
         list.clear();
-        /*list.add(new MarketObject("블랭크", "잠실","res","361m",
+        list.add(new MarketObject("블랭크", "잠실","res","361m",
                 "잠실,잠실본동",
                 "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fblank_jamsil_img.jpg?alt=media&token=7414e8c8-e738-4fb5-a447-8b7b8dbeb9d1",
-                "https://m.store.naver.com/places/detail?id=1409709820"));*/
+                "https://m.store.naver.com/places/detail?id=1409709820"));
         /*list.add(new MarketObject("연탄부락", "잠실","res","452m",
                 "연탄불에 구워먹는 두툼한 돼지고기",
                 "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fyeontan_jamsil_img.jpg?alt=media&token=a2ad2f92-c5cc-4e30-8407-2fe60f667d9d",
@@ -75,33 +84,44 @@ public class MarketFragment extends Fragment {
     }
 
     public void getFireBaseObject(){
-        db_market.collection("Market/잠실/res").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document: task.getResult()){
-                        Map map = document.getData();
-                        market_name = map.get("marketName").toString();
-                        place = map.get("place").toString();
-                        category = map.get("category").toString();
-                        distance = map.get("distance").toString();
-                        comment = map.get("comment").toString();
-                        imgcoverfrag = map.get("imgCover").toString();
-                        detail_uri = map.get("detailUri").toString();
-                        mkObject = new MarketObject(market_name,place,category,distance,comment, imgcoverfrag,detail_uri);
-                        list.add(mkObject);
-                        Log.v("value",mkObject.getMarketName());
-                        Log.v("value",mkObject.getPlace());
-                        Log.v("value",mkObject.getCategory());
-                        Log.v("value",mkObject.getDistance());
-                        Log.v("value",mkObject.getComment());
-                        Log.v("value",mkObject.getImgCover());
-                        Log.v("value",mkObject.getDetailUri());
-                        Log.v("value",""+list.size());
+        ArrayList<String> connectPathList = new ArrayList<String>();
+
+        if(f_category.equals("all")){
+            connectPathList.add("Market/"+f_place+"/res");
+            connectPathList.add("Market/"+f_place+"/cafe");
+            connectPathList.add("Market/"+f_place+"/bar");
+        }else{
+            connectPathList.add("Market/"+f_place+"/"+f_category);
+        }
+        for(String connectPath : connectPathList) {
+            db_market.collection(connectPath).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Map map = document.getData();
+                            market_name = map.get("marketName").toString();
+                            place = map.get("place").toString();
+                            category = map.get("category").toString();
+                            distance = map.get("distance").toString();
+                            comment = map.get("comment").toString();
+                            imgcoverfrag = map.get("imgCover").toString();
+                            detail_uri = map.get("detailUri").toString();
+                            mkObject = new MarketObject(market_name, place, category, distance, comment, imgcoverfrag, detail_uri);
+                            list.add(mkObject);
+                            Log.v("value", mkObject.getMarketName());
+                            Log.v("value", mkObject.getPlace());
+                            Log.v("value", mkObject.getCategory());
+                            Log.v("value", mkObject.getDistance());
+                            Log.v("value", mkObject.getComment());
+                            Log.v("value", mkObject.getImgCover());
+                            Log.v("value", mkObject.getDetailUri());
+                            Log.v("value", "" + list.size());
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
 
     }
 
