@@ -192,6 +192,9 @@ def crwaling(tag, day):
         cur_user = data[0]
         if prev_user == cur_user:
             user_cnt += 1
+            day_cnt -= 1
+            if day_cnt == 0 :
+                day_cnt = 0
         else:
             user_cnt = 0
         
@@ -205,7 +208,8 @@ def crwaling(tag, day):
         except: 
             dt = now
 
-        if (now - dt).days > day: # 날짜 차이까지만 가져오기
+        # 지정한 날짜가 12번 반복되면 종료
+        if (now - dt).days == (day + 1): 
             day_cnt += 1
             print("이상한 날짜 횟수 {}".format(day_cnt))
             if day_cnt == 12:
@@ -220,7 +224,7 @@ def crwaling(tag, day):
         num += 1
         results.append(data)
 
-        if num % 5 == 0: # 10개씩 csv파일에 저장
+        if num % 5 == 0: # 5개씩 csv파일에 저장
             df = pd.DataFrame(results)
             df.to_csv('./last/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig', mode = 'a', header = False)
             results.clear()
