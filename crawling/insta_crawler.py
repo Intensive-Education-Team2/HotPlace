@@ -173,20 +173,20 @@ def crwaling(tag, day):
     df = pd.DataFrame(results ,columns = ['Content' , 'Date', 'Like', 'Place', 'Content_tags', 'Comment_tags', 'imgs'])
     df.to_csv('./last/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig')
 
-    num = 0 #이미지 넘버링
-    cnt = 0 #날짜 카운트
+    num = 0 # 총 게시물 수를 위한 변수
+    cnt = 0 # 날짜 카운트
 
     # 7. 게시물 크롤링하기
     while True:
         data = get_content(driver) #게시물 정보 가져오기
-
+        
         if is_nan(data[1]):
             dt = now
         else: 
             dt = datetime.strptime(data[1], "%Y-%m-%d").date()
         
         if (now - dt).days > day: #날짜 차이까지만 가져오기
-            cnt+=1
+            cnt += 1
             print("이상한 날짜 횟수 {}".format(cnt))
             if cnt == 12:
                 break
@@ -195,13 +195,15 @@ def crwaling(tag, day):
                 continue
         else:
             cnt=0
+        
+        num += 1
+        results.append(data)
 
-        if((num+1) % 10 == 0): # 10개씩 csv파일에 저장
+        if num % 5 == 0: # 10개씩 csv파일에 저장
             df = pd.DataFrame(results)
             df.to_csv('./last/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig', mode = 'a', header = False)
             results.clear()
 
-        results.append(data)
         move_next(driver)
 
     print('총 게시물 수 : {}'.format(num))
@@ -213,7 +215,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    usage = "example python img_save.py -t '삼청동' -n 1"
+    usage = "example python img_save.py -t '삼청동' -d 1"
 
     if args.tag is None or args.day is None:
         print(usage)
