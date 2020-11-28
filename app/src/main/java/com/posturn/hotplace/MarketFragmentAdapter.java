@@ -48,7 +48,7 @@ public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAd
         protected TextView comment;
         protected TextView distance;
         protected ImageView imgCover;
-        protected Button dbtn;
+        //protected Button dbtn;
 
         public Holder(View view) {
             super(view);
@@ -56,7 +56,7 @@ public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAd
             this.comment = (TextView) view.findViewById(R.id.market_comment);
             this.distance = (TextView) view.findViewById(R.id.market_distance);
             this.imgCover = (ImageView) view.findViewById(R.id.imageview_cover);
-            this.dbtn = (Button) view.findViewById(R.id.market_detail_button);
+            //this.dbtn = (Button) view.findViewById(R.id.market_detail_button);
         }
     }
 
@@ -64,10 +64,17 @@ public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAd
     public void onBindViewHolder(@NonNull MarketFragmentAdapter.Holder holder, final int position) {
         holder.market_name.setText(list.get(position).market_name);
         holder.comment.setText(list.get(position).comment);
-        holder.distance.setText(list.get(position).distance);
+        holder.distance.setText(" "+list.get(position).lat);
         Picasso.get().load(list.get(position).imgcover).into(holder.imgCover);
 
-        holder.dbtn.setOnClickListener(new View.OnClickListener() {
+        holder.imgCover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(position).detail_uri));
+                context.startActivity(browserIntent);
+            }
+        });
+        holder.market_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(position).detail_uri));

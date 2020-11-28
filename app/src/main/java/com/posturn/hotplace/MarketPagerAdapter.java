@@ -19,10 +19,10 @@ public class MarketPagerAdapter extends FragmentStatePagerAdapter {
     public MarketPagerAdapter(@NonNull FragmentManager fm, String placeName) {
         super(fm);
         this.placeName = placeName;
-        fragments.add(new MarketFragment("# 실시간 전체 점포 정보","잠실","all"));
-        fragments.add(new MarketFragment("# 실시간 음식 점포 정보","잠실","res"));
-        fragments.add(new MarketFragment("# 실시간 카페 점포 정보","잠실","cafe"));
-        fragments.add(new MarketFragment("# 실시간 술집 점포 정보","잠실","bar"));
+        fragments.add(new MarketFragment("# 실시간 전체 점포 정보","해방촌","all"));
+        fragments.add(new MarketFragment("# 실시간 음식 점포 정보","해방촌","res"));
+        fragments.add(new MarketFragment("# 실시간 카페 점포 정보","해방촌","cafe"));
+        fragments.add(new MarketFragment("# 실시간 술집 점포 정보","해방촌","bar"));
 
     }
 

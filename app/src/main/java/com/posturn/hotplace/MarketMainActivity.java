@@ -35,6 +35,8 @@ public class MarketMainActivity extends AppCompatActivity{
         actionBar.setDisplayShowTitleEnabled(false);
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_place_name_marketinfo);
         toolbarTitle.setText(placeName);
+        ImageView toolbarImg = (ImageView) findViewById(R.id.my_favorite);
+        toolbarImg.setImageResource(R.drawable.ic_small_star_grey);
 
         pager = (ViewPager) findViewById(R.id.pager);
         //marketPagerAdapter = new MarketPagerAdapter(getSupportFragmentManager());

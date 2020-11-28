@@ -34,7 +34,8 @@ public class MarketFragment extends Fragment {
     public String place;
     public String category;
     public String comment;
-    public String distance;
+    public double lat;
+    public double lon;
     public String imgcoverfrag;
     public String detail_uri;
 
@@ -59,7 +60,7 @@ public class MarketFragment extends Fragment {
         Log.v("value",this.f_place);
 
         list.clear();
-        list.add(new MarketObject("블랭크", "잠실","res","361m",
+        list.add(new MarketObject("블랭크", "해방촌","res",127,32,
                 "잠실,잠실본동",
                 "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fblank_jamsil_img.jpg?alt=media&token=7414e8c8-e738-4fb5-a447-8b7b8dbeb9d1",
                 "https://m.store.naver.com/places/detail?id=1409709820"));
@@ -103,16 +104,16 @@ public class MarketFragment extends Fragment {
                             market_name = map.get("marketName").toString();
                             place = map.get("place").toString();
                             category = map.get("category").toString();
-                            distance = map.get("distance").toString();
+                            lat = (Double)map.get("lat");
+                            lon = (Double)map.get("lon");
                             comment = map.get("comment").toString();
                             imgcoverfrag = map.get("imgCover").toString();
                             detail_uri = map.get("detailUri").toString();
-                            mkObject = new MarketObject(market_name, place, category, distance, comment, imgcoverfrag, detail_uri);
+                            mkObject = new MarketObject(market_name, place, category, lat, lon, comment, imgcoverfrag, detail_uri);
                             list.add(mkObject);
                             Log.v("value", mkObject.getMarketName());
                             Log.v("value", mkObject.getPlace());
                             Log.v("value", mkObject.getCategory());
-                            Log.v("value", mkObject.getDistance());
                             Log.v("value", mkObject.getComment());
                             Log.v("value", mkObject.getImgCover());
                             Log.v("value", mkObject.getDetailUri());

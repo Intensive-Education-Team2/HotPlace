@@ -71,59 +71,98 @@ public class MainActivity extends AppCompatActivity {
                 }
  */
 
-/*
-                marketObjectsRes.add(new MarketObject("연탄부락", "잠실","res","452m",
+
+                /*marketObjectsRes.add(new MarketObject("연탄부락", "잠실","res",127.0815144,37.5094960,
                         "연탄불에 구워먹는 두툼한 돼지고기",
                         "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fyeontan_jamsil_img.jpg?alt=media&token=a2ad2f92-c5cc-4e30-8407-2fe60f667d9d",
                         "https://m.store.naver.com/places/detail?id=1390330587"));
-                marketObjectsRes.add(new MarketObject("피자쿠치나","잠실","res", "410m",
+                marketObjectsRes.add(new MarketObject("피자쿠치나","잠실","res", 127.0885283,37.5045092,
                         "안녕하세요 49가지 토핑",
                         "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fpizzacu_jamsil_img.jpg?alt=media&token=76d640c0-494e-4cf5-a983-ca684b2b6965",
                         "https://m.store.naver.com/places/detail?id=1960415505"));
-                marketObjectsRes.add(new MarketObject("화덕고깃간", "잠실","res","460m",
+                marketObjectsRes.add(new MarketObject("화덕고깃간", "잠실","res",127.0817185,37.5096743,
                         "별미였죠",
                         "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fhwaduk_jamsil_img.jpg?alt=media&token=9cfc68e3-bde7-4775-93ed-c5e7d4e40ba9",
                         "https://m.store.naver.com/places/detail?id=535057415"));
 
-                marketObjectsCafe.add(new MarketObject("블랭크", "잠실","cafe","361m",
+                marketObjectsCafe.add(new MarketObject("블랭크", "잠실","cafe",127.0882841,37.5052921,
                         "잠실,잠실본동",
                         "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fblank_jamsil_img.jpg?alt=media&token=7414e8c8-e738-4fb5-a447-8b7b8dbeb9d1",
                         "https://m.store.naver.com/places/detail?id=1409709820"));
-                marketObjectsCafe.add(new MarketObject("HOWS", "잠실","cafe","550m",
+                marketObjectsCafe.add(new MarketObject("HOWS", "잠실","cafe",127.0838482,37.5114049,
                         "카페,갤러리,서점이 함께 있는 복합문화공간",
                         "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fhows_jamsil_img.jpg?alt=media&token=e53e04b4-9984-4cae-b34a-b11e8ee5a9c8",
                         "https://m.store.naver.com/places/detail?id=1973519999"));
-                marketObjectsCafe.add(new MarketObject("밀도 잠실점", "잠실","cafe","592m",
+                marketObjectsCafe.add(new MarketObject("밀도 잠실점", "잠실","cafe",127.0838482,37.5114049,
                         "그날의 온도와 습도를 세심하게 고려하여 만드는 카페",
                         "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
                         "https://m.store.naver.com/places/detail?id=1566481353"));
 
-                marketObjectsBar.add(new MarketObject("회장님댁 잠실점", "잠실","bar","610m",
+                marketObjectsBar.add(new MarketObject("회장님댁 잠실점", "잠실","bar",127.0812985,37.5093398,
                         "서울특별시 송파구 잠실동 180-6 1층",
                         "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fhweijang_jamsil_img.jpg?alt=media&token=ce231011-9927-44d0-92d0-07b1ffc7c33e",
                         "https://m.store.naver.com/places/detail?id=1603996969"));
-                marketObjectsBar.add(new MarketObject("화심", "잠실","bar","452m",
+                marketObjectsBar.add(new MarketObject("화심", "잠실","bar",127.0844513,37.5101557,
                         "안주 서비스도 좋은 잠실새내 술집",
                         "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fhwasim_jamsil_img.jpg?alt=media&token=0714d779-545e-475b-bf28-fb8fa265b439",
                         "https://m.store.naver.com/places/detail?id=31992223"));
-                marketObjectsBar.add(new MarketObject("밀회관", "잠실","bar","437m",
+                marketObjectsBar.add(new MarketObject("밀회관", "잠실","bar",127.0850227,37.5099868,
                         "맥주를 디자인하다.",
                         "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmilhwegwan_jamsil_img.jpg?alt=media&token=04205f00-6943-4d3f-ad39-a604454dde97",
-                        "https://m.store.naver.com/places/detail?id=1912275762"));
+                        "https://m.store.naver.com/places/detail?id=1912275762"));*/
 
 
+                marketObjectsRes.add(new MarketObject("꼼모아", "해방촌","res",126.9877100,37.5434907,
+                        "프랑스 요리를 가볍게 즐기는 프렌치 레스토랑",
+                        "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fggommoa_haebangchon_img.jpg?alt=media&token=8329f776-1d21-405c-bb22-0d81bfb8f364",
+                        "https://m.store.naver.com/places/detail?id=36175099"));
+                marketObjectsRes.add(new MarketObject("보니스피자펍","해방촌","res", 126.9869245,37.5411986,
+                        "이태원 피자펍",
+                        "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fbonnys_haebangchon_img.jpg?alt=media&token=0af9f1ae-a7cb-4f07-9aca-feac1eb006a9",
+                        "https://m.store.naver.com/places/detail?id=31608396"));
+                marketObjectsRes.add(new MarketObject("와일드덕칸틴", "해방촌","res",126.9870686,37.5415116,
+                        "Neighborhood Wine Joint",
+                        "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fwildduck_haebangchon_img.jpg?alt=media&token=4c003c0e-7a9d-4aa5-be48-f0d8697eb3b5",
+                        "https://m.store.naver.com/places/detail?id=1465004920"));
+
+                marketObjectsCafe.add(new MarketObject("코타티", "해방촌","cafe",126.9881802,37.5434680,
+                        "신선한 과일과 자연식품을 사용하여 만든 내추럴 젤라또 샵",
+                        "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fcotati_haebangchon_img.jpg?alt=media&token=f35d243b-c810-4d39-8340-96d49400c261",
+                        "https://m.store.naver.com/places/detail?id=1499075152"));
+                marketObjectsCafe.add(new MarketObject("드도트", "해방촌","cafe",126.9881116,37.5432346,
+                        "해방촌 유일의 테라스카페 드도트총 64평 규모의 까페",
+                        "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fdedot_haebangchon_img.jpg?alt=media&token=36076a5b-92b9-4842-a576-bd4bfbfc71e8",
+                        "https://m.store.naver.com/places/detail?id=320929221"));
+                marketObjectsCafe.add(new MarketObject("HACKNEY", "해방촌","cafe",126.9873077,37.5415386,
+                        "당근케익이 맛있는 카페",
+                        "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fhackney_haebangchon_img.jpg?alt=media&token=44277f63-1d50-4ce1-8c1d-c5976d315fd4",
+                        "https://m.store.naver.com/places/detail?id=20789782"));
+
+                marketObjectsBar.add(new MarketObject("Ori", "해방촌","bar",126.9879010,37.5433420,
+                        "An original idea",
+                        "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fori_haebangchon_img.jpg?alt=media&token=b65c510f-662b-4fe5-ba12-7660565f7dd2",
+                        "https://m.store.naver.com/places/detail?id=1268532109"));
+                marketObjectsBar.add(new MarketObject("네평반", "해방촌","bar",126.9865423,37.5404077,
+                        "오리엔탈적인 음식메뉴와 다양한 보드카",
+                        "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fnepyeongban_haebangchon_img.jpg?alt=media&token=e2897ecb-ebe1-4e5c-96db-4be35cdf45f0",
+                        "https://m.store.naver.com/places/detail?id=36630634"));
+                marketObjectsBar.add(new MarketObject("SEOUL VINYL", "해방촌","bar",126.9872512,37.5410340,
+                        "영업시간 월~목 19시~02시",
+                        "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fseoul_vinyl_haebangchon_img.jpg?alt=media&token=9c8d4361-1c2e-4e08-9db9-2918597c13d8",
+                        "https://m.store.naver.com/places/detail?id=37383464"));
+
                 for(int i=0; i<3; i++){
-                    db.collection("Market/잠실/res").document(marketObjectsRes.get(i).getMarketName()).set(marketObjectsRes.get(i));
+                    db.collection("Market/해방촌/res").document(marketObjectsRes.get(i).getMarketName()).set(marketObjectsRes.get(i));
                 }
                 for(int i=0; i<3; i++){
-                    db.collection("Market/잠실/cafe").document(marketObjectsCafe.get(i).getMarketName()).set(marketObjectsCafe.get(i));
+                    db.collection("Market/해방촌/cafe").document(marketObjectsCafe.get(i).getMarketName()).set(marketObjectsCafe.get(i));
                 }
                 for(int i=0; i<3; i++){
-                    db.collection("Market/잠실/bar").document(marketObjectsBar.get(i).getMarketName()).set(marketObjectsBar.get(i));
+                    db.collection("Market/해방촌/bar").document(marketObjectsBar.get(i).getMarketName()).set(marketObjectsBar.get(i));
                 }
-*/
+
 //카운트 데이터 추가
-                Map<String, Object> nestedData = new HashMap<>();
+                /*Map<String, Object> nestedData = new HashMap<>();
 
                 objectCounts.add(new ObjectCount("가로수길", 1400));
                 objectCounts.add(new ObjectCount("강남", 1500));
@@ -145,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                     nestedData.put(Integer.toString(i), objectCounts.get(i));
                 }
                 db.collection("Test").document("2020-11-24").set(nestedData);
-
+*/
             }
         });
 
