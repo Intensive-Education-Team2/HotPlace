@@ -1,5 +1,7 @@
 package com.posturn.hotplace;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +21,7 @@ public class MarketMainActivity extends AppCompatActivity{
     private MarketPagerAdapter marketPagerAdapter;
 
     private String placeName;
+    private int myplaceon;
 
 
     @Override
@@ -27,6 +30,7 @@ public class MarketMainActivity extends AppCompatActivity{
         setContentView(R.layout.market_activity_main);
 
         placeName = getIntent().getStringExtra("placeName");
+        myplaceon = 0;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_market);
         setSupportActionBar(toolbar);
@@ -50,6 +54,19 @@ public class MarketMainActivity extends AppCompatActivity{
         tab_layout.setupWithViewPager(pager);
 
         setupTabIcons();
+
+        toolbarImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(myplaceon==0) {
+                    toolbarImg.setImageResource(R.drawable.ic_small_star_on_thick_grid_dirtyyellow);
+                    myplaceon = 1;
+                }else{
+                    toolbarImg.setImageResource(R.drawable.ic_small_star_grey);
+                    myplaceon = 0;
+                }
+            }
+        });
 
     }
 
