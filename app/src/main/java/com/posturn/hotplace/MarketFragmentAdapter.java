@@ -2,6 +2,7 @@ package com.posturn.hotplace;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAdapter.Holder> {
     private ArrayList<MarketObject> list = new ArrayList<>();
     private Context context;
     ImageView coverImageView;
+
+    public double latitude;
+    public double longitude;
 
     public MarketFragmentAdapter(Context context, ArrayList<MarketObject> list) {
         this.context = context;
@@ -32,6 +37,9 @@ public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAd
     @Override
     public MarketFragmentAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.market_fragment_post_item, parent, false);
+        GpsTracker gpsTracker = new GpsTracker(context);
+        latitude = gpsTracker.getLatitude();
+        longitude = gpsTracker.getLongitude();
 
         Holder holder = new Holder(view);
         return holder;
@@ -64,7 +72,8 @@ public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAd
     public void onBindViewHolder(@NonNull MarketFragmentAdapter.Holder holder, final int position) {
         holder.market_name.setText(list.get(position).market_name);
         holder.comment.setText(list.get(position).comment);
-        holder.distance.setText(" "+list.get(position).lat);
+
+        holder.distance.setText(" "+getDistance(latitude,longitude,list.get(position).getLat(),list.get(position).getLat()));
         Picasso.get().load(list.get(position).imgcover).into(holder.imgCover);
 
         holder.imgCover.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +91,22 @@ public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAd
             }
         });
 
+    }
+
+    private double getDistance(double myLat, double myLon, double targetLat, double targetLon) {
+        double distance;
+
+        Location locationA = new Location("point A");
+        locationA.setLatitude(myLat);
+        locationA.setLongitude(myLon);
+
+        Location locationB = new Location("point B");
+        locationB.setLatitude(targetLat);
+        locationB.setLongitude(targetLon);
+
+        distance = locationA.distanceTo(locationB);
+
+        return Math.round(distance / 1000 * 100) / 100.0;
     }
 
 
