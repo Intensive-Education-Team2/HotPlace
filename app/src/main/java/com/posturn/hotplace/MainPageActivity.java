@@ -94,6 +94,12 @@ public class MainPageActivity extends AppCompatActivity {
     private String today;
     private String yesterday;
 
+    private String userName;
+    private String userImg;
+    private ImageView userImg_v;
+    private TextView userName_v;
+    private int login_state;
+
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -120,6 +126,12 @@ public class MainPageActivity extends AppCompatActivity {
         gpsTracker = new GpsTracker(MainPageActivity.this);
         latitude = gpsTracker.getLatitude();
         longitude = gpsTracker.getLongitude();
+
+        userName = getIntent().getStringExtra("userName");
+        userImg = getIntent().getStringExtra("userImg");
+        
+        //TODO = Here
+        loginChecked(userName, userImg);
 
         setView();
 
@@ -155,6 +167,9 @@ public class MainPageActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (id == R.id.notice) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                } else if (id == R.id.login){
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                 }
 
@@ -396,6 +411,19 @@ public class MainPageActivity extends AppCompatActivity {
         textViewnearDistance3 = findViewById(R.id.textViewHereDistance3);
 
 
+    }
+
+    private void loginChecked(String userName, String userImg){
+        if(userName==null){
+            login_state = 0;
+        }else{
+            login_state = 1;
+            userImg_v = (ImageView)findViewById(R.id.userimage);
+            userName_v = (TextView)findViewById(R.id.username);
+
+            userImg_v.setImageResource(R.drawable.user_male);
+            userName_v.setText(userName+"님, 반갑습니다");
+        }
     }
 
 

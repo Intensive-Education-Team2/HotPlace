@@ -38,8 +38,11 @@ public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAd
     public MarketFragmentAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.market_fragment_post_item, parent, false);
         GpsTracker gpsTracker = new GpsTracker(context);
-        latitude = gpsTracker.getLatitude();
-        longitude = gpsTracker.getLongitude();
+
+        latitude = 37.497954;
+        //latitude = gpsTracker.getLatitude();
+        longitude = 127.027564;
+        //longitude = gpsTracker.getLongitude();
 
         Holder holder = new Holder(view);
         return holder;

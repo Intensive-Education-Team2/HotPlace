@@ -32,6 +32,13 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_back</item>
     </style>
 
+    <style name="HotplerToolbarLoginTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:background">@color/colorBabyPink</item>
+        <item name="android:textColor">@color/colorBabyPink</item>
+        <item name="android:actionMenuTextColor">@color/colorWhite</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_back</item>
+    </style>
+
     <!--메인화면  TOP5 텍스트-->
     <style name="Top12Text" parent="@android:style/Widget.TextView">
         <item name="android:textSize">25dp</item>
