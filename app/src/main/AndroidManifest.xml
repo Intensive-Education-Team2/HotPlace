@@ -25,7 +25,13 @@
             android:value="3sjkwye96q" />
 
 
-        <activity android:name=".MainActivity"></activity>
+
+        <activity android:name=".MainActivity">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
         <activity android:name=".LoadingPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MarketMainActivity">
-             <!-- <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
@@ -46,8 +52,9 @@
         <activity android:name=".RecommandActivity"/>
         <activity android:name=".WriteMyPageActivity"/>
         <activity android:name=".FilterPageActivity"/>
-        <activity android:name=".PlaceInfoActivity">
-        </activity>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LoginRegisterActivity"/>
+
         <activity android:name=".MyPlaceActivity"/>
         <activity android:name=".TestPlaceInfoActivity"></activity>
 

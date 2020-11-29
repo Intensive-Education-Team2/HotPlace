@@ -10,15 +10,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MarketPagerAdapter extends FragmentStatePagerAdapter {
+
+    public String placeName;
+
     ArrayList<Fragment> fragments = new ArrayList<>();
     ArrayList<String> pageTitles = new ArrayList<>(Arrays.asList("전체", "음식", "카페", "술집"));
 
-    public MarketPagerAdapter(@NonNull FragmentManager fm) {
+    public MarketPagerAdapter(@NonNull FragmentManager fm, String placeName) {
         super(fm);
-        fragments.add(new MarketFragment("# 실시간 전체 점포 정보"));
-        fragments.add(new MarketFragment("# 실시간 음식 점포 정보"));
-        fragments.add(new MarketFragment("# 실시간 카페 점포 정보"));
-        fragments.add(new MarketFragment("# 실시간 술집 점포 정보"));
+        this.placeName = placeName;
+        fragments.add(new MarketFragment("# 실시간 전체 점포 정보","해방촌","all"));
+        fragments.add(new MarketFragment("# 실시간 음식 점포 정보","해방촌","res"));
+        fragments.add(new MarketFragment("# 실시간 카페 점포 정보","해방촌","cafe"));
+        fragments.add(new MarketFragment("# 실시간 술집 점포 정보","해방촌","bar"));
 
     }
 
