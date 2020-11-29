@@ -1,3 +1,3 @@
-python insta_crawler.py -t ¸Á¿øµ¿ -d 1
-python insta_crawler.py -t °¡·Î¼ö±æ -d 1
-python insta_crawler.py -t °Ç´ë -d 1
+python insta_crawler.py -t ê°€ë¡œìˆ˜ê¸¸ -d 1
+python insta_crawler.py -t ê±´ëŒ€ -d 1
+python insta_crawler.py -t ë§ì›ë™ -d 1
