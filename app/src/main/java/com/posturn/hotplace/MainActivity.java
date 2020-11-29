@@ -9,6 +9,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -19,9 +20,14 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<ObjectPlace> objectPlaces = new ArrayList<ObjectPlace>();
@@ -32,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<ObjectCount> objectCounts = new ArrayList<>();
 
+    private ArrayList<ObjectPost> objectPosts = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +49,7 @@ public class MainActivity extends AppCompatActivity {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-
-
-        Button writeBtn= findViewById(R.id.read);
+        Button writeBtn = findViewById(R.id.read);
         writeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +128,8 @@ public class MainActivity extends AppCompatActivity {
                     db.collection("Market/잠실/bar").document(marketObjectsBar.get(i).getMarketName()).set(marketObjectsBar.get(i));
                 }
 */
-//카운트 데이터 추가
+
+/*카운트 데이터 추가
                 Map<String, Object> nestedData = new HashMap<>();
 
                 objectCounts.add(new ObjectCount("가로수길", 1400));
@@ -145,10 +152,27 @@ public class MainActivity extends AppCompatActivity {
                     nestedData.put(Integer.toString(i), objectCounts.get(i));
                 }
                 db.collection("Test").document("2020-11-24").set(nestedData);
+                */
 
+//게시글 데이터
+                Map<String, Object> nestedData = new HashMap<>();
+
+                List hotuser = Arrays.asList("kang", "kim", "han");
+
+                Timestamp ts = new Timestamp(new Date());
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "kim", "강남", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.", 3, hotuser));
+
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "kim", "가로수길", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.", 3, hotuser));
+
+                for (int i = 0; i < objectPosts.size(); i++) {
+                    nestedData.put(Integer.toString(0), objectPosts.get(i));
+                    db.collection("Post").document(objectPosts.get(i).place).set(nestedData);
+                }
             }
         });
-
     }
-
 }
