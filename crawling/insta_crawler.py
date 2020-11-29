@@ -211,7 +211,7 @@ def crwaling(tag, day):
         # 지정한 날짜가 12번 반복되면 종료
         if (now - dt).days == (day + 1): 
             day_cnt += 1
-            print("이상한 날짜 횟수 {}".format(day_cnt))
+            #print("이상한 날짜 횟수 {}".format(day_cnt))
             if day_cnt == 12:
                 break
             else:
