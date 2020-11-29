@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -94,6 +95,14 @@ public class MainPageActivity extends AppCompatActivity {
     private String today;
     private String yesterday;
 
+    //TODO Here0
+    public String userName;
+    static public String userImg="https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/user_img%2Fuser_male.png?alt=media&token=1b8290f1-97cb-4de4-aab8-f2d0e515281a";
+    public ImageView userImg_v;
+    public TextView userName_v;
+    public LinearLayout naviHeaderLayout;
+    public int login_state;
+
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -120,6 +129,9 @@ public class MainPageActivity extends AppCompatActivity {
         gpsTracker = new GpsTracker(MainPageActivity.this);
         latitude = gpsTracker.getLatitude();
         longitude = gpsTracker.getLongitude();
+
+        //TODO = Here1
+        //loginChecked(userName, userImg);
 
         setView();
 
@@ -156,6 +168,9 @@ public class MainPageActivity extends AppCompatActivity {
                 } else if (id == R.id.notice) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                } else if (id == R.id.login){
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
 
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -188,6 +203,16 @@ public class MainPageActivity extends AppCompatActivity {
         });
 
         getTodayCountData();
+
+        userName = getIntent().getStringExtra("userName");
+        userImg = getIntent().getStringExtra("userImg");
+
+        Toast.makeText( getApplicationContext(), userImg, Toast.LENGTH_SHORT ).show();
+        //nvbAdapter = new NavigationBarAdapter(userName,userImg);
+
+        //TODO = Here2
+        //Picasso.get().load(userImg).into(userImg_v);
+        //userName_v.setText(userName);
 
     }
 
@@ -301,7 +326,6 @@ public class MainPageActivity extends AppCompatActivity {
         Picasso.get().load(queryPlaceById(objectPlaces, objectCountsToday.get(3).getName())).into(imageViewTop4);
         Picasso.get().load(queryPlaceById(objectPlaces, objectCountsToday.get(4).getName())).into(imageViewTop5);
 
-
     }
 
     //이미지찾기
@@ -395,8 +419,26 @@ public class MainPageActivity extends AppCompatActivity {
         textViewnearDistance2 = findViewById(R.id.textViewHereDistance2);
         textViewnearDistance3 = findViewById(R.id.textViewHereDistance3);
 
-
+        //TODO = Here3
+        naviHeaderLayout = findViewById(R.id.navi_header_layout);
+        userImg_v = findViewById(R.id.userimage);
+        userName_v = findViewById(R.id.user_name);
+        //userName_v = naviHeaderLayout.getChildAt(0).findViewById(R.id.user_name);
+        //userImg_v = naviHeaderLayout.getChildAt(1).findViewById(R.id.userimage);
     }
+
+    //TODO = Here4
+    /*private void loginChecked(String userName, String userImg){
+        if(userName==null){
+            login_state = 0;
+        }else{
+            login_state = 1;
+
+            Picasso.get().load(userImg).into(userImg_v);
+            //userImg_v.setImageResource(R.drawable.user_male);
+            userName_v.setText(userName+"님, 반갑습니다");
+        }
+    }*/
 
 
 }

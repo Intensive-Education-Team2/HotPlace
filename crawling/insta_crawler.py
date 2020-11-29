@@ -14,8 +14,8 @@ from pandas import DataFrame
 
 driver = webdriver.Chrome() # 크롬 웹드라이버
 
-instagram_id = 'hhhhhhjjjjjj96' # wirte your instagram id
-instagram_pw = 'z1x2c3' # write your instagram password
+instagram_id = 'hhhhhjjjjj96' # wirte your instagram id
+instagram_pw = 'z1x2c3v4b5' # write your instagram password
 
 # Tag 검색 함수
 def insta_searching(word):  #word라는 매개변수를 받는 insta_searching 이라는 함수 생성
@@ -37,11 +37,17 @@ def move_next(driver):
 
 # 게시물 정보 획득 함수
 def get_content(driver):
-    # 1. 현재 페이지의 HTML 정보 가져오기
     html = driver.page_source
     soup = BeautifulSoup(html, 'html5lib')    
 
     try:
+        # 1. 게시자 아이디 가져오기
+        try:
+            xpath2 = '/html/body/div[5]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a'
+            user_profile = driver.find_element_by_xpath(xpath2).text
+        except:
+            user_profile = ''
+
         # 2. 본문 내용 가져오기 
         try:
             #첫 게시글 본문 내용이 <div class="C4VMK"> 임을 알 수 있다.
@@ -118,7 +124,7 @@ def get_content(driver):
                     imgs = ''
        
         # 8. 수집한 정보 저장하기
-        data = [content, date, like, place, content_tags, comment_tags, imgs]
+        data = [user_profile, date, content, like, place, content_tags, comment_tags, imgs]
         return data 
     
     except:
@@ -170,41 +176,61 @@ def crwaling(tag, day):
     results = []
 
     # 6. csv 파일 생성
-    df = pd.DataFrame(results ,columns = ['Content' , 'Date', 'Like', 'Place', 'Content_tags', 'Comment_tags', 'imgs'])
+    df = pd.DataFrame(results ,columns = ['User_Profile', 'Date', 'Content', 'Like', 'Place', 'Content_tags', 'Comment_tags', 'imgs'])
     df.to_csv('./last/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig')
 
     num = 0 # 총 게시물 수를 위한 변수
-    cnt = 0 # 날짜 카운트
+    day_cnt = 0 # 날짜 카운트
+    user_cnt = 0 # User 카운트
+    prev_user = ''
+    cur_user = ''
 
     # 7. 게시물 크롤링하기
     while True:
-        data = get_content(driver) #게시물 정보 가져오기
+        data = get_content(driver) # 게시물 정보 가져오기
+
+        cur_user = data[0]
+        if prev_user == cur_user:
+            user_cnt += 1
+            day_cnt -= 1
+            if day_cnt == 0 :
+                day_cnt = 0
+        else:
+            user_cnt = 0
         
-        if is_nan(data[1]):
-            dt = now
-        else: 
+        if user_cnt > 5:
+            move_next(driver)
+            prev_user = cur_user
+            continue
+
+        try:
             dt = datetime.strptime(data[1], "%Y-%m-%d").date()
-        
-        if (now - dt).days > day: #날짜 차이까지만 가져오기
-            cnt += 1
-            print("이상한 날짜 횟수 {}".format(cnt))
-            if cnt == 12:
+        except: 
+            dt = now
+
+        # 지정한 날짜가 12번 반복되면 종료
+        if (now - dt).days == (day + 1): 
+            day_cnt += 1
+            #print("이상한 날짜 횟수 {}".format(day_cnt))
+            if day_cnt == 12:
                 break
             else:
                 move_next(driver)
+                prev_user = cur_user
                 continue
         else:
-            cnt=0
+            day_cnt=0
         
         num += 1
         results.append(data)
 
-        if num % 5 == 0: # 10개씩 csv파일에 저장
+        if num % 5 == 0: # 5개씩 csv파일에 저장
             df = pd.DataFrame(results)
             df.to_csv('./last/{}_{}.csv'.format(now, tag), index=False, encoding='utf-8-sig', mode = 'a', header = False)
             results.clear()
 
         move_next(driver)
+        prev_user = cur_user
 
     print('총 게시물 수 : {}'.format(num))
         
