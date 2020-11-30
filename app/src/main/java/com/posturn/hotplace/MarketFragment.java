@@ -19,16 +19,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class MarketFragment extends Fragment {
     private String title_string;
 
     FirebaseFirestore db_market = FirebaseFirestore.getInstance();
-    private RecyclerView recyclerView;
-    private MarketFragmentAdapter adapter;
-    private ArrayList<MarketObject> list = new ArrayList<>();
-    private MarketObject mkObject;
+    public RecyclerView recyclerView;
+    public MarketFragmentAdapter adapter;
+    public ArrayList<MarketObject> list = new ArrayList<>();
+    public MarketObject mkObject;
 
     public String market_name;
     public String place;
@@ -50,6 +51,12 @@ public class MarketFragment extends Fragment {
 
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,26 +67,12 @@ public class MarketFragment extends Fragment {
         Log.v("value",this.f_place);
 
         list.clear();
-        list.add(new MarketObject("블랭크", "해방촌","res",127,32,
-                "잠실,잠실본동",
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fblank_jamsil_img.jpg?alt=media&token=7414e8c8-e738-4fb5-a447-8b7b8dbeb9d1",
-                "https://m.store.naver.com/places/detail?id=1409709820"));
-        /*list.add(new MarketObject("연탄부락", "잠실","res","452m",
-                "연탄불에 구워먹는 두툼한 돼지고기",
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fyeontan_jamsil_img.jpg?alt=media&token=a2ad2f92-c5cc-4e30-8407-2fe60f667d9d",
-                "https://m.store.naver.com/places/detail?id=1390330587"));*/
+
         getFireBaseObject();
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
         TextView title = view.findViewById(R.id.title);
         title.setText(title_string);
-
-        adapter = new MarketFragmentAdapter(getContext(), list);
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
 
         return view;
     }
@@ -88,12 +81,13 @@ public class MarketFragment extends Fragment {
         ArrayList<String> connectPathList = new ArrayList<String>();
 
         if(f_category.equals("all")){
-            connectPathList.add("Market/"+f_place+"/res");
-            connectPathList.add("Market/"+f_place+"/cafe");
-            connectPathList.add("Market/"+f_place+"/bar");
+            connectPathList.add("market_test/"+f_place+"/res");
+            connectPathList.add("market_test/"+f_place+"/cafe");
+            connectPathList.add("market_test/"+f_place+"/bar");
         }else{
-            connectPathList.add("Market/"+f_place+"/"+f_category);
+            connectPathList.add("market_test/"+f_place+"/"+f_category);
         }
+
         for(String connectPath : connectPathList) {
             db_market.collection(connectPath).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -118,11 +112,23 @@ public class MarketFragment extends Fragment {
                             Log.v("value", mkObject.getImgCover());
                             Log.v("value", mkObject.getDetailUri());
                             Log.v("value", "" + list.size());
+                            for(MarketObject i : list){
+                                Log.d("TestArray_InFirebase",i.market_name);
+                            }
                         }
                     }
+                    adapter = new MarketFragmentAdapter(getContext(), list);
+
+                    recyclerView.setHasFixedSize(true);
+
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    recyclerView.setAdapter(adapter);
                 }
+
+
             });
         }
+
 
     }
 
