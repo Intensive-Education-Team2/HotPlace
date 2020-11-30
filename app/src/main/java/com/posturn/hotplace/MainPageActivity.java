@@ -127,8 +127,11 @@ public class MainPageActivity extends AppCompatActivity {
         toolbarTitle.setText("Hotpler");
 
         gpsTracker = new GpsTracker(MainPageActivity.this);
-        latitude = gpsTracker.getLatitude();
-        longitude = gpsTracker.getLongitude();
+        //latitude = gpsTracker.getLatitude();
+        //longitude = gpsTracker.getLongitude();
+
+        latitude=37.4985;
+        longitude=127.0299;
 
         //TODO = Here1
         //loginChecked(userName, userImg);

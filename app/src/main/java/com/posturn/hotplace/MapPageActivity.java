@@ -218,8 +218,8 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         for(ObjectPlace place : placelist) {
             infoWindow = new InfoWindow();
             Marker marker = new Marker();
-            marker.setWidth(150);
-            marker.setHeight(200);
+            marker.setWidth(80);
+            marker.setHeight(110);
             marker.setIcon(OverlayImage.fromResource(R.drawable.marker));
             marker.setPosition(new LatLng(place.lat, place.lon));
             marker.setMap(naverMap);

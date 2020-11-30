@@ -11,7 +11,13 @@
 
     <meta-data
         android:name="com.xxx.MyGlideModule"
-        android:value="GlideModule"/>
+        android:value="GlideModule"
+        />
+
+    <meta-data
+        android:name="com.kakao.sdk.AppKey"
+        android:value="81323a9e0950c70b7ecd6f0e801af810"
+        />
 
     <application
         android:allowBackup="true"
