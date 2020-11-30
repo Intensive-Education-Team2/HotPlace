@@ -14,8 +14,8 @@ from pandas import DataFrame
 
 driver = webdriver.Chrome() # 크롬 웹드라이버
 
-instagram_id = 'hhhhhjjjjj96' # wirte your instagram id
-instagram_pw = 'z1x2c3v4b5' # write your instagram password
+instagram_id = 'khyeon9' # wirte your instagram id
+instagram_pw = 'skidrom0506' # write your instagram password
 
 # Tag 검색 함수
 def insta_searching(word):  #word라는 매개변수를 받는 insta_searching 이라는 함수 생성
