@@ -20,17 +20,12 @@ import androidx.annotation.UiThread;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -44,15 +39,11 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
-import com.naver.maps.map.overlay.Overlay;
+
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.widget.LocationButtonView;
-import com.naver.maps.map.widget.ZoomControlView;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -160,7 +151,6 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                                 placelist.add(objectPlace);
                                 Log.v("value",objectPlace.getName());
                                 Log.v("please", objectPlace.getName()+" "+objectPlace.getLat()+" "+objectPlace.getLon());
-                                //placelist.add(new ObjectPlace(map.get("name").toString(), (Double)map.get("lat"), (Double)map.get("lon"), map.get("img").toString(), map.get("tag").toString(), Integer.parseInt(map.get("index").toString())));
 
                             }
                         } else {
@@ -180,7 +170,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             public void onLocationChange(@NonNull Location location) {
                 lat = location.getLatitude();
                 lon = location.getLongitude();
-                //Toast.makeText(getApplicationContext(), lat + ", " + lon, Toast.LENGTH_SHORT).show();
+
             }
         });
 
