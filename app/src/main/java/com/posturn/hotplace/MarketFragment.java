@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +24,8 @@ public class MarketFragment extends Fragment {
     private String title_string;
 
     FirebaseFirestore db_market = FirebaseFirestore.getInstance();
+    RecyclerDecoration spaceDecoration = new RecyclerDecoration(4);
+
     public RecyclerView recyclerView;
     public MarketFragmentAdapter adapter;
     public ArrayList<MarketObject> list = new ArrayList<>();
@@ -42,9 +43,7 @@ public class MarketFragment extends Fragment {
     public String f_place;
     public String f_category;
 
-
-    MarketFragment(String title_string, String placeName, String categoryName) {
-        this.title_string = title_string;
+    MarketFragment(String placeName, String categoryName) {
         this.f_place = placeName;
         this.f_category = categoryName;
 
@@ -62,16 +61,10 @@ public class MarketFragment extends Fragment {
         View view = inflater.inflate(R.layout.market_fragment_post, container, false);
         view.setClickable(true);
 
-        Log.v("value",this.f_category);
-        Log.v("value",this.f_place);
-
         list.clear();
 
         getFireBaseObject();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-
-        TextView title = view.findViewById(R.id.title);
-        title.setText(title_string);
 
         return view;
     }
@@ -111,24 +104,17 @@ public class MarketFragment extends Fragment {
                             Log.v("value", mkObject.getImgCover());
                             Log.v("value", mkObject.getDetailUri());
                             Log.v("value", "" + list.size());
-                            for(MarketObject i : list){
-                                Log.d("TestArray_InFirebase",i.market_name);
-                            }
                         }
                     }
                     adapter = new MarketFragmentAdapter(getContext(), list);
 
                     recyclerView.setHasFixedSize(true);
+                    recyclerView.addItemDecoration(spaceDecoration);
 
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     recyclerView.setAdapter(adapter);
                 }
-
-
             });
         }
-
-
     }
-
 }
