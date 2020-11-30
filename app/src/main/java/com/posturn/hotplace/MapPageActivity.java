@@ -3,9 +3,10 @@ package com.posturn.hotplace;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -24,8 +25,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -43,18 +46,22 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.widget.LocationButtonView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class MapPageActivity extends AppCompatActivity implements OnMapReadyCallback {
-
+    private Context context;
     private LocationButtonView locationButtonView;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
     private MapFragment mapFragment;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db_placeinfo = FirebaseFirestore.getInstance();
+
+    private int myplaceon = 0;
 
     public ArrayList<ObjectPlace> placelist = new ArrayList<ObjectPlace>();
     public ObjectPlace objectPlace;
@@ -72,10 +79,13 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     public String tag;
     public int index;
 
+    public String imgUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mappage);
+//        context = getParent();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -228,12 +238,57 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                 Animation animation = new AlphaAnimation(0, 1);
                 animation.setDuration(500);
 
+                ImageView my_star = findViewById(R.id.place_star);
+                ImageView placeImg = findViewById(R.id.placeimage);
                 TextView placename=findViewById(R.id.placename);
                 placename.setText(place.name);
+
+                placeImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                        intent.putExtra("placeName", place.name);
+                        startActivity(intent);
+                    }
+                });
+
+                placename.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                        intent.putExtra("placeName", place.name);
+                        startActivity(intent);
+                    }
+                });
+                my_star.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(myplaceon == 0){
+                            my_star.setImageResource(R.drawable.ic_small_star_on_thick_grid_dirtyyellow);
+                            Toast.makeText( getApplicationContext(), "My 플레이스에 추가되었습니다.", Toast.LENGTH_SHORT ).show();
+                            myplaceon = 1;
+                        }else{
+                            my_star.setImageResource(R.drawable.ic_small_star_grey);
+                            Toast.makeText( getApplicationContext(), "My 플레이스에 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
+                            myplaceon = 0;
+                        }
+                    }
+                });
+
+
+                db_placeinfo.collection("HotPlace").document(place.name).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        imgUri = documentSnapshot.getString("img");
+                        Picasso.get().load(imgUri).into(placeImg);
+                    }
+                });
+
                 placeinfo.setVisibility(View.VISIBLE);
                 placeinfo.setAnimation(animation);
 
                 Toast.makeText(getApplication(), place.name + " 클릭", Toast.LENGTH_SHORT).show();
+
                 return false;
             });
         }
