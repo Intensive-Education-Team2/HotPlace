@@ -1,12 +1,10 @@
 package com.posturn.hotplace;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
@@ -22,10 +20,10 @@ public class MarketPagerAdapter extends FragmentStatePagerAdapter {
     public MarketPagerAdapter(@NonNull FragmentManager fm, String placeName) {
         super(fm);
         this.placeName = placeName;
-        fragments.add(new MarketFragment("# 실시간 전체 점포 정보",this.placeName,"all"));
-        fragments.add(new MarketFragment("# 실시간 음식 점포 정보",this.placeName,"res"));
-        fragments.add(new MarketFragment("# 실시간 카페 점포 정보",this.placeName,"cafe"));
-        fragments.add(new MarketFragment("# 실시간 술집 점포 정보",this.placeName,"bar"));
+        fragments.add(new MarketFragment(this.placeName,"all"));
+        fragments.add(new MarketFragment(this.placeName,"res"));
+        fragments.add(new MarketFragment(this.placeName,"cafe"));
+        fragments.add(new MarketFragment(this.placeName,"bar"));
     }
 
     @Nullable
