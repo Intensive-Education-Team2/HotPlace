@@ -9,7 +9,7 @@
     android:layout_gravity="center"
     >
     <ImageView
-        android:id="@+id/market_tab_img"
+        android:id="@+id/a_market_tab_img"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="4dp"
@@ -19,7 +19,7 @@
         android:scaleType="fitCenter" />
 
     <TextView
-        android:id="@+id/market_tab_text"
+        android:id="@+id/a_market_tab_text"
         android:layout_width="57dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

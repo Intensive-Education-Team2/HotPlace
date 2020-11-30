@@ -34,6 +34,8 @@ dependencies {
     implementation 'com.vincentbrison.openlibraries.android:foldablelayout:0.0.1@aar'
     implementation 'com.jakewharton:butterknife:10.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
