@@ -47,39 +47,99 @@
                     android:background="@color/colorBabyPink">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="4dp"
-                        app:cardCornerRadius="30dp"
-                        app:cardElevation="10dp"
-                        app:layout_constraintBottom_toTopOf="@+id/user_name"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardUseCompatPadding="true"
+                        android:padding="5dp"
+                        >
 
-                        <ImageView
-                            android:id="@+id/placeimage"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/hotpler" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorBabyPink"
+                            android:orientation="horizontal">
+
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardView_placeImage"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginLeft="10dp"
+                                app:cardCornerRadius="30dp"
+                                app:cardElevation="10dp">
+
+                                <ImageView
+                                    android:id="@+id/placeimage"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/hotpler" />
+                            </androidx.cardview.widget.CardView>
+
+                            <RelativeLayout
+                                android:id="@+id/relative_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/placename"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="left"
+                                        android:text="강남"
+                                        android:textColor="@color/colorStrongViolet"
+                                        android:textSize="26dp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/place_nickname"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginBottom="30dp"
+                                        android:text="신논현, 삼성, 코엑스"
+                                        android:textColor="@color/colorStrongPink"
+                                        android:textSize="17dp" />
+
+                                    <TextView
+                                        android:id="@+id/place_distance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="12dp"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_marginBottom="16dp"
+                                        android:text="2km"
+                                        android:textColor="@color/colorRed"
+                                        android:textSize="18dp" />
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/place_star"
+                                    android:layout_width="37dp"
+                                    android:layout_height="37dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_weight="1"
+
+                                    android:src="@drawable/ic_star_grey" />
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
                     </androidx.cardview.widget.CardView>
-
-                    <TextView
-                        android:id="@+id/placename"
-                        android:layout_width="223dp"
-                        android:layout_height="21dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="로그인하세요 >"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorStrongPink"
-                        android:textSize="18dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

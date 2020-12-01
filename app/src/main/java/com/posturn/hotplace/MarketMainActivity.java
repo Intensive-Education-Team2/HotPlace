@@ -2,6 +2,7 @@ package com.posturn.hotplace;
 
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,8 +30,8 @@ public class MarketMainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.market_activity_main);
 
-        //placeName = getIntent().getStringExtra("placeName");
-        placeName = "해방촌";
+        placeName = getIntent().getStringExtra("placeName");
+        //placeName = "해방촌";
         myplaceon = 0;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_market);
@@ -77,6 +78,18 @@ public class MarketMainActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: { // 뒤로가기
+                onBackPressed();
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setupTabIcons(){

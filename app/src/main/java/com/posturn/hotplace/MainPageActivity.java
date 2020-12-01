@@ -62,7 +62,7 @@ import java.util.Objects;
 
 public class MainPageActivity extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
+    private DrawerLayout;
     private NavigationView navigationView;
     private Context context = this;
     private TextView morerank;
@@ -210,6 +210,7 @@ public class MainPageActivity extends AppCompatActivity {
         });
 
         getTodayCountData();
+
     }
 
     //툴바 테마
@@ -417,6 +418,7 @@ public class MainPageActivity extends AppCompatActivity {
         textViewnearDistance2 = findViewById(R.id.textViewHereDistance2);
         textViewnearDistance3 = findViewById(R.id.textViewHereDistance3);
 
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         headerView = navigationView.getHeaderView(0);
@@ -425,6 +427,77 @@ public class MainPageActivity extends AppCompatActivity {
         userName=headerView.findViewById(R.id.user_name);
         userImg=headerView.findViewById(R.id.user_image);pref = getSharedPreferences("profile", MODE_PRIVATE);
         pref = getSharedPreferences("profile", MODE_PRIVATE);
+
+        //Image5 Listener
+        imageViewTop1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewTop1.getText());
+                startActivity(intent);
+            }
+        });
+        imageViewTop2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewTop2.getText());
+                startActivity(intent);
+            }
+        });
+        imageViewTop3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewTop3.getText());
+                startActivity(intent);
+            }
+        });
+        imageViewTop4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewTop4.getText());
+                startActivity(intent);
+            }
+        });
+        imageViewTop5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewTop5.getText());
+                startActivity(intent);
+            }
+        });
+
+        //recommand Listener
+        textViewrecommand1name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewrecommand1name.getText());
+                startActivity(intent);
+            }
+        });
+        textViewrecommand2name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewrecommand2name.getText());
+                startActivity(intent);
+            }
+        });
+        textViewrecommand3name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewrecommand3name.getText());
+                startActivity(intent);
+            }
+        });
+
+    }
+
 
     }
 

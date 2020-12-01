@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
-
     <meta-data
         android:name="com.xxx.MyGlideModule"
         android:value="GlideModule"
@@ -51,14 +50,7 @@
         </activity>
         <activity android:name=".LoadingPageActivity">
         </activity>
-        <activity android:name=".MarketMainActivity"/>
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>-->
-        <activity android:name=".MainPageActivity"/>
-        <activity android:name=".MapPageActivity"/>
+
         <activity android:name=".BoardActivity"/>
         <activity android:name=".RankActivity"/>
         <activity android:name=".RecommandActivity"/>

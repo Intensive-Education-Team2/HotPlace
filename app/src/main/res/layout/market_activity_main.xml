@@ -29,17 +29,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="22sp"
+                android:textSize="25sp"
                 android:textStyle="bold"/>
 
             <ImageView
                 android:id="@+id/my_favorite"
                 android:layout_marginTop="3dp"
                 android:layout_marginBottom="3dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="14dp"
                 android:layout_gravity="right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="27dip"
+                android:layout_height="27dip"/>
 
         </androidx.appcompat.widget.Toolbar>
 
