@@ -37,10 +37,10 @@
             </intent-filter>-->
         </activity>
         <activity android:name=".LoadingPageActivity">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity android:name=".MarketMainActivity">
             <!--<intent-filter>
@@ -49,10 +49,10 @@
             </intent-filter>-->
         </activity>
         <activity android:name=".RecommandMainActivity">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <activity android:name=".MainPageActivity">
@@ -71,8 +71,6 @@
         <activity android:name=".RankActivity"/>
         <activity android:name=".WriteMyPageActivity"/>
         <activity android:name=".FilterPageActivity"/>
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".LoginRegisterActivity"/>
 
         <activity android:name=".MyPlaceActivity"/>
         <activity android:name=".TestPlaceInfoActivity"></activity>

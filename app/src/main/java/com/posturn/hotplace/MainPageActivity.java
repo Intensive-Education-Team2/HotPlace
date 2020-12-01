@@ -168,9 +168,6 @@ public class MainPageActivity extends AppCompatActivity {
                 } else if (id == R.id.notice) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                } else if (id == R.id.login){
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
                 }
 
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
