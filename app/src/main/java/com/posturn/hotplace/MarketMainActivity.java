@@ -30,8 +30,8 @@ public class MarketMainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.market_activity_main);
 
-        //placeName = getIntent().getStringExtra("placeName");
-        placeName = "해방촌";
+        placeName = getIntent().getStringExtra("placeName");
+        //placeName = "해방촌";
         myplaceon = 0;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_market);
