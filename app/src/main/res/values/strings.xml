@@ -12,4 +12,6 @@
     <string name="btn_login">로그인</string>
     <string name="btn_register">회원가입</string>
     <string name="btn_logout">로그아웃</string>
+    <string name="appkey">81323a9e0950c70b7ecd6f0e801af810</string>
+
 </resources>
