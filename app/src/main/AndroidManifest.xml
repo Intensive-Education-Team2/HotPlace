@@ -48,9 +48,12 @@
     </activity>
         <activity android:name=".MainActivity">
         </activity>
+        <activity android:name=".MainPageActivity"/>
+        <activity android:name=".MapPageActivity"/>
         <activity android:name=".LoadingPageActivity">
         </activity>
 
+        <activity android:name=".MarketMainActivity"/>
         <activity android:name=".BoardActivity"/>
         <activity android:name=".RankActivity"/>
         <activity android:name=".RecommandActivity"/>

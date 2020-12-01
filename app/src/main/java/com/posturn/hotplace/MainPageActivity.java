@@ -62,7 +62,7 @@ import java.util.Objects;
 
 public class MainPageActivity extends AppCompatActivity {
 
-    private DrawerLayout;
+    private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
     private Context context = this;
     private TextView morerank;
@@ -495,10 +495,6 @@ public class MainPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-    }
-
-
     }
 
     private void setProfile(){
