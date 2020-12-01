@@ -2,7 +2,6 @@ package com.posturn.hotplace;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,7 +24,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -101,7 +98,6 @@ public class RecommandMainActivity extends AppCompatActivity {
                         for (int i = 0; i < 15; i++) {
                             HashMap map = (HashMap) document.get(Integer.toString(i));
                             objectCountsToday.add(new ObjectCount(map.get("name").toString(), Integer.parseInt(map.get("count").toString())));
-                            Log.v("11111", String.valueOf(objectCountsToday.get(i).name));
                         }
                     } else {
                     }
@@ -124,15 +120,12 @@ public class RecommandMainActivity extends AppCompatActivity {
                         for (int i = 0; i < 15; i++) {
                             HashMap map = (HashMap) document.get(Integer.toString(i));
                             objectCountsYesterday.add(new ObjectCount(map.get("name").toString(), Integer.parseInt(map.get("count").toString())));
-                            Log.v("22222", String.valueOf(objectCountsYesterday.get(i).name));
                         }
                     } else {
                     }
                 } else {
                 }
-                Log.d("OBJToday", String.valueOf(objectCountsToday));
-                Log.d("OBJYesterday", String.valueOf(objectCountsYesterday));
-                Log.d("OBJRecommands", String.valueOf(objectRecommands));
+
                 calculateRate(objectCountsToday, objectCountsYesterday, objectRecommands);
             }
         });
@@ -144,19 +137,13 @@ public class RecommandMainActivity extends AppCompatActivity {
             double yesterdayCount = objectCountsYesterday.get(i).count;
 
             objectRecommands.add(new ObjectRecommand(objectCountsToday.get(i).name, (todayCount - yesterdayCount) / yesterdayCount));
-            Log.v("value", String.valueOf(objectRecommands.get(i).percent));
         }
         Collections.sort(objectRecommands);
-        Log.d("OBJToday2", String.valueOf(objectCountsToday));
-        Log.d("OBJYesterday2", String.valueOf(objectCountsYesterday));
-        Log.d("OBJRecommands2", String.valueOf(objectRecommands));
+
         getPlaceList();
     }
 
     public void getPlaceList() {
-        Log.d("OBJToday3", String.valueOf(objectCountsToday));
-        Log.d("OBJYesterday3", String.valueOf(objectCountsYesterday));
-        Log.d("OBJRecommands3", String.valueOf(objectRecommands));
         db.collection("HotPlace")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -165,12 +152,9 @@ public class RecommandMainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map map = document.getData();
-                                Log.d("TAG", map.get("name").toString());
                                 objectPlaces.add(new ObjectPlace(map.get("name").toString(), (Double) map.get("lat"), (Double) map.get("lon"), map.get("img").toString(), map.get("tag").toString(), Integer.parseInt(map.get("index").toString())));
                             }
                             setRecommandTextImg(objectRecommands);
-
-
                         } else {
 
                         }
@@ -178,7 +162,6 @@ public class RecommandMainActivity extends AppCompatActivity {
                         getTodayCafeCountData();
                         getTodayBarCountData();
 
-                        Log.d("RecListAll", String.valueOf(recommandAllPlaceList));
                         rsAdapter = new RecommandSectionAdapter(getApplicationContext(), recommandAllPlaceList);
 
                         view.setHasFixedSize(true);
@@ -191,8 +174,7 @@ public class RecommandMainActivity extends AppCompatActivity {
     public void setRecommandTextImg(ArrayList<ObjectRecommand> objectRecommands){
         ArrayList<ObjectPlace> opList = new ArrayList<>();
         opList = objectPlaces;
-        Log.d("RopList", String.valueOf(opList));
-        Log.d("objRecommands", String.valueOf(objectRecommands));
+
         ArrayList<ObjectPlace> recommandListDay = new ArrayList();
 
         for(int i =0; i<5; i++){
@@ -202,7 +184,6 @@ public class RecommandMainActivity extends AppCompatActivity {
                 }
             }
         }
-        Log.d("RecListDay", String.valueOf(recommandListDay));
         recommandAllPlaceList.add(recommandListDay);
 
     }
@@ -210,8 +191,6 @@ public class RecommandMainActivity extends AppCompatActivity {
     public void setCountTextImg(ArrayList<ObjectCount> objectCounts){
         ArrayList<ObjectPlace> opList = new ArrayList<>();
         opList = objectPlaces;
-        Log.d("opList", String.valueOf(opList));
-        Log.d("objCounts", String.valueOf(objectCounts));
         ArrayList<ObjectPlace> recommandList = new ArrayList();
 
             for(int i =0; i<5; i++){
@@ -221,7 +200,6 @@ public class RecommandMainActivity extends AppCompatActivity {
                     }
                 }
             }
-        Log.d("RecList", String.valueOf(recommandList));
         recommandAllPlaceList.add(recommandList);
 
     }
@@ -239,7 +217,6 @@ public class RecommandMainActivity extends AppCompatActivity {
                         for (int i = 0; i < 15; i++) {
                             HashMap map = (HashMap) document.get(Integer.toString(i));
                             objectCountsResToday.add(new ObjectCount(map.get("name").toString(), Integer.parseInt(map.get("count").toString())));
-                            Log.v("55555", String.valueOf(objectCountsResToday.get(i).name));
                         }
                     } else {
                     }
@@ -264,7 +241,6 @@ public class RecommandMainActivity extends AppCompatActivity {
                         for (int i = 0; i < 15; i++) {
                             HashMap map = (HashMap) document.get(Integer.toString(i));
                             objectCountsCafeToday.add(new ObjectCount(map.get("name").toString(), Integer.parseInt(map.get("count").toString())));
-                            Log.v("66666", String.valueOf(objectCountsCafeToday.get(i).name));
                         }
                     } else {
                     }
@@ -288,7 +264,6 @@ public class RecommandMainActivity extends AppCompatActivity {
                         for (int i = 0; i < 15; i++) {
                             HashMap map = (HashMap) document.get(Integer.toString(i));
                             objectCountsBarToday.add(new ObjectCount(map.get("name").toString(), Integer.parseInt(map.get("count").toString())));
-                            Log.v("77777", String.valueOf(objectCountsBarToday.get(i).name));
                         }
                     } else {
                     }
@@ -300,54 +275,6 @@ public class RecommandMainActivity extends AppCompatActivity {
         });
     }
 
-    /*public void initializeData()
-    {
-
-        ArrayList<ObjectPlace> recommandList1 = new ArrayList();
-
-        recommandList1.add(new ObjectPlace("Ori", 126.9879010,37.5433420,
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fori_haebangchon_img.jpg?alt=media&token=b65c510f-662b-4fe5-ba12-7660565f7dd2",
-                "해방촌",1));
-        recommandList1.add(new ObjectPlace("dri", 126.9879010,37.5433420,
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fori_haebangchon_img.jpg?alt=media&token=b65c510f-662b-4fe5-ba12-7660565f7dd2",
-                "해방촌",2));
-
-        recommandAllPlaceList.add(recommandList1);
-
-        ArrayList<ObjectPlace> recommandList2 = new ArrayList();
-
-        recommandList2.add(new ObjectPlace("Ori", 126.9879010,37.5433420,
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fori_haebangchon_img.jpg?alt=media&token=b65c510f-662b-4fe5-ba12-7660565f7dd2",
-                "해방촌",1));
-        recommandList2.add(new ObjectPlace("dri", 126.9879010,37.5433420,
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fori_haebangchon_img.jpg?alt=media&token=b65c510f-662b-4fe5-ba12-7660565f7dd2",
-                "해방촌",2));
-        recommandList2.add(new ObjectPlace("dri", 126.9879010,37.5433420,
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fori_haebangchon_img.jpg?alt=media&token=b65c510f-662b-4fe5-ba12-7660565f7dd2",
-                "해방촌",2));
-        recommandList2.add(new ObjectPlace("dri", 126.9879010,37.5433420,
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fori_haebangchon_img.jpg?alt=media&token=b65c510f-662b-4fe5-ba12-7660565f7dd2",
-                "해방촌",2));
-
-        recommandAllPlaceList.add(recommandList2);
-
-        ArrayList<ObjectPlace> recommandList3 = new ArrayList();
-
-        recommandList3.add(new ObjectPlace("Ori", 126.9879010,37.5433420,
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fori_haebangchon_img.jpg?alt=media&token=b65c510f-662b-4fe5-ba12-7660565f7dd2",
-                "해방촌",1));
-        recommandList3.add(new ObjectPlace("dri", 126.9879010,37.5433420,
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fori_haebangchon_img.jpg?alt=media&token=b65c510f-662b-4fe5-ba12-7660565f7dd2",
-                "해방촌",2));
-        recommandList3.add(new ObjectPlace("dri", 126.9879010,37.5433420,
-                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%ED%95%B4%EB%B0%A9%EC%B4%8C%2Fori_haebangchon_img.jpg?alt=media&token=b65c510f-662b-4fe5-ba12-7660565f7dd2",
-                "해방촌",2));
-
-
-        recommandAllPlaceList.add(recommandList3);
-
-
-    }*/
 
 
 }
