@@ -45,9 +45,23 @@ public class RecommandSectionAdapter extends RecyclerView.Adapter<RecommandSecti
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        RecommandPlaceAdapter rpAdapter = new RecommandPlaceAdapter(recommandPlaceSectionList.get(position));
+        RecommandPlaceAdapter rpAdapter = new RecommandPlaceAdapter(context,recommandPlaceSectionList.get(position));
 
-        holder.sectionName.setText("급상승 핫플레이스");
+        switch (position){
+            case 0:
+                holder.sectionName.setText("급상승 핫플레이스");
+                break;
+            case 1:
+                holder.sectionName.setText("음식점 핫플레이스");
+                break;
+            case 2:
+                holder.sectionName.setText("카페 핫플레이스");
+                break;
+            case 3:
+                holder.sectionName.setText("술집 핫플레이스");
+                break;
+        }
+
         holder.recyclerView.setHasFixedSize(true);
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         holder.recyclerView.setAdapter(rpAdapter);
