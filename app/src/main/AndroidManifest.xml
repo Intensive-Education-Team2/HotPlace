@@ -69,7 +69,6 @@
         </activity>
         <activity android:name=".BoardActivity"/>
         <activity android:name=".RankActivity"/>
-        <activity android:name=".RecommandActivity"/>
         <activity android:name=".WriteMyPageActivity"/>
         <activity android:name=".FilterPageActivity"/>
         <activity android:name=".LoginActivity"/>

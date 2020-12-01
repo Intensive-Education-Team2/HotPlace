@@ -22,14 +22,14 @@
             android:fitsSystemWindows="true">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_market"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorStrongPink"
                 app:layout_collapseMode="pin">
 
                 <TextView
-                    android:id="@+id/toolbar_place_name_marketinfo"
+                    android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
