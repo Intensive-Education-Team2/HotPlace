@@ -58,7 +58,7 @@ public class MarketFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.market_fragment_post, container, false);
+        View view = inflater.inflate(R.layout.market_fragment_recycler, container, false);
         view.setClickable(true);
 
         list.clear();

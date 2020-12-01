@@ -33,7 +33,7 @@ public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAd
     @NonNull
     @Override
     public MarketFragmentAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.market_fragment_post_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.market_fragment_item, parent, false);
         GpsTracker gpsTracker = new GpsTracker(context);
 
         //강남 경도 위도
