@@ -133,9 +133,6 @@ public class MainPageActivity extends AppCompatActivity {
         latitude=37.4985;
         longitude=127.0299;
 
-        //TODO = Here1
-        //loginChecked(userName, userImg);
-
         setView();
 
         LocalDate date = LocalDate.of(2020, 11, 25);
@@ -211,11 +208,6 @@ public class MainPageActivity extends AppCompatActivity {
         userImg = getIntent().getStringExtra("userImg");
 
         Toast.makeText( getApplicationContext(), userImg, Toast.LENGTH_SHORT ).show();
-        //nvbAdapter = new NavigationBarAdapter(userName,userImg);
-
-        //TODO = Here2
-        //Picasso.get().load(userImg).into(userImg_v);
-        //userName_v.setText(userName);
 
     }
 
@@ -422,26 +414,77 @@ public class MainPageActivity extends AppCompatActivity {
         textViewnearDistance2 = findViewById(R.id.textViewHereDistance2);
         textViewnearDistance3 = findViewById(R.id.textViewHereDistance3);
 
-        //TODO = Here3
-        naviHeaderLayout = findViewById(R.id.navi_header_layout);
-        userImg_v = findViewById(R.id.userimage);
-        userName_v = findViewById(R.id.user_name);
-        //userName_v = naviHeaderLayout.getChildAt(0).findViewById(R.id.user_name);
-        //userImg_v = naviHeaderLayout.getChildAt(1).findViewById(R.id.userimage);
+        //Image5 Listener
+        imageViewTop1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewTop1.getText());
+                startActivity(intent);
+            }
+        });
+        imageViewTop2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewTop2.getText());
+                startActivity(intent);
+            }
+        });
+        imageViewTop3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewTop3.getText());
+                startActivity(intent);
+            }
+        });
+        imageViewTop4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewTop4.getText());
+                startActivity(intent);
+            }
+        });
+        imageViewTop5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewTop5.getText());
+                startActivity(intent);
+            }
+        });
+
+        //recommand Listener
+        textViewrecommand1name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewrecommand1name.getText());
+                startActivity(intent);
+            }
+        });
+        textViewrecommand2name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewrecommand2name.getText());
+                startActivity(intent);
+            }
+        });
+        textViewrecommand3name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MarketMainActivity.class);
+                intent.putExtra("placeName",textViewrecommand3name.getText());
+                startActivity(intent);
+            }
+        });
+
     }
 
-    //TODO = Here4
-    /*private void loginChecked(String userName, String userImg){
-        if(userName==null){
-            login_state = 0;
-        }else{
-            login_state = 1;
 
-            Picasso.get().load(userImg).into(userImg_v);
-            //userImg_v.setImageResource(R.drawable.user_male);
-            userName_v.setText(userName+"님, 반갑습니다");
-        }
-    }*/
 
 
 }

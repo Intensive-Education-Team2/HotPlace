@@ -88,10 +88,12 @@ class TopListAdapter extends BaseAdapter implements View.OnClickListener {
             }
         }
 
+
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, TestPlaceInfoActivity.class);
+                Intent intent = new Intent(mContext, MarketMainActivity.class);
                 intent.putExtra("placeName", thisObjectCount.getName());
                 mContext.startActivity(intent);
             }
