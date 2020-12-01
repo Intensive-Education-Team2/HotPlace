@@ -10,11 +10,11 @@
     >
     <ImageView
         android:id="@+id/market_tab_img"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginLeft="14dp"
+        android:layout_marginLeft="10dp"
         android:layout_gravity="center"
         android:scaleType="fitCenter" />
 
@@ -24,9 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="3dp"
+        android:layout_marginRight="2dp"
         android:textColor="@color/colorBlack"
         android:textIsSelectable="true"
-        android:textSize="15dp"
+        android:textSize="14sp"
         tools:text="Sample text" />
 
 </LinearLayout>

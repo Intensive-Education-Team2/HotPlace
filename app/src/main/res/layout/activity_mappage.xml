@@ -84,49 +84,54 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
 
-                                <TextView
-                                    android:id="@+id/placename"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="20dp"
-                                    android:layout_marginBottom="8dp"
-                                    android:gravity="left"
-                                    android:text="강남"
-                                    android:textColor="@color/colorStrongViolet"
-                                    android:textSize="26dp"
-                                    android:textStyle="bold" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/place_nickname"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/placename"
-                                    android:layout_marginLeft="11dp"
-                                    android:layout_marginBottom="30dp"
-                                    android:text="신논현, 삼성, 코엑스"
-                                    android:textAlignment="center"
-                                    android:textColor="@color/colorStrongPink"
-                                    android:textSize="18dp" />
+                                    <TextView
+                                        android:id="@+id/placename"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="left"
+                                        android:text="강남"
+                                        android:textColor="@color/colorStrongViolet"
+                                        android:textSize="26dp"
+                                        android:textStyle="bold" />
 
-                                <TextView
-                                    android:id="@+id/place_distance"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/place_nickname"
-                                    android:layout_marginLeft="12dp"
-                                    android:layout_marginTop="30dp"
-                                    android:layout_marginBottom="16dp"
-                                    android:text="2km"
-                                    android:textAlignment="center"
-                                    android:textColor="@color/colorRed"
-                                    android:textSize="18dp" />
+                                    <TextView
+                                        android:id="@+id/place_nickname"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginBottom="30dp"
+                                        android:text="신논현, 삼성, 코엑스"
+                                        android:textColor="@color/colorStrongPink"
+                                        android:textSize="17dp" />
+
+                                    <TextView
+                                        android:id="@+id/place_distance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="12dp"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_marginBottom="16dp"
+                                        android:text="2km"
+                                        android:textColor="@color/colorRed"
+                                        android:textSize="18dp" />
+
+                                </LinearLayout>
 
                                 <ImageView
                                     android:id="@+id/place_star"
-                                    android:layout_width="60dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="37dp"
+                                    android:layout_height="37dp"
+                                    android:layout_marginRight="10dp"
                                     android:layout_alignParentRight="true"
+                                    android:layout_marginTop="15dp"
                                     android:layout_weight="1"
 
                                     android:src="@drawable/ic_star_grey" />

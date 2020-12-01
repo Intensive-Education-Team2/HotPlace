@@ -80,6 +80,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     public int index;
 
     public String imgUri;
+    public String tagPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,6 +244,10 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                 TextView placename=findViewById(R.id.placename);
                 placename.setText(place.name);
 
+                //TODO here
+                TextView placeNickName = findViewById(R.id.place_nickname);
+                TextView placeDistance = findViewById(R.id.place_distance);
+
                 placeImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -280,7 +285,9 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         imgUri = documentSnapshot.getString("img");
+                        tagPlace = documentSnapshot.getString("tag");
                         Picasso.get().load(imgUri).into(placeImg);
+                        placeNickName.setText(tagPlace);
                     }
                 });
 
