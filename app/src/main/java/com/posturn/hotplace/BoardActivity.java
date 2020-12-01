@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,6 +39,11 @@ public class BoardActivity extends AppCompatActivity {
 
     private Context context;
 
+    private String placeName;
+
+    private RecyclerView recyclerView;
+    private PostAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,15 @@ public class BoardActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         toolbarTitle.setText("핫플레이스 게시판");
+
+        recyclerView = findViewById(R.id.postRecyclerView) ;
+        recyclerView.setLayoutManager(new LinearLayoutManager(context)) ;
+
+        if (getIntent().getBooleanExtra("EXIT_ROOT", false)) {
+            this.finishAndRemoveTask();
+            System.exit(0);
+        }
+
 
         getPostList();
     }
@@ -78,7 +93,7 @@ public class BoardActivity extends AppCompatActivity {
 
             case R.id.boardfilter: {//필터버튼
                 Intent intent = new Intent(getApplicationContext(), FilterPageActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 return false;
             }
 
@@ -88,34 +103,73 @@ public class BoardActivity extends AppCompatActivity {
     }
 
     public void getPostList() {
-        db.collection("Post")
+        db.collection("AllPost")
+                .document("post")
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            int i=0;
-                            String docuID="";
-                            String newdocuID="";
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                docuID=document.getId();
-                                if(!docuID.equals(newdocuID)){
-                                    i=0;
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                for(int i=document.getData().size()-1; i>=0;i--){
+                                    HashMap map = (HashMap) document.getData().get(Integer.toString(i));
+                                    Log.v("qqqq", Integer.toString(document.getData().size()));
+                                    //Log.d("TAG", "DocumentSnapshot data: " + document.getData().get(Integer.toString(i)));
+                                    List list=  Arrays.asList(map.get("hotuser"));
+                                    objectPosts.add(new ObjectPost(map.get("userimg").toString(), map.get("username").toString(), map.get("place").toString(), (Timestamp) map.get("date"), map.get("img").toString(), map.get("content").toString(), Integer.parseInt(map.get("hot").toString()), list));
                                 }
-                                HashMap map = (HashMap) document.get(Integer.toString(i));
-                                List list=  Arrays.asList(map.get("hotuser"));
-                                objectPosts.add(new ObjectPost(map.get("userimg").toString(), map.get("username").toString(), map.get("place").toString(), (Timestamp) map.get("date"), map.get("img").toString(), map.get("content").toString(), Integer.parseInt(map.get("hot").toString()), list));
-                                newdocuID=document.getId();
-                                Log.d("TAG", list.toString());
-                                i++;
+                            } else {
                             }
                         } else {
+                            Log.d("TAG", "get failed with ", task.getException());
                         }
-                        RecyclerView recyclerView = findViewById(R.id.postRecyclerView) ;
-                        recyclerView.setLayoutManager(new LinearLayoutManager(context)) ;
-                        PostAdapter adapter = new PostAdapter(objectPosts) ;
+                        adapter = new PostAdapter(objectPosts) ;
                         recyclerView.setAdapter(adapter) ;
                     }
                 });
+    }
+
+    public void getFilterPost(String placeName){
+        db.collection("PlacePost")
+                .document(placeName)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                for(int i=document.getData().size()-1; i>=0;i--){
+                                    HashMap map = (HashMap) document.getData().get(Integer.toString(i));
+                                    Log.v("qqqq", Integer.toString(document.getData().size()));
+                                    //Log.d("TAG", "DocumentSnapshot data: " + document.getData().get(Integer.toString(i)));
+                                    List list=  Arrays.asList(map.get("hotuser"));
+                                    objectPosts.clear();
+                                    objectPosts.add(new ObjectPost(map.get("userimg").toString(), map.get("username").toString(), map.get("place").toString(), (Timestamp) map.get("date"), map.get("img").toString(), map.get("content").toString(), Integer.parseInt(map.get("hot").toString()), list));
+                                }
+                            } else {
+                                objectPosts.clear();
+                                Log.d("TAG", "not exist", task.getException());
+                            }
+                        } else {
+                            Log.d("TAG", "get failed with ", task.getException());
+                        }
+                        adapter = new PostAdapter(objectPosts) ;
+                        recyclerView.setAdapter(adapter) ;
+                    }
+                });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) { // 정상 반환일 경우에만 동작하겠다
+            placeName = data.getExtras().getString("placeName");
+            Log.v("name", placeName);
+
+            getFilterPost(placeName);
+        }
     }
 }
