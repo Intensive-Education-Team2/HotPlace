@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 marketObjectsBar.add(new MarketObject("밀회관", "잠실","bar",127.0850227,37.5099868,
                         "맥주를 디자인하다.",
                         "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmilhwegwan_jamsil_img.jpg?alt=media&token=04205f00-6943-4d3f-ad39-a604454dde97",
-                        "https://m.store.naver.com/places/detail?id=1912275762"));*/
+                        "https://m.store.naver.com/places/detail?id=1912275762"));
 
 
                 marketObjectsRes.add(new MarketObject("꼼모아", "해방촌","res",126.9877100,37.5434907,
@@ -167,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
                     db.collection("Market/해방촌/bar").document(marketObjectsBar.get(i).getMarketName()).set(marketObjectsBar.get(i));
                 }
 
+                 */
+
 /*카운트 데이터 추가
                 Map<String, Object> nestedData = new HashMap<>();
 
@@ -191,14 +193,16 @@ public class MainActivity extends AppCompatActivity {
                 }
                 db.collection("Test").document("2020-11-24").set(nestedData);
 
-/*
-게시글 데이터
+ */
+
+
+//게시글 데이터
                 Map<String, Object> nestedData = new HashMap<>();
 
                 List hotuser = Arrays.asList("kang", "kim", "han");
 
                 Timestamp ts = new Timestamp(new Date());
-                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fblank_jamsil_img.jpg?alt=media&token=7414e8c8-e738-4fb5-a447-8b7b8dbeb9d1",
                         "kim", "강남", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
                         "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.", 3, hotuser));
 
@@ -207,10 +211,10 @@ public class MainActivity extends AppCompatActivity {
                         "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.", 3, hotuser));
 
                 for (int i = 0; i < objectPosts.size(); i++) {
-                    nestedData.put(Integer.toString(0), objectPosts.get(i));
-                    db.collection("Post").document(objectPosts.get(i).place).set(nestedData);
+                    nestedData.put(Integer.toString(i), objectPosts.get(i));
                 }
-*/
+                db.collection("AllPost").document("post").set(nestedData);
+
             }
         });
     }
