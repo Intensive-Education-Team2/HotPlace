@@ -70,6 +70,7 @@ public class RecommandActivity extends AppCompatActivity {
 
         LocalDate date = LocalDate.of(2020, 11, 25);
         LocalDate dateago = date.minusDays(1L);
+
         today = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         yesterday = dateago.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 

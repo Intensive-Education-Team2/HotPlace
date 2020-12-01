@@ -540,6 +540,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navi_header"
-        app:menu="@menu/navi_not_login_menu" />
+        app:menu="@menu/navi_login_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

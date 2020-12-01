@@ -4,12 +4,17 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.location.Location;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -40,8 +45,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.kakao.sdk.common.util.Utility;
 import com.squareup.picasso.Picasso;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -52,16 +60,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import okhttp3.internal.Internal;
-
 public class MainPageActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+    private NavigationView navigationView;
     private Context context = this;
     private TextView morerank;
     private TextView morerecommand;
     private StorageReference mStorageRef;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private SharedPreferences pref;
 
     public ArrayList<ObjectPlace> objectPlaces = new ArrayList<ObjectPlace>();
     public ArrayList<ObjectCount> objectCountsToday = new ArrayList<ObjectCount>();
@@ -92,16 +100,14 @@ public class MainPageActivity extends AppCompatActivity {
     private TextView textViewrecommand2name;
     private TextView textViewrecommand3name;
 
+    private TextView userName;
+    private ImageView userImg;
+    private View headerView;
+
     private String today;
     private String yesterday;
 
-    //TODO Here0
-    public String userName;
-    static public String userImg="https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/user_img%2Fuser_male.png?alt=media&token=1b8290f1-97cb-4de4-aab8-f2d0e515281a";
-    public ImageView userImg_v;
-    public TextView userName_v;
     public LinearLayout naviHeaderLayout;
-    public int login_state;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
@@ -133,9 +139,6 @@ public class MainPageActivity extends AppCompatActivity {
         latitude=37.4985;
         longitude=127.0299;
 
-        //TODO = Here1
-        //loginChecked(userName, userImg);
-
         setView();
 
         LocalDate date = LocalDate.of(2020, 11, 25);
@@ -143,10 +146,6 @@ public class MainPageActivity extends AppCompatActivity {
         today = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         yesterday = dateago.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -171,8 +170,13 @@ public class MainPageActivity extends AppCompatActivity {
                 } else if (id == R.id.notice) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                } else if (id == R.id.login){
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                } else if (id == R.id.cs) {
+                    userName.setText(pref.getString("name","")+"님 안녕하세요!");
+                    Picasso.get().load(pref.getString("userimg", "")).into(userImg);
+                    Toast.makeText(getApplicationContext(),pref.getString("name", "empty"), Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.logout){
+                    ((KakaoLoginActivity)KakaoLoginActivity.context).logout();
+                    Intent intent = new Intent(getApplicationContext(), KakaoLoginActivity.class);
                     startActivity(intent);
                 }
 
@@ -206,17 +210,6 @@ public class MainPageActivity extends AppCompatActivity {
         });
 
         getTodayCountData();
-
-        userName = getIntent().getStringExtra("userName");
-        userImg = getIntent().getStringExtra("userImg");
-
-        Toast.makeText( getApplicationContext(), userImg, Toast.LENGTH_SHORT ).show();
-        //nvbAdapter = new NavigationBarAdapter(userName,userImg);
-
-        //TODO = Here2
-        //Picasso.get().load(userImg).into(userImg_v);
-        //userName_v.setText(userName);
-
     }
 
     //툴바 테마
@@ -263,6 +256,7 @@ public class MainPageActivity extends AppCompatActivity {
                     Collections.sort(objectCountsToday);//소팅
                     Log.d("Sort", objectCountsToday.get(1).getName().toString());
 
+
                     getPlaceList();
                     setTop5text();
                 } else {
@@ -307,6 +301,7 @@ public class MainPageActivity extends AppCompatActivity {
                             }
                         } else {
                         }
+                        setProfile();
                         calculateDistance(latitude, longitude, objectPlaces);
                         setTop5img();
                         getYesterdayCountData();
@@ -422,28 +417,21 @@ public class MainPageActivity extends AppCompatActivity {
         textViewnearDistance2 = findViewById(R.id.textViewHereDistance2);
         textViewnearDistance3 = findViewById(R.id.textViewHereDistance3);
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        headerView = navigationView.getHeaderView(0);
+
         //TODO = Here3
-        naviHeaderLayout = findViewById(R.id.navi_header_layout);
-        userImg_v = findViewById(R.id.userimage);
-        userName_v = findViewById(R.id.user_name);
-        //userName_v = naviHeaderLayout.getChildAt(0).findViewById(R.id.user_name);
-        //userImg_v = naviHeaderLayout.getChildAt(1).findViewById(R.id.userimage);
+        userName=headerView.findViewById(R.id.user_name);
+        userImg=headerView.findViewById(R.id.user_image);pref = getSharedPreferences("profile", MODE_PRIVATE);
+        pref = getSharedPreferences("profile", MODE_PRIVATE);
+
     }
 
-    //TODO = Here4
-    /*private void loginChecked(String userName, String userImg){
-        if(userName==null){
-            login_state = 0;
-        }else{
-            login_state = 1;
-
-            Picasso.get().load(userImg).into(userImg_v);
-            //userImg_v.setImageResource(R.drawable.user_male);
-            userName_v.setText(userName+"님, 반갑습니다");
-        }
-    }*/
-
-
+    private void setProfile(){
+        userName.setText(pref.getString("name", ""));
+        Picasso.get().load(pref.getString("userimg", "")).into(userImg);
+    }
 }
 
 

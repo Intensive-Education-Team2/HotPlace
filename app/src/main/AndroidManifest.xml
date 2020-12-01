@@ -8,18 +8,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 
-
     <meta-data
         android:name="com.xxx.MyGlideModule"
         android:value="GlideModule"
         />
 
-    <meta-data
-        android:name="com.kakao.sdk.AppKey"
-        android:value="81323a9e0950c70b7ecd6f0e801af810"
-        />
-
     <application
+        android:name="com.posturn.hotplace.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -30,27 +25,38 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="3sjkwye96q" />
 
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="81323a9e0950c70b7ecd6f0e801af810" />
 
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
 
+            <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+            <data android:host="oauth"
+                android:scheme="kakao81323a9e0950c70b7ecd6f0e801af810" />
+        </intent-filter>
+    </activity>
+
+        <activity android:name=".KakaoLoginActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
         <activity android:name=".MainActivity">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
         <activity android:name=".LoadingPageActivity">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
-        <activity android:name=".MarketMainActivity">
-            <intent-filter>
+        <activity android:name=".MarketMainActivity"/>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
+        </activity>-->
         <activity android:name=".MainPageActivity"/>
         <activity android:name=".MapPageActivity"/>
         <activity android:name=".BoardActivity"/>
@@ -60,7 +66,6 @@
         <activity android:name=".FilterPageActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".LoginRegisterActivity"/>
-
         <activity android:name=".MyPlaceActivity"/>
         <activity android:name=".TestPlaceInfoActivity"></activity>
 
