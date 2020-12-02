@@ -491,7 +491,7 @@ public class MainPageActivity extends AppCompatActivity {
     }
 
     private void setProfile(){
-        userName.setText(pref.getString("name", ""));
+        userName.setText(pref.getString("name", "")+"님, 환영합니다.");
         Picasso.get().load(pref.getString("userimg", "")).into(userImg);
     }
 }
