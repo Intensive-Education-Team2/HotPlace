@@ -141,7 +141,7 @@ public class MarketMainActivity extends AppCompatActivity{
         ImageView imgSecond = viewSecond.findViewById(R.id.market_tab_img);
         TextView textSecond = viewSecond.findViewById(R.id.market_tab_text);
         imgSecond.setImageResource(R.drawable.category_res_grey);
-        textSecond.setText("식당");
+        textSecond.setText("맛집");
         tab_layout.getTabAt(1).setCustomView(viewSecond);
 
         viewThird = getLayoutInflater().inflate(R.layout.market_tab,null);
