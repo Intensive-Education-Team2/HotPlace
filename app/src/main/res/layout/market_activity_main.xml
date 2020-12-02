@@ -18,28 +18,17 @@
         android:fitsSystemWindows="true">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_market"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_collapseMode="pin"
-            android:background="@color/colorStrongPink">
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/HotplerToolbarTheme">
 
             <TextView
-                android:id="@+id/toolbar_place_name_marketinfo"
+                android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
-
-            <ImageView
-                android:id="@+id/my_favorite"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginRight="14dp"
-                android:layout_gravity="right"
-                android:layout_width="27dip"
-                android:layout_height="27dip"/>
+                android:textSize="18sp" />
 
         </androidx.appcompat.widget.Toolbar>
 
