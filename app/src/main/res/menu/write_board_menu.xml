@@ -5,6 +5,6 @@
     <item android:id="@+id/write"
         android:title="등록"
         app:showAsAction="always"
-        android:width="30dp"
-        android:height="30dp"/>
+        android:width="20dp"
+        android:height="20dp"/>
 </menu>
