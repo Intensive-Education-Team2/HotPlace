@@ -28,6 +28,7 @@
     <style name="HotplerToolbarTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:background">@color/colorStrongPink</item>
         <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">24dp</item>
         <item name="android:actionMenuTextColor">@color/colorWhite</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_back</item>
     </style>
