@@ -69,8 +69,8 @@
                                     android:id="@+id/lotation1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:layout_marginTop="15dp"
                                     android:layout_marginLeft="50dp"
+                                    android:layout_marginTop="15dp"
                                     android:layout_weight="15"
                                     android:orientation="vertical">
 
@@ -78,9 +78,9 @@
                                         android:id="@+id/textViewHereName1"
                                         android:layout_width="70dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
                                         android:layout_marginBottom="5dp"
-                                        android:textAlignment="center"
-                                        android:layout_gravity="center"/>
+                                        android:textAlignment="center" />
 
                                     <ImageView
                                         android:id="@+id/imageViewHere1"
@@ -93,9 +93,9 @@
                                         android:id="@+id/textViewHereDistance1"
                                         android:layout_width="70dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
                                         android:layout_marginTop="7dp"
-                                        android:textAlignment="center"
-                                        android:layout_gravity="center"/>
+                                        android:textAlignment="center" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -110,9 +110,9 @@
                                         android:id="@+id/textViewHereName2"
                                         android:layout_width="70dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
                                         android:layout_marginBottom="5dp"
-                                        android:textAlignment="center"
-                                        android:layout_gravity="center"/>
+                                        android:textAlignment="center" />
 
                                     <ImageView
                                         android:id="@+id/imageViewHere2"
@@ -125,9 +125,9 @@
                                         android:id="@+id/textViewHereDistance2"
                                         android:layout_width="70dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
                                         android:layout_marginTop="7dp"
-                                        android:textAlignment="center"
-                                        android:layout_gravity="center"/>
+                                        android:textAlignment="center" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -142,9 +142,9 @@
                                         android:id="@+id/textViewHereName3"
                                         android:layout_width="70dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
                                         android:layout_marginBottom="5dp"
-                                        android:textAlignment="center"
-                                        android:layout_gravity="center"/>
+                                        android:textAlignment="center" />
 
                                     <ImageView
                                         android:id="@+id/imageViewHere3"
@@ -157,9 +157,9 @@
                                         android:id="@+id/textViewHereDistance3"
                                         android:layout_width="70dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
                                         android:layout_marginTop="7dp"
-                                        android:textAlignment="center"
-                                        android:layout_gravity="center"/>
+                                        android:textAlignment="center" />
                                 </LinearLayout>
                             </LinearLayout>
 

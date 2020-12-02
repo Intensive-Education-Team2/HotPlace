@@ -225,7 +225,7 @@ public class KakaoLoginActivity extends AppCompatActivity {
 
     /*쉐어드에 입력값 저장*/
     private void saveShared(long id, String username, String userimg) {
-        super.onStop();
+        //super.onStop();
         SharedPreferences pref = getSharedPreferences("profile", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putLong("token", id);

@@ -62,6 +62,8 @@ public class RecommandMainActivity extends AppCompatActivity {
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         toolbarTitle.setText("추천 핫플레이스");
 
+        recommandAllPlaceList.clear();
+
         LocalDate date = LocalDate.of(2020, 11, 29);
         LocalDate dateago = date.minusDays(1L);
         today = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
