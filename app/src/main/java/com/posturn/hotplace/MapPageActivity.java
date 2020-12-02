@@ -82,6 +82,8 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     public String imgUri;
     public String tagPlace;
 
+    LatLng coord = new LatLng(37.4985, 127.0299);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,6 +162,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                                 index = Integer.parseInt(map.get("index").toString());
                                 objectPlace = new ObjectPlace(map.get("name").toString(), lat, lon, img, tag, index);
                                 placelist.add(objectPlace);
+
                                 Log.v("value",objectPlace.getName());
                                 Log.v("please", objectPlace.getName()+" "+objectPlace.getLat()+" "+objectPlace.getLon());
 
@@ -241,12 +244,14 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
 
                 ImageView my_star = findViewById(R.id.place_star);
                 ImageView placeImg = findViewById(R.id.placeimage);
-                TextView placename=findViewById(R.id.placename);
+                TextView placename = findViewById(R.id.placename);
                 placename.setText(place.name);
 
                 //TODO here
                 TextView placeNickName = findViewById(R.id.place_nickname);
                 TextView placeDistance = findViewById(R.id.place_distance);
+
+
 
                 placeImg.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -287,6 +292,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                         imgUri = documentSnapshot.getString("img");
                         tagPlace = documentSnapshot.getString("tag");
                         Picasso.get().load(imgUri).into(placeImg);
+                        placeDistance.setText(getDistance(coord.latitude,coord.longitude,(Double)documentSnapshot.get("lat"),(Double)documentSnapshot.get("lon"))+" km");
                         placeNickName.setText(tagPlace);
                     }
                 });
@@ -312,6 +318,22 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             }
         }
     };
+
+    private String getDistance(double myLat, double myLon, double targetLat, double targetLon) {
+        double distance;
+
+        Location locationA = new Location("point A");
+        locationA.setLatitude(myLat);
+        locationA.setLongitude(myLon);
+
+        Location locationB = new Location("point B");
+        locationB.setLatitude(targetLat);
+        locationB.setLongitude(targetLon);
+
+        distance = locationA.distanceTo(locationB) /1000.0;
+
+        return String.format("%.2f",distance);
+    }
 }
 
 
