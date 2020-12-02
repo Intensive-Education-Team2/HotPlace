@@ -47,6 +47,7 @@
 
         </activity>
         <activity android:name=".MainPageActivity" />
+        <activity android:name=".RecommandMainActivity" />
         <activity android:name=".MapPageActivity" />
         <activity android:name=".LoadingPageActivity" />
         <activity android:name=".MarketMainActivity" />
@@ -57,11 +58,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".RankActivity" />
-        <activity android:name=".RecommandActivity" />
+
         <activity android:name=".PostingActivity" />
+
         <activity android:name=".FilterPageActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".LoginRegisterActivity" />
         <activity android:name=".MyPlaceActivity" />
         <activity android:name=".TestPlaceInfoActivity" />
 
