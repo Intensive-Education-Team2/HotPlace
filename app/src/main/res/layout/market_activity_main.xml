@@ -34,14 +34,7 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:elevation="1dp"
-            app:tabBackground="@color/colorBabyPink"
-            app:tabSelectedTextColor="@color/colorStrongViolet"
-            app:tabIndicatorColor="@color/colorStrongViolet"
-            app:tabMode="fixed" />
+            style="@style/tab_style" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

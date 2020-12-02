@@ -26,6 +26,7 @@ public class MarketPagerAdapter extends FragmentStatePagerAdapter {
         fragments.add(new MarketFragment(this.placeName,"bar"));
     }
 
+
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {

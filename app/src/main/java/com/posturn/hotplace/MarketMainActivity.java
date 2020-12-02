@@ -2,6 +2,8 @@ package com.posturn.hotplace;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,10 +21,19 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import org.w3c.dom.Text;
+
 public class MarketMainActivity extends AppCompatActivity{
     private TabLayout tab_layout;
     private ViewPager pager;
     private MarketPagerAdapter marketPagerAdapter;
+
+    private View viewFirst;
+    private View viewSecond;
+    private View viewThird;
+    private View viewFourth;
+
+    private TextView temp;
 
     private String placeName;
     private int myplaceon;
@@ -49,14 +60,17 @@ public class MarketMainActivity extends AppCompatActivity{
         setupViewPager(pager); // new MarketPagerAdapter, pager.setAdapter(marketPagerAdapter)
 
         tab_layout = (TabLayout) findViewById(R.id.tab_layout);
+        //temp=tab_layout.findViewById(R.id.market_tab_text);
 
         tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                //temp.setTextColor(Color.parseColor(black));
                 pager.setCurrentItem(tab.getPosition());
             }
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
@@ -116,31 +130,31 @@ public class MarketMainActivity extends AppCompatActivity{
 
     private void setupTabIcons(){
 
-        View viewFirst = getLayoutInflater().inflate(R.layout.market_tab,null);
+        viewFirst = getLayoutInflater().inflate(R.layout.market_tab,null);
         ImageView imgfirst = viewFirst.findViewById(R.id.market_tab_img);
         TextView textfirst = viewFirst.findViewById(R.id.market_tab_text);
-        imgfirst.setImageResource(R.drawable.category_all_black_18dp);
+        imgfirst.setImageResource(R.drawable.category_all_grey);
         textfirst.setText("전체");
         tab_layout.getTabAt(0).setCustomView(viewFirst);
 
-        View viewSecond = getLayoutInflater().inflate(R.layout.market_tab,null);
+        viewSecond = getLayoutInflater().inflate(R.layout.market_tab,null);
         ImageView imgSecond = viewSecond.findViewById(R.id.market_tab_img);
         TextView textSecond = viewSecond.findViewById(R.id.market_tab_text);
-        imgSecond.setImageResource(R.drawable.category_res_black_18dp);
+        imgSecond.setImageResource(R.drawable.category_res_grey);
         textSecond.setText("식당");
         tab_layout.getTabAt(1).setCustomView(viewSecond);
 
-        View viewThird = getLayoutInflater().inflate(R.layout.market_tab,null);
+        viewThird = getLayoutInflater().inflate(R.layout.market_tab,null);
         ImageView imgThird = viewThird.findViewById(R.id.market_tab_img);
         TextView textThird = viewThird.findViewById(R.id.market_tab_text);
-        imgThird.setImageResource(R.drawable.category_cafe_black_18dp);
+        imgThird.setImageResource(R.drawable.category_cafe_grey);
         textThird.setText("카페");
         tab_layout.getTabAt(2).setCustomView(viewThird);
 
-        View viewFourth = getLayoutInflater().inflate(R.layout.market_tab,null);
+        viewFourth = getLayoutInflater().inflate(R.layout.market_tab,null);
         ImageView imgFourth = viewFourth.findViewById(R.id.market_tab_img);
         TextView textFourth = viewFourth.findViewById(R.id.market_tab_text);
-        imgFourth.setImageResource(R.drawable.category_bar_black_18dp);
+        imgFourth.setImageResource(R.drawable.category_bar_grey);
         textFourth.setText("술집");
         tab_layout.getTabAt(3).setCustomView(viewFourth);
 

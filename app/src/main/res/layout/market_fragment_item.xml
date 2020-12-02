@@ -51,7 +51,7 @@
                     android:layout_marginTop="5dp"
                     android:gravity="fill_horizontal"
                     android:textColor="@color/colorBlack"
-                    android:textSize="20sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView

@@ -42,7 +42,7 @@
 
     <!--메인화면  TOP5 텍스트-->
     <style name="Top12Text" parent="@android:style/Widget.TextView">
-        <item name="android:textSize">25dp</item>
+        <item name="android:textSize">23dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:shadowColor">@color/colorBlack</item>
         <item name="android:shadowRadius">30</item>
@@ -96,6 +96,19 @@
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:clickable">true</item>
+    </style>
+
+    <!--탭 텍스트-->
+        <style name="tab_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="tabIndicatorColor">@color/darkgary</item>
+        <item name="tabIndicatorHeight">3dp</item>
+        <item name="tabSelectedTextColor">@color/colorStrongViolet</item>
+        <item name="tabTextColor">@color/darkgary</item>
+        <item name="android:background">@color/colorBabyPink</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">fixed</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
