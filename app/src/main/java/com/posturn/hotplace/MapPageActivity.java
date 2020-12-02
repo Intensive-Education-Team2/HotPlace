@@ -274,11 +274,11 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                     @Override
                     public void onClick(View v) {
                         if(myplaceon == 0){
-                            my_star.setImageResource(R.drawable.ic_small_star_on_thick_grid_dirtyyellow);
+                            my_star.setImageResource(R.drawable.ic_bookmarked_strongpink);
                             Toast.makeText( getApplicationContext(), "My 플레이스에 추가되었습니다.", Toast.LENGTH_SHORT ).show();
                             myplaceon = 1;
                         }else{
-                            my_star.setImageResource(R.drawable.ic_small_star_grey);
+                            my_star.setImageResource(R.drawable.ic_bookmark_strongpink);
                             Toast.makeText( getApplicationContext(), "My 플레이스에 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
                             myplaceon = 0;
                         }

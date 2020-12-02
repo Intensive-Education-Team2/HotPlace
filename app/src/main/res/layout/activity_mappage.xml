@@ -44,7 +44,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:background="@color/colorBabyPink">
+                    android:background="@color/colorWhite">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
@@ -56,7 +56,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/colorBabyPink"
+                            android:background="@color/colorWhite"
                             android:orientation="horizontal">
 
 
@@ -64,17 +64,17 @@
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/cardView_placeImage"
                                 android:layout_width="150dp"
-                                android:layout_height="150dp"
-                                android:layout_marginTop="20dp"
+                                android:layout_height="180dp"
+                                android:layout_marginTop="7dp"
                                 android:layout_marginBottom="10dp"
                                 android:layout_marginLeft="10dp"
-                                app:cardCornerRadius="30dp"
+                                app:cardCornerRadius="20dp"
                                 app:cardElevation="10dp">
 
                                 <ImageView
                                     android:id="@+id/placeimage"
                                     android:layout_width="150dp"
-                                    android:layout_height="150dp"
+                                    android:layout_height="180dp"
                                     android:scaleType="centerCrop"
                                     android:src="@drawable/hotpler" />
                             </androidx.cardview.widget.CardView>
@@ -94,34 +94,34 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="10dp"
-                                        android:layout_marginTop="20dp"
+                                        android:layout_marginTop="8dp"
                                         android:layout_marginBottom="8dp"
                                         android:gravity="left"
                                         android:text="강남"
                                         android:textColor="@color/colorStrongViolet"
-                                        android:textSize="26dp"
+                                        android:textSize="22dp"
                                         android:textStyle="bold" />
 
                                     <TextView
                                         android:id="@+id/place_nickname"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="50dp"
                                         android:layout_marginLeft="10dp"
                                         android:layout_marginBottom="30dp"
-                                        android:text="신논현, 삼성, 코엑스"
-                                        android:textColor="@color/colorStrongPink"
-                                        android:textSize="17dp" />
+                                        android:text="신논현, 삼성, 코엑스, 한옥마을, 구리구리"
+                                        android:textColor="@color/colorGrey"
+                                        android:textSize="16dp" />
 
                                     <TextView
                                         android:id="@+id/place_distance"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="12dp"
-                                        android:layout_marginTop="20dp"
+                                        android:layout_marginTop="28dp"
                                         android:layout_marginBottom="16dp"
                                         android:text="2km"
-                                        android:textColor="@color/colorRed"
-                                        android:textSize="18dp" />
+                                        android:textColor="@color/colorGrey"
+                                        android:textSize="15dp" />
 
                                 </LinearLayout>
 
@@ -131,10 +131,10 @@
                                     android:layout_height="37dp"
                                     android:layout_marginRight="10dp"
                                     android:layout_alignParentRight="true"
-                                    android:layout_marginTop="15dp"
+                                    android:layout_marginTop="6dp"
                                     android:layout_weight="1"
 
-                                    android:src="@drawable/ic_star_grey" />
+                                    android:src="@drawable/ic_bookmark_strongpink" />
                             </RelativeLayout>
 
                         </LinearLayout>
