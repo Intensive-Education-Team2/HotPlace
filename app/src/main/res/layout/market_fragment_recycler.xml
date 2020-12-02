@@ -19,7 +19,7 @@
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="4dp"
         android:scrollbarThumbVertical="@android:color/darker_gray"
-        android:scrollbars="vertical"
+        android:scrollbars="none"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
