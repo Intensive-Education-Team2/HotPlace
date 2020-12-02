@@ -85,13 +85,12 @@ public class PostingActivity extends AppCompatActivity implements View.OnClickLi
                 onBackPressed();
                 return true;
             }
-
             case R.id.write : {//등록버튼
                 posting();
+                setResult(2);
                 finish();
                 return false;
             }
-
             default :
                 return super.onOptionsItemSelected(item) ;
         }
@@ -145,11 +144,11 @@ public class PostingActivity extends AppCompatActivity implements View.OnClickLi
                 "가로수길",
                 ts,
                 "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/hamberger.png?alt=media&token=e9361c74-1965-47b8-8d90-a48dc16fcedf",
-                "내용",
+                "너무맛있다 ㅗㅜㅑ",
                 0,
                 hotuser);
         Map<String, Object> nestedData = new HashMap<>();
-        nestedData.put(Integer.toString(2), temp);
+        nestedData.put(Integer.toString(8), temp);
         db.collection("AllPost").document("post").update(nestedData);
     }
 

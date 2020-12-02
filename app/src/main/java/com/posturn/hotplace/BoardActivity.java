@@ -55,13 +55,6 @@ public class BoardActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.postRecyclerView) ;
         recyclerView.setLayoutManager(new LinearLayoutManager(context)) ;
 
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.v("resume", "resume");
         getPostList();
     }
 
@@ -83,7 +76,7 @@ public class BoardActivity extends AppCompatActivity {
 
             case R.id.boardadd: {//글쓰기
                 Intent intent = new Intent(getApplicationContext(), PostingActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 2);
                 return false;
             }
 
@@ -138,12 +131,12 @@ public class BoardActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
+                                objectPosts.clear();
                                 for(int i=document.getData().size()-1; i>=0;i--){
                                     HashMap map = (HashMap) document.getData().get(Integer.toString(i));
                                     Log.v("qqqq", Integer.toString(document.getData().size()));
                                     //Log.d("TAG", "DocumentSnapshot data: " + document.getData().get(Integer.toString(i)));
                                     List list=  Arrays.asList(map.get("hotuser"));
-                                    objectPosts.clear();
                                     objectPosts.add(new ObjectPost(map.get("userimg").toString(), map.get("username").toString(), map.get("place").toString(), (Timestamp) map.get("date"), map.get("img").toString(), map.get("content").toString(), Integer.parseInt(map.get("hot").toString()), list));
                                 }
                             } else {
@@ -168,6 +161,9 @@ public class BoardActivity extends AppCompatActivity {
             Log.v("name", placeName);
 
             getFilterPost(placeName);
+        }
+        if(resultCode ==2){
+            getPostList();
         }
     }
 }
