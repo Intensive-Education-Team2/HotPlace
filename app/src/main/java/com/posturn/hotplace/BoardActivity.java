@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,15 +20,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BoardActivity extends AppCompatActivity {
 
@@ -60,12 +55,6 @@ public class BoardActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.postRecyclerView) ;
         recyclerView.setLayoutManager(new LinearLayoutManager(context)) ;
 
-        if (getIntent().getBooleanExtra("EXIT_ROOT", false)) {
-            this.finishAndRemoveTask();
-            System.exit(0);
-        }
-
-
         getPostList();
     }
 
@@ -86,7 +75,7 @@ public class BoardActivity extends AppCompatActivity {
             }
 
             case R.id.boardadd: {//글쓰기
-                Intent intent = new Intent(getApplicationContext(), WriteMyPageActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PostingActivity.class);
                 startActivity(intent);
                 return false;
             }

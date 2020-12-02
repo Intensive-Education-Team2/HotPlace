@@ -85,7 +85,6 @@
     <!--필터 텍스트-->
     <style name="FilterText" parent="@android:style/Widget.TextView">
         <item name="android:textSize">16dp</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:clickable">true</item>
     </style>
