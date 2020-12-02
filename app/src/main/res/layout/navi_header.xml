@@ -16,8 +16,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="4dp"
             app:cardCornerRadius="30dp"
@@ -29,8 +29,8 @@
 
             <ImageView
                 android:id="@+id/user_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/hotpler" />
         </androidx.cardview.widget.CardView>
@@ -42,7 +42,7 @@
             android:layout_marginBottom="16dp"
             android:text="로그인하세요 >"
             android:textAlignment="center"
-            android:textColor="@color/colorStrongPink"
+            android:textColor="@color/darkgary"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
