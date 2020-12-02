@@ -1,9 +1,12 @@
 package com.posturn.hotplace;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,15 +37,13 @@ public class MarketMainActivity extends AppCompatActivity{
         //placeName = "해방촌";
         myplaceon = 0;
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_market);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();    //뒤로가기 버튼 생성
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
-        TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_place_name_marketinfo);
+        TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         toolbarTitle.setText(placeName);
-        ImageView toolbarImg = (ImageView) findViewById(R.id.my_favorite);
-        toolbarImg.setImageResource(R.drawable.ic_small_star_grey);
 
         pager = (ViewPager) findViewById(R.id.pager);
         setupViewPager(pager); // new MarketPagerAdapter, pager.setAdapter(marketPagerAdapter)
@@ -62,7 +63,7 @@ public class MarketMainActivity extends AppCompatActivity{
         tab_layout.setupWithViewPager(pager);
         setupTabIcons();
 
-
+/*
         toolbarImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,16 +78,37 @@ public class MarketMainActivity extends AppCompatActivity{
                 }
             }
         });
-
+*/
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.market_menu, menu);
+        return true;
+    }
+
+    //툴바 기능
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: { // 뒤로가기
+            case android.R.id.home: { // 네비게이션메뉴 버튼
                 onBackPressed();
                 return true;
             }
+
+            case R.id.bookmark: //지도버튼
+                if(myplaceon==0) {
+                    item.setIcon(R.drawable.ic_bookmarked);
+                    Toast.makeText( getApplicationContext(), "My 플레이스에 추가되었습니다.", Toast.LENGTH_SHORT ).show();
+                    myplaceon = 1;
+                }else{
+                    //toolbarImg.setImageResource(R.drawable.ic_small_star_grey);
+                    item.setIcon(R.drawable.ic_bookmark);
+                    Toast.makeText( getApplicationContext(), "My 플레이스에서 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
+                    myplaceon = 0;
+                }
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -177,7 +177,7 @@ public class RecommandMainActivity extends AppCompatActivity {
 
         ArrayList<ObjectPlace> recommandListDay = new ArrayList();
 
-        for(int i =0; i<5; i++){
+        for(int i =0; i<6; i++){
             for (ObjectPlace op : opList) {
                 if (objectRecommands.get(i).name.equals(op.name)) {
                     recommandListDay.add(op);

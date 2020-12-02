@@ -159,7 +159,7 @@ public class MainPageActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), RankActivity.class);
                     startActivity(intent);
                 } else if (id == R.id.hotplace_recommand) {
-                    Intent intent = new Intent(getApplicationContext(), RecommandActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), RecommandMainActivity.class);
                     startActivity(intent);
                 } else if (id == R.id.hotplace_board) {
                     Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
@@ -204,7 +204,7 @@ public class MainPageActivity extends AppCompatActivity {
         morerecommand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RecommandActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RecommandMainActivity.class);
                 startActivity(intent);
             }
         });
