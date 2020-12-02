@@ -21,8 +21,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PostingActivity extends AppCompatActivity implements View.OnClickListener{
     private final int GET_GALLERY_IMAGE = 200;
@@ -40,6 +45,7 @@ public class PostingActivity extends AppCompatActivity implements View.OnClickLi
     private Button selectPlace;
     private ImageButton selectImg;
     private EditText editContent;
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +87,8 @@ public class PostingActivity extends AppCompatActivity implements View.OnClickLi
             }
 
             case R.id.write : {//등록버튼
+                posting();
+                finish();
                 return false;
             }
 
@@ -113,6 +121,7 @@ public class PostingActivity extends AppCompatActivity implements View.OnClickLi
         if (requestCode==1 && resultCode == RESULT_OK) { // 정상 반환일 경우에만 동작하겠다
             String btnText = data.getExtras().getString("placeName");
             selectPlace.setText(btnText);
+            selectPlace.setTextSize(16);
             selectPlace.setTextColor(Color.parseColor("#ffffff"));
             selectPlace.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_select_radius));
             //selectPlace.setBackgroundColor(Color.parseColor("#EE6C81"));
@@ -125,6 +134,23 @@ public class PostingActivity extends AppCompatActivity implements View.OnClickLi
             selectImg.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         }
+    }
+
+    public void posting(){
+        ObjectPost temp;
+        Timestamp ts = new Timestamp(new Date());
+        List hotuser = Arrays.asList("");
+        temp=new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/profil.jpg?alt=media&token=5ee54b5a-8e47-4f69-9d37-cfba8e9339b2",
+                "정목",
+                "가로수길",
+                ts,
+                "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/hamberger.png?alt=media&token=e9361c74-1965-47b8-8d90-a48dc16fcedf",
+                "내용",
+                0,
+                hotuser);
+        Map<String, Object> nestedData = new HashMap<>();
+        nestedData.put(Integer.toString(2), temp);
+        db.collection("AllPost").document("post").update(nestedData);
     }
 
 }
