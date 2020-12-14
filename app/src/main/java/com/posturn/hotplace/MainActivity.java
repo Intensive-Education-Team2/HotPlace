@@ -167,8 +167,8 @@ public class MainActivity extends AppCompatActivity {
                 for(int i=0; i<3; i++){
                     db.collection("Market/해방촌/bar").document(marketObjectsBar.get(i).getMarketName()).set(marketObjectsBar.get(i));
                 }
+*/
 
-                 */
 
 /*카운트 데이터 추가
                 Map<String, Object> nestedData = new HashMap<>();

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
@@ -48,6 +49,7 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.widget.LocationButtonView;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -60,6 +62,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     private MapFragment mapFragment;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseFirestore db_placeinfo = FirebaseFirestore.getInstance();
+    private SharedPreferences pref;
 
     private int myplaceon = 0;
 
@@ -276,10 +279,46 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                         if(myplaceon == 0){
                             my_star.setImageResource(R.drawable.ic_bookmarked_strongpink);
                             Toast.makeText( getApplicationContext(), "My 플레이스에 추가되었습니다.", Toast.LENGTH_SHORT ).show();
+
+                            pref = getSharedPreferences("profile", MODE_PRIVATE);
+
+                            String token = pref.getLong("token",0)+"";
+
+                            ObjectMyplace obmyplace = new ObjectMyplace();
+                            Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
+
+                            if(tds.isSuccessful()) {
+                                DocumentSnapshot ds = tds.getResult();
+                                obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                                obmyplace.myplacelist.add(place.name);
+                            }else{
+                                obmyplace.myplacelist.add(place.name);
+                            }
+
+                            db.collection("MyPlace").document(token).set(obmyplace);
+
                             myplaceon = 1;
                         }else{
                             my_star.setImageResource(R.drawable.ic_bookmark_strongpink);
                             Toast.makeText( getApplicationContext(), "My 플레이스에 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
+
+                            pref = getSharedPreferences("profile", MODE_PRIVATE);
+
+                            String token = pref.getLong("token",0)+"";
+
+                            ObjectMyplace obmyplace = new ObjectMyplace();
+                            Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
+
+                            if(tds.isSuccessful()) {
+                                DocumentSnapshot ds = tds.getResult();
+                                obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                                obmyplace.myplacelist.remove(place.name);
+                            }else{
+                                obmyplace.myplacelist.remove(place.name);
+                            }
+
+                            db.collection("MyPlace").document(token).set(obmyplace);
+
                             myplaceon = 0;
                         }
                     }
