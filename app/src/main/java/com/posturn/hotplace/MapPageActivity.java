@@ -114,7 +114,6 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                 obmyplace.myplacelist = (ArrayList) ds.get("myplacelist");
             }
         });
-        Log.v("000000","GET MYPLACELIST");
         //map 객체 선언
         FragmentManager fm = getSupportFragmentManager();
         mapFragment = (MapFragment) fm.findFragmentById(R.id.map);
@@ -192,8 +191,6 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
 
         setMapOption();
 
-
-
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         naverMap.addOnLocationChangeListener(new NaverMap.OnLocationChangeListener() {
@@ -201,10 +198,8 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             public void onLocationChange(@NonNull Location location) {
                 lat = location.getLatitude();
                 lon = location.getLongitude();
-
             }
         });
-
     }
 
     //툴바 기능
@@ -258,27 +253,18 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             marker.setOnClickListener(overlay -> {
                 Animation animation = new AlphaAnimation(0, 1);
                 animation.setDuration(500);
+                UpdateMyplace();
                 myplaceon = 0;
-                Log.v("111111111","CLICK MARKER");
                 my_star = findViewById(R.id.place_star);
-
-                Log.v("1111111",myplaceon+"");
-                Log.v("1111112",place.name);
-
-                Log.v("1111113",token);
 
                 for (int i = 0; i < obmyplace.myplacelist.size(); i++) {
                     if (obmyplace.myplacelist.get(i).equals(place.name)) {
                         myplaceon = 1;
-                        Log.v("3333333", myplaceon + "");
                     }
                 }
-                Log.v("44444444", myplaceon + "");
                 if (myplaceon == 1) {
-                    Log.v("5555555", myplaceon + "");
                     my_star.setImageResource(R.drawable.ic_bookmarked_strongpink);
                 } else {
-                    Log.v("6666666", myplaceon + "");
                     my_star.setImageResource(R.drawable.ic_bookmark_strongpink);
                 }
 
@@ -358,23 +344,19 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if(task.isSuccessful()){
-                                        Log.v("333333333333","DELETE IF");
                                         DocumentSnapshot ds = task.getResult();
                                         obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
                                         obmyplace.myplacelist.remove(place.name);
                                         db.collection("MyPlace").document(token).set(obmyplace);
-                                    }else{
-                                        Log.v("4444444444","DELETE ELSE");
-                                        obmyplace.myplacelist.remove(place.name);
-                                        db.collection("MyPlace").document(token).set(obmyplace);
+                                        UpdateMyplace();
                                     }
+                                    myplaceon = 0;
                                 }
                             });
                         }
                     }
                 });
 
-                Log.v("888889999","START GET PLACE");
                 db_placeinfo.collection("HotPlace").document(place.name).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -385,10 +367,8 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                         placeNickName.setText(tagPlace);
                     }
                 });
-                Log.v("88888999999","END GET PLACE");
                 placeinfo.setVisibility(View.VISIBLE);
                 placeinfo.setAnimation(animation);
-                Log.v("99999999","END MARKER");
                 Toast.makeText(getApplication(), place.name + " 클릭", Toast.LENGTH_SHORT).show();
 
                 return false;
@@ -424,8 +404,14 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         return String.format("%.2f",distance);
     }
 
-    private void setMyplace(){
-
+    private void UpdateMyplace(){
+        db.collection("MyPlace").document(token).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot ds) {
+                obmyplace = new ObjectMyplace();
+                obmyplace.myplacelist = (ArrayList) ds.get("myplacelist");
+            }
+        });
     }
 }
 
