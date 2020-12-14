@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ObjectCount> objectCounts = new ArrayList<>();
 
     private ArrayList<ObjectPost> objectPosts = new ArrayList<>();
+    private ArrayList<ObjectPost> objectPosts1 = new ArrayList<>();
 
 
     @Override
@@ -195,8 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
  */
 
-
-//게시글 데이터
+/*
                 Map<String, Object> nestedData = new HashMap<>();
 
                 List hotuser = Arrays.asList("");
@@ -243,6 +243,72 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 db.collection("AllPost").document("post").set(nestedData);
+                */
+
+                Map<String, Object> nestedData = new HashMap<>();
+                Map<String, Object> nestedData1 = new HashMap<>();
+
+                List hotuser = Arrays.asList("");
+
+                Timestamp ts = new Timestamp(new Date());
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "버섯베놈", "가로수길", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "WS뷔뷔에스", 531, hotuser));
+                objectPosts1.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "버섯베놈", "가로수길", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "WS뷔뷔에스", 531, hotuser));
+                /////////////////////////
+
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fblank_jamsil_img.jpg?alt=media&token=7414e8c8-e738-4fb5-a447-8b7b8dbeb9d1",
+                        "Doris_", "망원동", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "일상 데일리 맛집 소통 인친 맞팔", 13, hotuser));
+
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "KITTYKITTY", "성수동", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "오랜만에 성수동 출석~.~", 52, hotuser));
+
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "꼬기남자", "경리단길", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "HOT RECIPTE HERE", 121, hotuser));
+
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "구찌배찌", "가로수길", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "애플스토어 shit xxx", 71, hotuser));
+
+                objectPosts1.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "구찌배찌", "가로수길", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "애플스토어 shit xxx", 71, hotuser));
+                ////////////////////////
+
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "피카소", "삼청동", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "삼청....낭만....", 44, hotuser));
+
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "수키", "강남", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "불금 Fire", 71, hotuser));
+
+                objectPosts.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "Bandal", "가로수길", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "a b c d e랜드", 145, hotuser));
+                objectPosts1.add(new ObjectPost("https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "Bandal", "가로수길", ts, "https://firebasestorage.googleapis.com/v0/b/hotplaceserver.appspot.com/o/market%2F%EC%9E%A0%EC%8B%A4%2Fmildo_jamsil_cafe.jpg?alt=media&token=e6456cea-7c5d-47a0-b948-d0543c1c4dd3",
+                        "a b c d e랜드", 145, hotuser));
+                /////////////////
+
+
+
+                for (int i = 0; i < objectPosts.size(); i++) {
+                    nestedData.put(Integer.toString(i), objectPosts.get(i));
+                }
+                db.collection("AllPost").document("post").set(nestedData);
+
+                for (int j = 0; j < objectPosts1.size(); j++) {
+                    nestedData1.put(Integer.toString(j), objectPosts1.get(j));
+                }
+                db.collection("PlacePost").document("가로수길").set(nestedData1);
+
+
 
 
             }

@@ -1,5 +1,6 @@
 package com.posturn.hotplace;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -84,15 +86,22 @@ public class RankActivity extends AppCompatActivity {
     }
 
     //툴바 기능
+    @SuppressLint("ShowToast")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: { // 뒤로가기
+            case android.R.id.home:{ // 뒤로가기
                 onBackPressed();
                 return true;
             }
-            default:
-                return super.onOptionsItemSelected(item);
+            case R.id.question : {//등록버튼
+                Log.v("show","show");
+                Toast myToast = Toast.makeText(this.getApplicationContext(),"머신러닝 분류 모델을 이용해 인스타그램 게시물 태그를 분석하여 지역별 게시물 카운트 집계", Toast.LENGTH_SHORT);
+                myToast.show();
+                return false;
+            }
+            default :
+                return super.onOptionsItemSelected(item) ;
         }
     }
 
