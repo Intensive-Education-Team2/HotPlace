@@ -283,7 +283,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                             String token = pref.getLong("token",0)+"";
 
                             ObjectMyplace obmyplace = new ObjectMyplace();
-                            Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if(task.isSuccessful()){
@@ -319,7 +319,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                             String token = pref.getLong("token",0)+"";
 
                             ObjectMyplace obmyplace = new ObjectMyplace();
-                            Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if(task.isSuccessful()){
