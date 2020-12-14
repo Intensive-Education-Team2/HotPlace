@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -39,13 +41,13 @@ public class MarketMainActivity extends AppCompatActivity{
     private MarketPagerAdapter marketPagerAdapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private SharedPreferences pref;
+    private ObjectMyplace obmyplace;
+    private int IsMyplace = 0;
 
     private View viewFirst;
     private View viewSecond;
     private View viewThird;
     private View viewFourth;
-
-    private TextView temp;
 
     private String placeName;
     private int myplaceon;
@@ -92,7 +94,34 @@ public class MarketMainActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.market_menu, menu);
+        Log.v("1111111",IsMyplace+"");
+        Log.v("1111112",placeName);
+        pref = getSharedPreferences("profile", MODE_PRIVATE);
+        String token = pref.getLong("token",0)+"";
+        Log.v("1111113",token);
+        db.collection("MyPlace").document(token).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot ds) {
+                obmyplace = new ObjectMyplace();
+                obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                for(int i=0; i<obmyplace.myplacelist.size();i++){
+                    if(obmyplace.myplacelist.get(i).equals(placeName)){
+                        IsMyplace = 1;
+                        Log.v("3333333",IsMyplace+"");
+
+                    }
+                }
+                Log.v("44444444",IsMyplace+"");
+                if(IsMyplace == 1) {
+                    Log.v("5555555",IsMyplace+"");
+                    getMenuInflater().inflate(R.menu.market_menu_marked, menu);
+                }else{
+                    Log.v("6666666",IsMyplace+"");
+                    getMenuInflater().inflate(R.menu.market_menu, menu);
+                }
+            }
+        });
+
         return true;
     }
 
@@ -114,7 +143,7 @@ public class MarketMainActivity extends AppCompatActivity{
                     String token = pref.getLong("token",0)+"";
 
                     ObjectMyplace obmyplace = new ObjectMyplace();
-                    Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.isSuccessful()){
@@ -150,17 +179,15 @@ public class MarketMainActivity extends AppCompatActivity{
                     String token = pref.getLong("token",0)+"";
 
                     ObjectMyplace obmyplace = new ObjectMyplace();
-                    Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.isSuccessful()){
-                                Log.v("333333333333","DELETE IF");
                                 DocumentSnapshot ds = task.getResult();
                                 obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
                                 obmyplace.myplacelist.remove(placeName);
                                 db.collection("MyPlace").document(token).set(obmyplace);
                             }else{
-                                Log.v("4444444444","DELETE ELSE");
                                 obmyplace.myplacelist.remove(placeName);
                                 db.collection("MyPlace").document(token).set(obmyplace);
                             }
@@ -206,10 +233,16 @@ public class MarketMainActivity extends AppCompatActivity{
     }
 
     private void setupViewPager(ViewPager viewPager){
-        marketPagerAdapter = new MarketPagerAdapter(getSupportFragmentManager(),placeName);
+        pref = getSharedPreferences("profile", MODE_PRIVATE);
+        String token = pref.getLong("token",0)+"";
 
+        marketPagerAdapter = new MarketPagerAdapter(getSupportFragmentManager(),placeName);
         pager.setAdapter(marketPagerAdapter);
 
+
+    }
+
+    private void setMyplace(){
 
     }
 }

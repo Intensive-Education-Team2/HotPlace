@@ -14,6 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,8 +26,11 @@ public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAd
     private ArrayList<MarketObject> list = new ArrayList<>();
     private Context context;
 
+
     public double latitude;
     public double longitude;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public MarketFragmentAdapter(Context context, ArrayList<MarketObject> list) {
         this.context = context;
@@ -108,6 +115,7 @@ public class MarketFragmentAdapter extends RecyclerView.Adapter<MarketFragmentAd
 
         return String.format("%.2f",distance);
     }
+
 
 
 }
