@@ -1,17 +1,14 @@
 package com.posturn.hotplace;
 
 
-import android.content.Intent;
+
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Icon;
+
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,9 +26,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -59,7 +53,6 @@ public class MarketMainActivity extends AppCompatActivity{
         setContentView(R.layout.market_activity_main);
 
         placeName = getIntent().getStringExtra("placeName");
-        //placeName = "해방촌";
         myplaceon = 0;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
