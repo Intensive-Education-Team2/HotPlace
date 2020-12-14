@@ -94,11 +94,9 @@ public class MarketMainActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.v("1111111",IsMyplace+"");
-        Log.v("1111112",placeName);
         pref = getSharedPreferences("profile", MODE_PRIVATE);
         String token = pref.getLong("token",0)+"";
-        Log.v("1111113",token);
+
         db.collection("MyPlace").document(token).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot ds) {
@@ -107,16 +105,11 @@ public class MarketMainActivity extends AppCompatActivity{
                 for(int i=0; i<obmyplace.myplacelist.size();i++){
                     if(obmyplace.myplacelist.get(i).equals(placeName)){
                         IsMyplace = 1;
-                        Log.v("3333333",IsMyplace+"");
-
                     }
                 }
-                Log.v("44444444",IsMyplace+"");
                 if(IsMyplace == 1) {
-                    Log.v("5555555",IsMyplace+"");
                     getMenuInflater().inflate(R.menu.market_menu_marked, menu);
                 }else{
-                    Log.v("6666666",IsMyplace+"");
                     getMenuInflater().inflate(R.menu.market_menu, menu);
                 }
             }
@@ -187,10 +180,8 @@ public class MarketMainActivity extends AppCompatActivity{
                                 obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
                                 obmyplace.myplacelist.remove(placeName);
                                 db.collection("MyPlace").document(token).set(obmyplace);
-                            }else{
-                                obmyplace.myplacelist.remove(placeName);
-                                db.collection("MyPlace").document(token).set(obmyplace);
                             }
+                            myplaceon = 0;
                         }
                     });
                 }
