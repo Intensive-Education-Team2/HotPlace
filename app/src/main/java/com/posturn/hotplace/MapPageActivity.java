@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -65,6 +66,8 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     private SharedPreferences pref;
 
     private int myplaceon = 0;
+    private ObjectMyplace obmyplace;
+    private String token;
 
     public ArrayList<ObjectPlace> placelist = new ArrayList<ObjectPlace>();
     public ObjectPlace objectPlace;
@@ -74,6 +77,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     public LinearLayout placeinfo;
 
     public ImageView mappart;
+    public ImageView my_star;
 
     public String name;
     public double lat;
@@ -91,7 +95,6 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mappage);
-//        context = getParent();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -101,6 +104,17 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         toolbarTitle.setText("내 주변 핫플레이스");
 
+        pref = getSharedPreferences("profile", MODE_PRIVATE);
+        token = pref.getLong("token",0)+"";
+
+        db.collection("MyPlace").document(token).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot ds) {
+                obmyplace = new ObjectMyplace();
+                obmyplace.myplacelist = (ArrayList) ds.get("myplacelist");
+            }
+        });
+        Log.v("000000","GET MYPLACELIST");
         //map 객체 선언
         FragmentManager fm = getSupportFragmentManager();
         mapFragment = (MapFragment) fm.findFragmentById(R.id.map);
@@ -244,13 +258,34 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
             marker.setOnClickListener(overlay -> {
                 Animation animation = new AlphaAnimation(0, 1);
                 animation.setDuration(500);
+                myplaceon = 0;
+                Log.v("111111111","CLICK MARKER");
+                my_star = findViewById(R.id.place_star);
 
-                ImageView my_star = findViewById(R.id.place_star);
+                Log.v("1111111",myplaceon+"");
+                Log.v("1111112",place.name);
+
+                Log.v("1111113",token);
+
+                for (int i = 0; i < obmyplace.myplacelist.size(); i++) {
+                    if (obmyplace.myplacelist.get(i).equals(place.name)) {
+                        myplaceon = 1;
+                        Log.v("3333333", myplaceon + "");
+                    }
+                }
+                Log.v("44444444", myplaceon + "");
+                if (myplaceon == 1) {
+                    Log.v("5555555", myplaceon + "");
+                    my_star.setImageResource(R.drawable.ic_bookmarked_strongpink);
+                } else {
+                    Log.v("6666666", myplaceon + "");
+                    my_star.setImageResource(R.drawable.ic_bookmark_strongpink);
+                }
+
                 ImageView placeImg = findViewById(R.id.placeimage);
                 TextView placename = findViewById(R.id.placename);
                 placename.setText(place.name);
 
-                //TODO here
                 TextView placeNickName = findViewById(R.id.place_nickname);
                 TextView placeDistance = findViewById(R.id.place_distance);
 
@@ -339,7 +374,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                     }
                 });
 
-
+                Log.v("888889999","START GET PLACE");
                 db_placeinfo.collection("HotPlace").document(place.name).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -350,10 +385,10 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                         placeNickName.setText(tagPlace);
                     }
                 });
-
+                Log.v("88888999999","END GET PLACE");
                 placeinfo.setVisibility(View.VISIBLE);
                 placeinfo.setAnimation(animation);
-
+                Log.v("99999999","END MARKER");
                 Toast.makeText(getApplication(), place.name + " 클릭", Toast.LENGTH_SHORT).show();
 
                 return false;
@@ -387,6 +422,10 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         distance = locationA.distanceTo(locationB) /1000.0;
 
         return String.format("%.2f",distance);
+    }
+
+    private void setMyplace(){
+
     }
 }
 

@@ -160,7 +160,7 @@ public class MyPlaceAdapter extends RecyclerView.Adapter<MyPlaceAdapter.ViewHold
         locationB.setLatitude(targetLat);
         locationB.setLongitude(targetLon);
 
-        distance = locationA.distanceTo(locationB) /1000000.0;
+        distance = locationA.distanceTo(locationB) /1000.0;
 
         return String.format("%.2f",distance);
     }
