@@ -416,7 +416,6 @@ public class MainPageActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view);
         headerView = navigationView.getHeaderView(0);
 
-        //TODO = Here3
         userName=headerView.findViewById(R.id.user_name);
         userImg=headerView.findViewById(R.id.user_image);pref = getSharedPreferences("profile", MODE_PRIVATE);
         pref = getSharedPreferences("profile", MODE_PRIVATE);

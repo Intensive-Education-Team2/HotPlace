@@ -2,9 +2,11 @@ package com.posturn.hotplace;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,14 +21,21 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class MarketMainActivity extends AppCompatActivity{
     private TabLayout tab_layout;
     private ViewPager pager;
     private MarketPagerAdapter marketPagerAdapter;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private SharedPreferences pref;
 
     private View viewFirst;
     private View viewSecond;
@@ -115,11 +124,44 @@ public class MarketMainActivity extends AppCompatActivity{
                 if(myplaceon==0) {
                     item.setIcon(R.drawable.ic_bookmarked);
                     Toast.makeText( getApplicationContext(), "My 플레이스에 추가되었습니다.", Toast.LENGTH_SHORT ).show();
+                    pref = getSharedPreferences("profile", MODE_PRIVATE);
+
+                    String token = pref.getLong("token",0)+"";
+
+                    ObjectMyplace obmyplace = new ObjectMyplace();
+                    Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
+
+                    if(tds.isSuccessful()) {
+                        DocumentSnapshot ds = tds.getResult();
+                        obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                        obmyplace.myplacelist.add(placeName);
+                    }else{
+                        Log.v("TTTTTTTTT","NEWNEWNEW");
+                        obmyplace.myplacelist.add(placeName);
+                    }
+
+                    db.collection("MyPlace").document(token).set(obmyplace);
                     myplaceon = 1;
                 }else{
-                    //toolbarImg.setImageResource(R.drawable.ic_small_star_grey);
                     item.setIcon(R.drawable.ic_bookmark);
                     Toast.makeText( getApplicationContext(), "My 플레이스에서 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
+
+                    pref = getSharedPreferences("profile", MODE_PRIVATE);
+
+                    String token = pref.getLong("token",0)+"";
+
+                    ObjectMyplace obmyplace = new ObjectMyplace();
+                    Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
+
+                    if(tds.isSuccessful()) {
+                        DocumentSnapshot ds = tds.getResult();
+                        obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                        obmyplace.myplacelist.remove(placeName);
+                    }else{
+                        obmyplace.myplacelist.remove(placeName);
+                    }
+
+                    db.collection("MyPlace").document(token).set(obmyplace);
                     myplaceon = 0;
                 }
                 return false;
