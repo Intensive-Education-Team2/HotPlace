@@ -133,8 +133,7 @@
                                     android:layout_alignParentRight="true"
                                     android:layout_marginTop="6dp"
                                     android:layout_weight="1"
-
-                                    android:src="@drawable/ic_bookmark_strongpink" />
+                                    />
                             </RelativeLayout>
 
                         </LinearLayout>
