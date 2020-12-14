@@ -1,7 +1,9 @@
 package com.posturn.hotplace;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -23,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.loader.content.CursorLoader;
 
 import com.google.android.gms.tasks.Continuation;
@@ -87,6 +91,15 @@ public class PostingActivity extends AppCompatActivity implements View.OnClickLi
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         toolbarTitle.setText("게시글 작성");
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1);
+            }
+        }
+
         selectPlace = findViewById(R.id.btn_place);
         selectImg = findViewById(R.id.btn_image);
         editContent = findViewById(R.id.edittext_content);
@@ -130,7 +143,6 @@ public class PostingActivity extends AppCompatActivity implements View.OnClickLi
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     @Override
     public void onClick(View view) {
