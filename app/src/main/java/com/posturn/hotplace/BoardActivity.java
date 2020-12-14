@@ -163,6 +163,7 @@ public class BoardActivity extends AppCompatActivity {
             getFilterPost(placeName);
         }
         if(resultCode ==2){
+            Log.v("refresh", "refresh");
             getPostList();
         }
     }
