@@ -69,10 +69,6 @@ public class MyPlaceActivity extends AppCompatActivity {
             }
         });
 
-        //myAdapter.notifyDataSetChanged();
-
-
-
     }
 
     //툴바 기능

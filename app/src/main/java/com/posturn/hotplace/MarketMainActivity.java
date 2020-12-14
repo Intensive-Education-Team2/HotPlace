@@ -15,16 +15,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
@@ -69,7 +72,6 @@ public class MarketMainActivity extends AppCompatActivity{
         setupViewPager(pager); // new MarketPagerAdapter, pager.setAdapter(marketPagerAdapter)
 
         tab_layout = (TabLayout) findViewById(R.id.tab_layout);
-        //temp=tab_layout.findViewById(R.id.market_tab_text);
 
         tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -85,23 +87,6 @@ public class MarketMainActivity extends AppCompatActivity{
         });
         tab_layout.setupWithViewPager(pager);
         setupTabIcons();
-
-/*
-        toolbarImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(myplaceon==0) {
-                    toolbarImg.setImageResource(R.drawable.ic_small_star_on_thick_grid_dirtyyellow);
-                    Toast.makeText( getApplicationContext(), "My 플레이스에 추가되었습니다.", Toast.LENGTH_SHORT ).show();
-                    myplaceon = 1;
-                }else{
-                    toolbarImg.setImageResource(R.drawable.ic_small_star_grey);
-                    Toast.makeText( getApplicationContext(), "My 플레이스에서 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
-                    myplaceon = 0;
-                }
-            }
-        });
-*/
     }
 
 
@@ -129,19 +114,33 @@ public class MarketMainActivity extends AppCompatActivity{
                     String token = pref.getLong("token",0)+"";
 
                     ObjectMyplace obmyplace = new ObjectMyplace();
-                    Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
+                    Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                int empty = 0;
+                                DocumentSnapshot ds = task.getResult();
+                                obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                                if(obmyplace.myplacelist.size() == 0){
+                                    obmyplace.myplacelist.add(placeName);
+                                    db.collection("MyPlace").document(token).set(obmyplace);
+                                }else{
+                                    for(int i=0; i<obmyplace.myplacelist.size(); i++){
+                                        if(obmyplace.myplacelist.get(i).equals(placeName)){
+                                            empty = 1;
+                                        }
+                                    }
+                                    if(empty == 0){
+                                        obmyplace.myplacelist.add(placeName);
+                                        db.collection("MyPlace").document(token).set(obmyplace);
+                                    }
+                                }
+                            }else{
 
-                    if(tds.isSuccessful()) {
-                        DocumentSnapshot ds = tds.getResult();
-                        obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
-                        obmyplace.myplacelist.add(placeName);
-                    }else{
-                        Log.v("TTTTTTTTT","NEWNEWNEW");
-                        obmyplace.myplacelist.add(placeName);
-                    }
-
-                    db.collection("MyPlace").document(token).set(obmyplace);
-                    myplaceon = 1;
+                            }
+                            myplaceon = 1;
+                        }
+                    });
                 }else{
                     item.setIcon(R.drawable.ic_bookmark);
                     Toast.makeText( getApplicationContext(), "My 플레이스에서 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
@@ -151,18 +150,22 @@ public class MarketMainActivity extends AppCompatActivity{
                     String token = pref.getLong("token",0)+"";
 
                     ObjectMyplace obmyplace = new ObjectMyplace();
-                    Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
-
-                    if(tds.isSuccessful()) {
-                        DocumentSnapshot ds = tds.getResult();
-                        obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
-                        obmyplace.myplacelist.remove(placeName);
-                    }else{
-                        obmyplace.myplacelist.remove(placeName);
-                    }
-
-                    db.collection("MyPlace").document(token).set(obmyplace);
-                    myplaceon = 0;
+                    Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                Log.v("333333333333","DELETE IF");
+                                DocumentSnapshot ds = task.getResult();
+                                obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                                obmyplace.myplacelist.remove(placeName);
+                                db.collection("MyPlace").document(token).set(obmyplace);
+                            }else{
+                                Log.v("4444444444","DELETE ELSE");
+                                obmyplace.myplacelist.remove(placeName);
+                                db.collection("MyPlace").document(token).set(obmyplace);
+                            }
+                        }
+                    });
                 }
                 return false;
             default:

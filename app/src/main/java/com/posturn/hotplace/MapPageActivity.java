@@ -254,8 +254,6 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                 TextView placeNickName = findViewById(R.id.place_nickname);
                 TextView placeDistance = findViewById(R.id.place_distance);
 
-
-
                 placeImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -285,19 +283,33 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                             String token = pref.getLong("token",0)+"";
 
                             ObjectMyplace obmyplace = new ObjectMyplace();
-                            Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
+                            Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if(task.isSuccessful()){
+                                        int empty = 0;
+                                        DocumentSnapshot ds = task.getResult();
+                                        obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                                        if(obmyplace.myplacelist.size() == 0){
+                                            obmyplace.myplacelist.add(place.name);
+                                            db.collection("MyPlace").document(token).set(obmyplace);
+                                        }else{
+                                            for(int i=0; i<obmyplace.myplacelist.size(); i++){
+                                                if(obmyplace.myplacelist.get(i).equals(place.name)){
+                                                    empty = 1;
+                                                }
+                                            }
+                                            if(empty == 0){
+                                                obmyplace.myplacelist.add(place.name);
+                                                db.collection("MyPlace").document(token).set(obmyplace);
+                                            }
+                                        }
+                                    }else{
 
-                            if(tds.isSuccessful()) {
-                                DocumentSnapshot ds = tds.getResult();
-                                obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
-                                obmyplace.myplacelist.add(place.name);
-                            }else{
-                                obmyplace.myplacelist.add(place.name);
-                            }
-
-                            db.collection("MyPlace").document(token).set(obmyplace);
-
-                            myplaceon = 1;
+                                    }
+                                    myplaceon = 1;
+                                }
+                            });
                         }else{
                             my_star.setImageResource(R.drawable.ic_bookmark_strongpink);
                             Toast.makeText( getApplicationContext(), "My 플레이스에 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
@@ -307,19 +319,22 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
                             String token = pref.getLong("token",0)+"";
 
                             ObjectMyplace obmyplace = new ObjectMyplace();
-                            Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
-
-                            if(tds.isSuccessful()) {
-                                DocumentSnapshot ds = tds.getResult();
-                                obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
-                                obmyplace.myplacelist.remove(place.name);
-                            }else{
-                                obmyplace.myplacelist.remove(place.name);
-                            }
-
-                            db.collection("MyPlace").document(token).set(obmyplace);
-
-                            myplaceon = 0;
+                            Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if(task.isSuccessful()){
+                                        Log.v("333333333333","DELETE IF");
+                                        DocumentSnapshot ds = task.getResult();
+                                        obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                                        obmyplace.myplacelist.remove(place.name);
+                                        db.collection("MyPlace").document(token).set(obmyplace);
+                                    }else{
+                                        Log.v("4444444444","DELETE ELSE");
+                                        obmyplace.myplacelist.remove(place.name);
+                                        db.collection("MyPlace").document(token).set(obmyplace);
+                                    }
+                                }
+                            });
                         }
                     }
                 });
