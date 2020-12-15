@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -78,18 +80,23 @@ public class MyPlaceAdapter extends RecyclerView.Adapter<MyPlaceAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyPlaceAdapter.ViewHolder holder, int position) {
-        double lat=0;
-        double lon=0;
+
         holder.my_place_name.setText(myplacelist.get(position).toString());
-        Task<DocumentSnapshot> tds = db.collection("HotPlace").document(myplacelist.get(position).toString()).get();
-        if(tds.isSuccessful()){
-            DocumentSnapshot ds = tds.getResult();
-            Picasso.get().load(ds.getString("img")).into(holder.my_place_image);
-            holder.my_place_nickname.setText(ds.getString("tag"));
-            lat = ds.getDouble("lat");
-            lon = ds.getDouble("lon");
-            holder.my_place_distance.setText(getDistance(latitude,longitude,lat,lon)+"km");
-        }
+        db.collection("HotPlace").document(myplacelist.get(position).toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                double lat=0;
+                double lon=0;
+                if(task.isSuccessful()){
+                    DocumentSnapshot ds = task.getResult();
+                    Picasso.get().load(ds.getString("img")).into(holder.my_place_image);
+                    holder.my_place_nickname.setText(ds.getString("tag"));
+                    lat = ds.getDouble("lat");
+                    lon = ds.getDouble("lon");
+                    holder.my_place_distance.setText(getDistance(latitude,longitude,lat,lon)+"km");
+                }
+            }
+        });
 
 
         holder.my_place_image.setOnClickListener(new View.OnClickListener() {
@@ -111,27 +118,28 @@ public class MyPlaceAdapter extends RecyclerView.Adapter<MyPlaceAdapter.ViewHold
         holder.my_place_star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText( context, "My 플레이스에서 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
-
+                Log.v("1111111111",position+"");
                 ObjectMyplace obmyplace = new ObjectMyplace();
-                Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
+                db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot ds = task.getResult();
+                            obmyplace.myplacelist = (ArrayList) ds.get("myplacelist");
+                            myplacelist = obmyplace.myplacelist;
+                            myplacelist.remove(position);
+                            obmyplace.myplacelist = myplacelist;
+                            Toast.makeText( context, "My 플레이스에서 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
 
-                if(tds.isSuccessful()) {
-                    DocumentSnapshot ds = tds.getResult();
-                    obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
-                    obmyplace.myplacelist.remove(holder.my_place_name);
-                }else{
-                    obmyplace.myplacelist.remove(holder.my_place_name);
-                }
+                            db.collection("MyPlace").document(token).set(obmyplace);
 
-                db.collection("MyPlace").document(token).set(obmyplace);
-                //v.setVisibility(v.INVISIBLE);
-
-                notifyItemRemoved(position);
-
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, obmyplace.myplacelist.size());
+                        }
+                    }
+                });
             }
         });
-
 
     }
     @Override
@@ -150,7 +158,7 @@ public class MyPlaceAdapter extends RecyclerView.Adapter<MyPlaceAdapter.ViewHold
         locationB.setLatitude(targetLat);
         locationB.setLongitude(targetLon);
 
-        distance = locationA.distanceTo(locationB) /1000000.0;
+        distance = locationA.distanceTo(locationB) /1000.0;
 
         return String.format("%.2f",distance);
     }

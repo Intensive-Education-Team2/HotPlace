@@ -1,32 +1,31 @@
 package com.posturn.hotplace;
 
 
-import android.content.Intent;
+
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Typeface;
+
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -36,13 +35,13 @@ public class MarketMainActivity extends AppCompatActivity{
     private MarketPagerAdapter marketPagerAdapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private SharedPreferences pref;
+    private ObjectMyplace obmyplace;
+    private int IsMyplace = 0;
 
     private View viewFirst;
     private View viewSecond;
     private View viewThird;
     private View viewFourth;
-
-    private TextView temp;
 
     private String placeName;
     private int myplaceon;
@@ -54,7 +53,6 @@ public class MarketMainActivity extends AppCompatActivity{
         setContentView(R.layout.market_activity_main);
 
         placeName = getIntent().getStringExtra("placeName");
-        //placeName = "해방촌";
         myplaceon = 0;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -69,7 +67,6 @@ public class MarketMainActivity extends AppCompatActivity{
         setupViewPager(pager); // new MarketPagerAdapter, pager.setAdapter(marketPagerAdapter)
 
         tab_layout = (TabLayout) findViewById(R.id.tab_layout);
-        //temp=tab_layout.findViewById(R.id.market_tab_text);
 
         tab_layout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -85,29 +82,32 @@ public class MarketMainActivity extends AppCompatActivity{
         });
         tab_layout.setupWithViewPager(pager);
         setupTabIcons();
-
-/*
-        toolbarImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(myplaceon==0) {
-                    toolbarImg.setImageResource(R.drawable.ic_small_star_on_thick_grid_dirtyyellow);
-                    Toast.makeText( getApplicationContext(), "My 플레이스에 추가되었습니다.", Toast.LENGTH_SHORT ).show();
-                    myplaceon = 1;
-                }else{
-                    toolbarImg.setImageResource(R.drawable.ic_small_star_grey);
-                    Toast.makeText( getApplicationContext(), "My 플레이스에서 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
-                    myplaceon = 0;
-                }
-            }
-        });
-*/
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.market_menu, menu);
+        pref = getSharedPreferences("profile", MODE_PRIVATE);
+        String token = pref.getLong("token",0)+"";
+
+        db.collection("MyPlace").document(token).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot ds) {
+                obmyplace = new ObjectMyplace();
+                obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                for(int i=0; i<obmyplace.myplacelist.size();i++){
+                    if(obmyplace.myplacelist.get(i).equals(placeName)){
+                        IsMyplace = 1;
+                    }
+                }
+                if(IsMyplace == 1) {
+                    getMenuInflater().inflate(R.menu.market_menu_marked, menu);
+                }else{
+                    getMenuInflater().inflate(R.menu.market_menu, menu);
+                }
+            }
+        });
+
         return true;
     }
 
@@ -129,19 +129,33 @@ public class MarketMainActivity extends AppCompatActivity{
                     String token = pref.getLong("token",0)+"";
 
                     ObjectMyplace obmyplace = new ObjectMyplace();
-                    Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
+                    db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                int empty = 0;
+                                DocumentSnapshot ds = task.getResult();
+                                obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                                if(obmyplace.myplacelist.size() == 0){
+                                    obmyplace.myplacelist.add(placeName);
+                                    db.collection("MyPlace").document(token).set(obmyplace);
+                                }else{
+                                    for(int i=0; i<obmyplace.myplacelist.size(); i++){
+                                        if(obmyplace.myplacelist.get(i).equals(placeName)){
+                                            empty = 1;
+                                        }
+                                    }
+                                    if(empty == 0){
+                                        obmyplace.myplacelist.add(placeName);
+                                        db.collection("MyPlace").document(token).set(obmyplace);
+                                    }
+                                }
+                            }else{
 
-                    if(tds.isSuccessful()) {
-                        DocumentSnapshot ds = tds.getResult();
-                        obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
-                        obmyplace.myplacelist.add(placeName);
-                    }else{
-                        Log.v("TTTTTTTTT","NEWNEWNEW");
-                        obmyplace.myplacelist.add(placeName);
-                    }
-
-                    db.collection("MyPlace").document(token).set(obmyplace);
-                    myplaceon = 1;
+                            }
+                            myplaceon = 1;
+                        }
+                    });
                 }else{
                     item.setIcon(R.drawable.ic_bookmark);
                     Toast.makeText( getApplicationContext(), "My 플레이스에서 삭제되었습니다.", Toast.LENGTH_SHORT ).show();
@@ -151,18 +165,18 @@ public class MarketMainActivity extends AppCompatActivity{
                     String token = pref.getLong("token",0)+"";
 
                     ObjectMyplace obmyplace = new ObjectMyplace();
-                    Task<DocumentSnapshot> tds = db.collection("MyPlace").document(token).get();
-
-                    if(tds.isSuccessful()) {
-                        DocumentSnapshot ds = tds.getResult();
-                        obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
-                        obmyplace.myplacelist.remove(placeName);
-                    }else{
-                        obmyplace.myplacelist.remove(placeName);
-                    }
-
-                    db.collection("MyPlace").document(token).set(obmyplace);
-                    myplaceon = 0;
+                    db.collection("MyPlace").document(token).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                DocumentSnapshot ds = task.getResult();
+                                obmyplace.myplacelist = (ArrayList)ds.get("myplacelist");
+                                obmyplace.myplacelist.remove(placeName);
+                                db.collection("MyPlace").document(token).set(obmyplace);
+                            }
+                            myplaceon = 0;
+                        }
+                    });
                 }
                 return false;
             default:
@@ -203,10 +217,16 @@ public class MarketMainActivity extends AppCompatActivity{
     }
 
     private void setupViewPager(ViewPager viewPager){
-        marketPagerAdapter = new MarketPagerAdapter(getSupportFragmentManager(),placeName);
+        pref = getSharedPreferences("profile", MODE_PRIVATE);
+        String token = pref.getLong("token",0)+"";
 
+        marketPagerAdapter = new MarketPagerAdapter(getSupportFragmentManager(),placeName);
         pager.setAdapter(marketPagerAdapter);
 
+
+    }
+
+    private void setMyplace(){
 
     }
 }

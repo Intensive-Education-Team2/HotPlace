@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class MarketFragment extends Fragment {
-    private String title_string;
 
     FirebaseFirestore db_market = FirebaseFirestore.getInstance();
     RecyclerDecoration spaceDecoration = new RecyclerDecoration(4);
@@ -46,7 +45,6 @@ public class MarketFragment extends Fragment {
     MarketFragment(String placeName, String categoryName) {
         this.f_place = placeName;
         this.f_category = categoryName;
-
     }
 
     @Override
