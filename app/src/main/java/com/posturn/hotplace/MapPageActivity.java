@@ -3,6 +3,7 @@ package com.posturn.hotplace;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,7 @@ import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.InfoWindow;
+import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 
 import com.naver.maps.map.overlay.OverlayImage;
@@ -85,6 +87,8 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
     public String imgUri;
     public String tagPlace;
 
+    public LocationOverlay locationOverlay;
+
     LatLng coord = new LatLng(37.4985, 127.0299);
 
     @Override
@@ -100,6 +104,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         actionBar.setDisplayShowTitleEnabled(false);
         TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         toolbarTitle.setText("내 주변 핫플레이스");
+
 
         //map 객체 선언
         FragmentManager fm = getSupportFragmentManager();
@@ -130,7 +135,7 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         if (locationSource.onRequestPermissionsResult(
                 requestCode, permissions, grantResults)) {
             if (!locationSource.isActivated()) { // 권한 거부됨
-                naverMap.setLocationTrackingMode(LocationTrackingMode.None);
+                naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
             }
             return;
         }
@@ -148,6 +153,10 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
         mappart.setOnClickListener(clickListener);
 
         this.naverMap = naverMap;
+
+        locationOverlay = naverMap.getLocationOverlay();
+        locationOverlay.setVisible(true);
+        locationOverlay.setPosition(new LatLng(37.4985, 127.0299));
 
         db.collection("HotPlace")
                 .get()
@@ -178,18 +187,22 @@ public class MapPageActivity extends AppCompatActivity implements OnMapReadyCall
 
         setMapOption();
 
-
-
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+
+        /*
         naverMap.addOnLocationChangeListener(new NaverMap.OnLocationChangeListener() {
             @Override
             public void onLocationChange(@NonNull Location location) {
-                lat = location.getLatitude();
-                lon = location.getLongitude();
+                location.setLatitude(37.4985);
+                location.setLongitude(127.0299);
 
             }
         });
+
+         */
+
+
 
     }
 
