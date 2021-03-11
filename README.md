@@ -3,7 +3,7 @@
 ### 기능 정리
 
 - 메인페이지  
-<img src="https://user-images.githubusercontent.com/17956765/110785587-768ffb80-82ae-11eb-9eef-1bd7f7bf0060.jpg" width="60%" height="60%">
+<img src="https://user-images.githubusercontent.com/17956765/110785587-768ffb80-82ae-11eb-9eef-1bd7f7bf0060.jpg" width="30%" height="30%">
 
 
 - 네비게이션 바  
