@@ -1,5 +1,9 @@
 ## Hotpler application 
 
+### 사용 툴 및 라이브러리
+- Android Studio ( Java )
+- Firebase
+
 ### 기능 정리
 
 - 메인페이지  
