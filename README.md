@@ -1,4 +1,4 @@
-## HotPlace
+## Hotpler application 
 
 ### 기능 정리
 
