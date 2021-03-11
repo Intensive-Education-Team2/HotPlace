@@ -3,35 +3,35 @@
 ### 기능 정리
 
 - 메인페이지  
-  <img src="https://user-images.githubusercontent.com/17956765/110785587-768ffb80-82ae-11eb-9eef-1bd7f7bf0060.jpg" width="30%" height="30%">
+  <img src="https://user-images.githubusercontent.com/17956765/110787387-99bbaa80-82b0-11eb-8424-be9cd2a9466c.jpg" width="30%" height="30%">
 
 
 - 네비게이션 바  
-  <img src="https://user-images.githubusercontent.com/17956765/110785737-9fb08c00-82ae-11eb-8221-b30e1b69af9a.jpg" width="30%" height="30%">
+  <img src="https://user-images.githubusercontent.com/17956765/110787393-9b856e00-82b0-11eb-8e06-8c45f0ed44ef.jpg" width="30%" height="30%">
 
 
 - 순위 페이지  
-  <img src="https://user-images.githubusercontent.com/17956765/110785867-c53d9580-82ae-11eb-92b8-39eb0569d3f4.jpg" width="30%" height="30%">
+  <img src="https://user-images.githubusercontent.com/17956765/110787395-9b856e00-82b0-11eb-960d-929ae45a83f1.jpg" width="30%" height="30%">
 
 - 추천 페이지  
-  <img src="https://user-images.githubusercontent.com/17956765/110785853-c242a500-82ae-11eb-8ea8-e524cdceab98.jpg" width="30%" height="30%">
+  <img src="https://user-images.githubusercontent.com/17956765/110787398-9c1e0480-82b0-11eb-97d6-f2881bb83384.jpg" width="30%" height="30%">
 
 
 - 지도 페이지  
-  <img src="https://user-images.githubusercontent.com/17956765/110785813-b7881000-82ae-11eb-923d-d1392e2da19e.jpg" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/17956765/110785864-c4a4ff00-82ae-11eb-9cf7-50518644c306.jpg" width="30%" height="30%">   
+  <img src="https://user-images.githubusercontent.com/17956765/110787389-9a544100-82b0-11eb-9012-145adbd5e496.jpg" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/17956765/110787390-9a544100-82b0-11eb-884c-40a3ebbcb817.jpg" width="30%" height="30%">   
 
 
 - 나의 플레이스 페이지  
-  <img src="https://user-images.githubusercontent.com/17956765/110785865-c4a4ff00-82ae-11eb-9289-69379c9c13a2.jpg" width="30%" height="30%"> 
+  <img src="https://user-images.githubusercontent.com/17956765/110787392-9aecd780-82b0-11eb-9d8f-bc89bc2cb8cd.jpg" width="30%" height="30%"> 
 
 
 - 게시판 페이지  
-  <img src="https://user-images.githubusercontent.com/17956765/110785860-c40c6880-82ae-11eb-9da2-0a22370097c0.jpg" width="30%" height="30%">
+  <img src="https://user-images.githubusercontent.com/17956765/110787403-9cb69b00-82b0-11eb-8d34-02f8a0e9bbed.jpg" width="30%" height="30%">
 
 
 - 게시판 글 작성  
-  <img src="https://user-images.githubusercontent.com/17956765/110785857-c373d200-82ae-11eb-90a1-ab233c903df3.jpg" width="30%" height="30%">
+  <img src="https://user-images.githubusercontent.com/17956765/110787401-9c1e0480-82b0-11eb-89ba-11e98ccb2354.jpg" width="30%" height="30%">
 
 
 - 게시판 플레이스 필터  
-  <img src="https://user-images.githubusercontent.com/17956765/110785862-c40c6880-82ae-11eb-9640-af73c30ce7f3.jpg" width="30%" height="30%">
+  <img src="https://user-images.githubusercontent.com/17956765/110787383-988a7d80-82b0-11eb-98c1-1ff221adc458.jpg" width="30%" height="30%">
