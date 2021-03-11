@@ -18,8 +18,8 @@
 
 
 - 지도 페이지  
-<img src="https://user-images.githubusercontent.com/17956765/110785813-b7881000-82ae-11eb-923d-d1392e2da19e.jpg" width="30%" height="30%">   
-<img src="https://user-images.githubusercontent.com/17956765/110785864-c4a4ff00-82ae-11eb-9cf7-50518644c306.jpg" width="30%" height="30%">
+<img src="https://user-images.githubusercontent.com/17956765/110785813-b7881000-82ae-11eb-923d-d1392e2da19e.jpg" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/17956765/110785864-c4a4ff00-82ae-11eb-9cf7-50518644c306.jpg" width="30%" height="30%">   
+
 
 - 나의 플레이스 페이지  
 <img src="https://user-images.githubusercontent.com/17956765/110785865-c4a4ff00-82ae-11eb-9289-69379c9c13a2.jpg" width="30%" height="30%"> 
